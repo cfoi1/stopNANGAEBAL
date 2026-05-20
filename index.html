@@ -135,7 +135,7 @@ header{padding:8px 14px 6px;background:linear-gradient(180deg,#0a0800 0%,var(--b
 .intro-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(18px,4.5vw,26px);color:var(--gold);letter-spacing:1px;margin-bottom:5px;line-height:1.3;}
 .intro-sub{font-size:13px;color:#907040;letter-spacing:0.5px;margin-bottom:16px;}
 .intro-card{background:#0d0a04;border:1px solid var(--border);border-radius:9px;padding:14px 17px;max-width:380px;width:100%;text-align:left;margin-bottom:13px;position:relative;}
-.intro-card::before{content:'🔍 수사 브리핑';position:absolute;top:-11px;left:13px;background:#0d0a04;padding:0 7px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:var(--gold);letter-spacing:1px;}
+.intro-card::before{content:'🔍 상황 브리핑';position:absolute;top:-11px;left:13px;background:#0d0a04;padding:0 7px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:var(--gold);letter-spacing:1px;}
 .rule-item{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start;}
 .rule-icon{font-size:18px;flex-shrink:0;line-height:1.3;}
 .rule-text{font-size:12px;color:#c8a860;line-height:1.6;}
@@ -154,43 +154,78 @@ header{padding:8px 14px 6px;background:linear-gradient(180deg,#0a0800 0%,var(--b
 </head>
 <body>
 
-<!-- ═══ 인트로 ═══ -->
+<!-- ═══ 인트로 페이지 1: 상황 브리핑 ═══ -->
 <div class="intro-overlay" id="intro-ov">
   <div class="intro-emblem">🕵️</div>
   <div class="intro-title">아무리 덮어봐라<br>우리가 파헤치지</div>
   <div class="intro-sub">난개발·환경오염 방지 및 주민 알권리 조례 운동본부</div>
 
-  <div class="intro-card">
+  <div class="intro-card" style="max-width:380px;width:100%;">
+    <div style="font-family:'Black Han Sans',sans-serif;font-size:13px;color:var(--gold);margin-bottom:12px;text-align:center;letter-spacing:1px;">📢 상황 브리핑</div>
+    <div style="font-size:13px;color:#c8a860;line-height:1.8;">
+      지금 이 순간, 전국 곳곳에서<br>
+      <strong style="color:#e05040;">우리 동네에 폐기물소각장이 주민 몰래</strong>들어오려 합니다.<br><br>
+      사업자는 규모를 줄여 환경영향평가를 피하고,<br>
+      행정은 인허가 절차를 날림으로 통과시킵니다.<br><br>
+      주민들은 인허가가 <strong>다 끝난 후에야</strong> 뒤늦게 소식을 듣습니다.<br><br>
+      <strong style="color:#40c070;">당신은 정보공개 청구로 이 과정을 파헤치는 주민 활동가입니다.</strong><br>
+      인허가가 완료되기 전에 조례를 제정해 막아내세요!
+    </div>
+  </div>
+
+  <div class="intro-dossier" style="max-width:380px;">
+    📁 실제 사건 | 이 게임의 이벤트는 현실에서도 벌어지는 일들입니다.<br>
+    • 99톤 소각장 → 100톤 기준을 피해 환경영향평가 면제<br>
+    • 도시계획위원회 27회 전부 이메일 서면심의로만 의결<br>
+    • 폐기물사업계획서 적합통보 후 주민은 뒤늦게 공사 시작을 알게 됨
+  </div>
+
+  <button class="start-btn" onclick="showIntro2()">다음 → 게임 규칙 보기</button>
+</div>
+
+<!-- ═══ 인트로 페이지 2: 게임 규칙 ═══ -->
+<div class="intro-overlay" id="intro-ov2" style="display:none;">
+  <div class="intro-emblem" style="font-size:40px;margin-bottom:6px;">📋</div>
+  <div class="intro-title" style="font-size:clamp(16px,4vw,22px);margin-bottom:12px;">게임 규칙</div>
+
+  <div class="intro-card" style="max-width:380px;width:100%;">
+    <div style="font-family:'Black Han Sans',sans-serif;font-size:13px;color:var(--gold);margin-bottom:12px;text-align:center;letter-spacing:1px;">🎮 어떻게 하나요?</div>
     <div class="rule-item">
       <span class="rule-icon">📄</span>
-      <div class="rule-text"><strong>클릭 → 정보공개 포인트(📄)</strong> 적립.<br>포인트로 스킬을 발동하고 주민활동을 강화합니다.</div>
+      <div class="rule-text"><strong>화면을 클릭</strong>해서 정보공개 포인트를 모으세요.<br>포인트로 스킬을 쓰고, 주민활동을 강화합니다.</div>
     </div>
     <div class="rule-item">
       <span class="rule-icon">🏗️</span>
-      <div class="rule-text"><strong style="color:#d04030">인허가 진행</strong> 게이지가 100%가 되면 소각장이 들어섭니다. <strong>패배!</strong><br>스킬로 속도를 늦추거나 잠시 멈출 수 있지만, 한 번 오른 게이지는 내려가지 않습니다.</div>
+      <div class="rule-text"><strong style="color:#e05040;">인허가 진행</strong> 게이지가 100%가 되면 <strong>패배!</strong><br>스킬로 속도를 늦출 수 있지만 내려가진 않습니다.</div>
     </div>
     <div class="rule-item">
       <span class="rule-icon">📜</span>
-      <div class="rule-text"><strong style="color:#30b060">조례 제정</strong> 게이지를 100%까지 채우면 주민알권리 조례가 통과됩니다. <strong>승리!</strong><br>스킬과 주민활동 강화로 조례를 올리세요.</div>
+      <div class="rule-text"><strong style="color:#40c070;">조례 제정</strong> 게이지를 100%까지 채우면 <strong>승리!</strong><br>주민활동을 강화하고, 스킬로 게이지를 올리세요.</div>
     </div>
     <div class="rule-item">
       <span class="rule-icon">🔥</span>
-      <div class="rule-text"><strong>콤보</strong>: 1.5초 안에 연속 클릭하면 포인트 ×2~×5 폭발!<br>손을 멈추면 <strong>즉시 초기화</strong>됩니다.</div>
+      <div class="rule-text"><strong>콤보</strong>: 1.5초 안에 연속 클릭하면 포인트 최대 5배!<br>멈추면 즉시 초기화됩니다.</div>
     </div>
     <div class="rule-item">
       <span class="rule-icon">🚨</span>
-      <div class="rule-text"><strong>긴급 이벤트</strong>: 공무원 유착, 서면심의 등 위기가 터집니다.<br>이벤트창에 <strong>어떻게 대응할지 안내</strong>가 표시됩니다. 제한시간 내 대응하세요!</div>
+      <div class="rule-text"><strong>긴급 이벤트</strong>가 주기적으로 터집니다.<br>이벤트 창에 <strong>대응 방법</strong>이 안내됩니다. 제한시간 내 대응하세요!</div>
     </div>
   </div>
 
-  <div class="intro-dossier">
-    🗂️ 현실 사건 파일 | 이 게임의 위기는 모두 실제 상황에서 벌어진 일입니다.<br>
-    • 사업자가 규모를 97톤으로 줄여 환경영향평가를 회피하는 꼼수<br>
-    • 도시계획위원회가 대면 없이 이메일로만 의결하는 서면심의<br>
-    • 폐기물사업계획서 적합통보로 주민 몰래 인허가가 진행되는 현실
+  <div style="display:flex;gap:10px;margin-top:4px;">
+    <button class="re-btn" onclick="showIntro1()">← 뒤로</button>
+    <button class="start-btn" onclick="startCountdown()">✊ 투쟁 시작</button>
   </div>
+</div>
 
-  <button class="start-btn" onclick="startGame()">✊ 투쟁 시작</button>
+<!-- ═══ 카운트다운 ═══ -->
+<div class="intro-overlay" id="countdown-ov" style="display:none;">
+  <div style="font-size:22px;color:#c8a860;margin-bottom:16px;line-height:1.7;text-align:center;max-width:340px;">
+    🏗️ 소각장 인허가 절차가<br>지금 이 순간도 진행 중입니다.<br><br>
+    <strong style="color:var(--gold);">정보를 파헤쳐 막아내세요!</strong>
+  </div>
+  <div id="countdown-num" style="font-family:'Black Han Sans',sans-serif;font-size:80px;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(232,160,16,0.6);">3</div>
+  <div style="font-size:16px;color:#907040;margin-top:12px;">게임이 곧 시작됩니다...</div>
 </div>
 
 <!-- ═══ 헤더 ═══ -->
@@ -313,12 +348,12 @@ const EVENTS = [
   {
     title:'🔒 도시계획위원회 서면심의!',
     effect:'저지 실패 시 인허가 +22%',
-    response:'💡 저지법: 🌿<strong>환경영향평가 촉구</strong> 스킬로 심의를 중단시키거나, 포인트를 <strong>300점 이상</strong> 보유하세요!',
+    response:'💡 저지법: 🌿<strong>언론보도</strong> 스킬로 심의를 중단시키거나, 포인트를 <strong>1000점 이상</strong> 보유하세요!',
     timer:8, penalty:22, bonus:0,
-    successCond:'pts', successThreshold:300,
+    successCond:'pts', successThreshold:1000,
   },
   {
-    title:'🤝 공무원과 업체의 유착 발각!',
+    title:'🤝 공무원과 업체의 유착!',
     effect:'인허가 즉시 +12% — 저지 불가',
     response:'😡 저지 불가: 내부 정보가 차단됐습니다. 인허가가 강제 진행됩니다. 클릭을 멈추지 마세요!',
     timer:6, penalty:12, bonus:0, unavoidable:true,
@@ -326,30 +361,30 @@ const EVENTS = [
   {
     title:'🏭 환경영향평가 면제 꼼수!',
     effect:'허용 시 인허가 +18%',
-    response:'💡 저지법: 포인트를 <strong>250점 이상</strong> 확보한 상태에서 시간이 지나면 주민의견서가 제출돼 저지됩니다!',
+    response:'💡 저지법: 포인트를 <strong>1000점 이상</strong> 확보한 상태에서 시간이 지나면 주민의견서가 제출돼 저지됩니다!',
     timer:8, penalty:18, bonus:0,
-    successCond:'pts', successThreshold:250,
+    successCond:'pts', successThreshold:1000,
   },
   {
     title:'📢 주민설명회 기회!',
     effect:'참가하면 조례 +15%',
-    response:'💡 참가법: 포인트를 <strong>200점 이상</strong> 모으면 주민의견서가 접수됩니다. 열심히 클릭하세요!',
+    response:'💡 참가법: 포인트를 <strong>2000점 이상</strong> 모으면 주민의견서가 접수됩니다. 열심히 클릭하세요!',
     timer:8, penalty:0, bonus:15,
-    successCond:'pts', successThreshold:200,
+    successCond:'pts', successThreshold:2000,
   },
   {
     title:'✊ 마을총회 개최!',
     effect:'참여하면 조례 +18%',
-    response:'💡 참가법: <strong>클릭을 멈추지 마세요!</strong> 포인트 <strong>280점 이상</strong>이면 마을 협의의견서가 제출됩니다.',
+    response:'💡 참가법: <strong>클릭을 멈추지 마세요!</strong> 포인트 <strong>2500점 이상</strong>이면 마을 협의의견서가 제출됩니다.',
     timer:8, penalty:0, bonus:18,
-    successCond:'pts', successThreshold:280,
+    successCond:'pts', successThreshold:2500,
   },
   {
     title:'📰 언론사 취재 기회!',
     effect:'제보하면 조례 +12%',
-    response:'💡 제보법: ✊<strong>주민총회 소집</strong> 스킬을 사용하거나 포인트를 <strong>250점 이상</strong> 보유하면 자료 제보 성공!',
+    response:'💡 제보법: ✊ 포인트를 <strong>2000점 이상</strong> 보유하면 자료 제보 성공!',
     timer:7, penalty:8, bonus:12,
-    successCond:'pts', successThreshold:250,
+    successCond:'pts', successThreshold:2000,
   },
   {
     title:'🏦 대형 로비 자금 투입!',
@@ -360,7 +395,7 @@ const EVENTS = [
   {
     title:'🗄️ 위원회 회의록 비공개 처리!',
     effect:'막지 못하면 인허가 +20%',
-    response:'💡 저지법: 📋<strong>정보공개 청구</strong> 스킬을 사용하면 회의록 공개를 강제할 수 있습니다!',
+    response:'💡 저지법: 📋<strong>정보공개 청구</strong> 스킬을 사용하면 회의록을 공개할 수 있습니다!',
     timer:8, penalty:20, bonus:0,
     successCond:'skill_foia',
   },
@@ -371,35 +406,35 @@ const EVENTS = [
 // 인허가 게이지는 절대 하락 없음 → devFreeze(속도 중단)만 사용
 // ═══════════════════
 const SKILL_BASE_COSTS = {sk_foia:80, sk_env:140, sk_rally:220};
-const SKILL_COST_MULT  = {sk_foia:1.8, sk_env:1.8, sk_rally:1.8};
+const SKILL_COST_MULT  = {sk_foia:3, sk_env:3, sk_rally:3};
 const SKILLS = [
   {
     id:'sk_foia', icon:'📋', name:'정보공개 청구',
-    cd:18,
-    effect:'인허가 10초 중단 & 자동적립 2배',
+    cd:8,
+    effect:'인허가 8초 중단 & 자동적립 2배',
     fn(G){
-      G.devFreeze=Math.max(G.devFreeze,100);
-      G.foiaBoost=100;
+      G.devFreeze=Math.max(G.devFreeze,80);
+      G.foiaBoost=80;
       G.lastSkillUsed='sk_foia';
-      addFeed('📋 정보공개 청구 제출! 인허가 10초 중단, 자동적립 2배','ok');
+      addFeed('📋 정보공개 청구 제출! 인허가 8초 중단, 자동적립 2배','ok');
     },
     burst:'📋',
   },
   {
-    id:'sk_env', icon:'🌿', name:'환경영향평가 촉구',
-    cd:26,
-    effect:'인허가 20초 중단 & 조례 +8%',
+    id:'sk_env', icon:'📰', name:'언론보도',
+    cd:12,
+    effect:'인허가 15초 중단 & 조례 +8%',
     fn(G){
-      G.devFreeze=Math.max(G.devFreeze,200);
+      G.devFreeze=Math.max(G.devFreeze,150);
       G.lawPct=Math.min(100,G.lawPct+8);
       G.lastSkillUsed='sk_env';
-      addFeed('🌿 환경영향평가 촉구! 인허가 20초 중단, 조례 +8%','ok');
+      addFeed('📰 언론보도! 인허가 15초 중단, 조례 +8%','ok');
     },
-    burst:'🌿',
+    burst:'📰',
   },
   {
     id:'sk_rally', icon:'✊', name:'주민총회 소집',
-    cd:32,
+    cd:16,
     effect:'조례 +18% 즉시',
     fn(G){
       G.lawPct=Math.min(100,G.lawPct+18);
@@ -411,16 +446,13 @@ const SKILLS = [
 ];
 
 // ═══════════════════
-// 업그레이드
+// 업그레이드 (4종)
 // ═══════════════════
 const UPGRADES = [
-  {id:'u1',ico:'🔍',name:'정보공개청구서 제출',  desc:'자동 포인트 +1/초',          eff:'인허가 서류 정기 청구',                  cost:100, cps:1,  power:0,    devSlow:0,    lawTick:0},
-  {id:'u2',ico:'📣',name:'주민설명회 요구',       desc:'클릭 파워 +2',               eff:'환경영향평가 초안 공람 강제',              cost:160, cps:0,  power:'+2', devSlow:0,    lawTick:0},
-  {id:'u3',ico:'📋',name:'사전고지조례 활용',     desc:'인허가 속도 −10%',           eff:'갈등유발시설 인허가 시 주민통보 의무화',  cost:280, cps:0,  power:0,    devSlow:0.10, lawTick:0},
-  {id:'u4',ico:'⚖️', name:'법률지원단 파견',      desc:'자동 포인트 +2/초',          eff:'폐기물사업계획서 적합통보 이의제기',      cost:420, cps:2,  power:0,    devSlow:0,    lawTick:0},
-  {id:'u5',ico:'🗳️', name:'도시계획위원회 참관',  desc:'클릭 파워 +3',               eff:'위원회 회의록 공개 청구, 서면심의 저지',  cost:600, cps:0,  power:'+3', devSlow:0,    lawTick:0},
-  {id:'u6',ico:'📰',name:'언론 제보',             desc:'인허가 속도 −10%',           eff:'소각장 허가 의혹 기사화, 여론 압박',      cost:800, cps:0,  power:0,    devSlow:0.10, lawTick:0},
-  {id:'u7',ico:'🌐',name:'전국 주민 서명운동',    desc:'자동 포인트 +3/초 & 조례 즉시 +8%', eff:'10만 서명으로 조례 입법 압박',      cost:1200,cps:3,  power:0,    devSlow:0,    lawTick:0, lawImm:8},
+  {id:'u1',ico:'👁️',name:'현장 감시 모니터링',   desc:'자동 포인트 +1/초',              eff:'현장을 지속 감시해 인허가 서류를 자동 수집',    cost:100, cps:1,  power:0,    devSlow:0,    lawImm:0},
+  {id:'u2',ico:'✊',name:'주민대책위 결성',        desc:'클릭 파워 +2',                   eff:'대책위가 주민 의견을 결집해 파워 강화',  cost:200, cps:0,  power:'+2', devSlow:0,    lawImm:0},
+  {id:'u3',ico:'⚖️', name:'공익법률팀 연결',       desc:'인허가 속도 −15%',               eff:'법적 이의제기로 인허가 절차에 제동',            cost:400, cps:0,  power:0,    devSlow:0.15, lawImm:0},
+  {id:'u4',ico:'🌐',name:'제도 개선 네트워크 구축',desc:'자동 포인트 +2/초 & 조례 즉시 +10%', eff:'전국 단체 연대로 조례 입법 기반 확보',     cost:700, cps:2,  power:0,    devSlow:0,    lawImm:10},
 ];
 
 const LV_NAMES=['','정보공개 신청인','마을 청원인','환경 감시단','주민의견 제출자','설명회 참가자','정보공개 청구인','회의록 열람자','환경평가 촉구자','지역 활동가','주민알권리 수호자'];
@@ -584,7 +616,6 @@ function buyUpgrade(id){
   if(u.power==='+2')G.clickPower+=2;
   if(u.power==='+3')G.clickPower+=3;
   if(u.devSlow)G.devSlowMult=Math.max(0.3,G.devSlowMult*(1-u.devSlow));
-  if(u.lawTick)G.lawTickRate+=u.lawTick;
   if(u.lawImm)G.lawPct=Math.min(100,G.lawPct+u.lawImm);
   addFeed(`✅ [${u.name}] 활성화 — ${u.eff}`,'ok');
   renderUpgrades();
@@ -772,10 +803,33 @@ function startLoop(){
 // ═══════════════════
 // 시작 / 재시작
 // ═══════════════════
-function startGame(){
+function showIntro1(){
+  $('intro-ov2').style.display='none';
+  $('intro-ov').style.display='flex';
+}
+function showIntro2(){
   $('intro-ov').style.display='none';
+  $('intro-ov2').style.display='flex';
+}
+function startCountdown(){
+  $('intro-ov2').style.display='none';
+  $('countdown-ov').style.display='flex';
+  let n=3;
+  $('countdown-num').textContent=n;
+  const iv=setInterval(()=>{
+    n--;
+    if(n>0){
+      $('countdown-num').textContent=n;
+    }else{
+      clearInterval(iv);
+      $('countdown-ov').style.display='none';
+      startGame();
+    }
+  },1000);
+}
+function startGame(){
   initState();renderSkillBar();
-  addFeed('🕵️ 수사 시작! 클릭해서 정보공개 포인트를 모으세요.','imp');
+  addFeed('✊ 투쟁 시작! 클릭해서 정보공개 포인트를 모으세요.','imp');
   addFeed('📄 포인트로 스킬 발동 → 인허가 저지 & 조례 제정!','');
   addFeed('⚡ 콤보는 1.5초 내 클릭 없으면 즉시 초기화됩니다!','bad');
   updateUI();startLoop();
@@ -785,6 +839,8 @@ function restartGame(){
   document.querySelectorAll('.event-banner').forEach(e=>e.remove());
   $('win-ov').classList.remove('on');$('lose-ov').classList.remove('on');
   feedEl.innerHTML='';
+  $('countdown-ov').style.display='none';
+  $('intro-ov2').style.display='none';
   $('intro-ov').style.display='flex';
 }
 
