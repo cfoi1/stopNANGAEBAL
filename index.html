@@ -2,169 +2,202 @@
 <html lang="ko">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 <title>아무리 덮어봐라 우리가 파헤치지</title>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Black+Han+Sans&display=swap');
 :root{
   --bg:#1a1510;--panel:#110f08;--border:#6b5020;
   --gold:#e8a010;--paper:#f0e0a0;--red:#b83020;--green:#1a7a3c;
-  --sky:#1560a0;--combo:#8040c0;--tan:#c8a050;
+  --combo:#8040c0;--tan:#c8a050;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;overflow:hidden;}
-body{background:var(--bg);font-family:'Noto Sans KR',sans-serif;color:var(--paper);display:flex;flex-direction:column;height:100vh;}
+body{
+  background:var(--bg);font-family:'Noto Sans KR',sans-serif;
+  color:var(--paper);display:flex;flex-direction:column;
+  height:100dvh; /* 모바일 주소창 대응 */
+}
 
-/* HEADER */
-header{padding:8px 14px 6px;background:linear-gradient(180deg,#0a0800 0%,var(--bg) 100%);border-bottom:2px solid var(--border);flex-shrink:0;}
+/* ── HEADER ── */
+header{
+  flex-shrink:0;padding:5px 12px 4px;
+  background:linear-gradient(180deg,#0a0800,var(--bg));
+  border-bottom:2px solid var(--border);
+}
 .hdr{display:flex;align-items:center;justify-content:space-between;}
-.title{font-family:'Black Han Sans',sans-serif;font-size:clamp(14px,3.8vw,22px);color:var(--gold);letter-spacing:0.5px;line-height:1.2;}
-.sub-title{font-size:12px;color:#907040;margin-top:2px;letter-spacing:0.3px;}
-.crisis-label{font-size:13px;color:#c04020;font-weight:700;letter-spacing:0.5px;text-align:right;}
-.crisis-sub{font-size:11px;color:#907040;margin-top:1px;text-align:right;}
+.title{font-family:'Black Han Sans',sans-serif;font-size:clamp(12px,3.2vw,17px);color:var(--gold);letter-spacing:0.5px;line-height:1.2;}
+.sub-title{font-size:10px;color:#907040;margin-top:1px;}
+.crisis-label{font-size:10px;color:#c04020;font-weight:700;text-align:right;}
+.crisis-sub{font-size:9px;color:#907040;margin-top:1px;text-align:right;}
 
-/* 게이지 영역 */
-.gauges{flex-shrink:0;display:flex;gap:7px;padding:7px 12px;background:var(--panel);border-bottom:1px solid var(--border);}
-.gauge-box{flex:1;background:#080600;border:1px solid var(--border);border-radius:5px;padding:6px 12px;}
-.gauge-label{font-size:13px;color:#b09050;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
-.gauge-pct{font-family:'Black Han Sans',sans-serif;font-size:17px;}
-.gauge-bar{height:13px;background:#1a1510;border-radius:4px;overflow:hidden;}
-.gauge-fill{height:100%;border-radius:4px;transition:width 0.3s;}
+/* ── 게이지 2개 ── */
+.gauges{
+  flex-shrink:0;display:flex;gap:6px;
+  padding:5px 10px;background:var(--panel);border-bottom:1px solid var(--border);
+}
+.gauge-box{flex:1;background:#080600;border:1px solid var(--border);border-radius:4px;padding:4px 10px;}
+.gauge-label{font-size:11px;color:#b09050;display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
+.gauge-pct{font-family:'Black Han Sans',sans-serif;font-size:15px;}
+.gauge-bar{height:10px;background:#1a1510;border-radius:3px;overflow:hidden;}
+.gauge-fill{height:100%;border-radius:3px;transition:width 0.4s;}
 .gf-dev{background:linear-gradient(90deg,#802010,#d04030);}
 .gf-law{background:linear-gradient(90deg,#1a7a3c,#30b060);}
 .gauge-pct-dev{color:#e05040;}
 .gauge-pct-law{color:#40c070;}
 
-/* SCENE */
-.scene{flex:1;position:relative;overflow:hidden;background:linear-gradient(180deg,#2e1e08 0%,#1a1510 100%);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;min-height:0;}
-.scene-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(107,80,32,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(107,80,32,0.1) 1px,transparent 1px);background-size:28px 28px;}
-.click-obj{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);text-align:center;pointer-events:none;z-index:2;}
-.click-icon{font-size:clamp(52px,13vw,76px);display:block;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.9));transition:transform 0.08s;}
-.scene:active .click-icon{transform:scale(0.82) rotate(-6deg);}
-.click-hint{font-size:14px;color:#907040;margin-top:6px;}
-.lv-badge{position:absolute;top:9px;right:10px;z-index:3;background:rgba(8,6,0,0.9);border:1px solid var(--gold);border-radius:5px;padding:5px 12px;font-family:'Black Han Sans',sans-serif;font-size:15px;color:var(--gold);text-align:center;}
-.lv-badge small{display:block;font-size:11px;color:#907040;font-family:'Noto Sans KR',sans-serif;font-weight:400;}
-.xp-bar{height:3px;background:#1a1510;border-radius:1px;margin-top:3px;overflow:hidden;}
-.xp-fill{height:100%;background:var(--gold);border-radius:1px;transition:width 0.3s;}
+/* ── 포인트 + 타이머 ── */
+.pt-row{
+  flex-shrink:0;display:flex;align-items:center;gap:8px;
+  padding:4px 10px;background:#0d0a04;
+  border-bottom:1px solid var(--border);
+}
+.pt-main{display:flex;align-items:baseline;gap:5px;}
+.pt-label{font-size:10px;color:#907040;}
+.pt-num{font-family:'Black Han Sans',sans-serif;font-size:26px;color:var(--gold);line-height:1;}
+.pt-rate{font-size:10px;color:#706030;}
+.pt-right{margin-left:auto;text-align:right;}
+.pt-time{font-family:'Black Han Sans',sans-serif;font-size:11px;color:#c04020;}
+.pt-time-label{font-size:9px;color:#907040;margin-top:1px;}
 
-/* 이벤트 배너 */
-.event-banner{position:absolute;top:7px;left:9px;right:9px;z-index:8;background:rgba(140,30,10,0.97);border:2px solid #e04020;border-radius:7px;padding:9px 14px;animation:pulse-ev 0.7s infinite alternate;pointer-events:none;}
-@keyframes pulse-ev{from{box-shadow:0 0 0 0 rgba(224,64,32,0.5);}to{box-shadow:0 0 0 7px rgba(224,64,32,0);}}
-.ev-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
-.ev-title{font-size:14px;font-weight:700;color:#fff;letter-spacing:0.5px;}
-.ev-timer-box{background:#600;border-radius:4px;padding:2px 10px;}
-.ev-timer{font-family:'Black Han Sans',sans-serif;font-size:20px;color:#ffd;}
-.ev-how{font-size:13px;color:#ffddaa;line-height:1.5;}
+/* ── 이벤트 배너 ── */
+.event-banner{
+  flex-shrink:0;background:rgba(140,30,10,0.98);border-top:2px solid #e04020;
+  border-bottom:2px solid #e04020;padding:7px 12px;
+  animation:pulse-ev 0.7s infinite alternate;
+}
+@keyframes pulse-ev{from{background:rgba(140,30,10,0.98);}to{background:rgba(180,40,10,0.98);}}
+.ev-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.ev-title{font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;}
+.ev-timer-box{background:#600;border-radius:4px;padding:2px 8px;flex-shrink:0;margin-left:6px;}
+.ev-timer{font-family:'Black Han Sans',sans-serif;font-size:18px;color:#ffd;}
+.ev-how{font-size:11px;color:#ffddaa;line-height:1.5;}
 .ev-how strong{color:#ffe060;}
+.no-event{display:none;}
 
-/* 파티클 */
-.particle{position:absolute;font-size:13px;font-weight:700;pointer-events:none;z-index:10;white-space:nowrap;animation:pu 1.1s ease forwards;}
-@keyframes pu{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-55px)}}
-.big-p{position:absolute;font-family:'Black Han Sans',sans-serif;font-size:20px;pointer-events:none;z-index:11;white-space:nowrap;animation:bp 1.4s ease forwards;text-shadow:0 2px 6px rgba(0,0,0,0.9);}
-@keyframes bp{0%{opacity:1;transform:translateY(0) scale(1.2)}100%{opacity:0;transform:translateY(-80px) scale(0.6)}}
-.skill-burst{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:12;animation:sb 0.8s ease forwards;font-size:clamp(52px,14vw,84px);}
-@keyframes sb{0%{opacity:1;transform:translate(-50%,-50%) scale(0.3)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
-
-/* 포인트 바 (스킬 위) */
-.pt-bar{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:6px 14px;background:#0d0a04;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.pt-icon{font-size:20px;}
-.pt-label{font-size:12px;color:#907040;}
-.pt-num{font-family:'Black Han Sans',sans-serif;font-size:28px;color:var(--gold);line-height:1;}
-.pt-rate{font-size:12px;color:#706030;margin-left:4px;}
-.combo-wrap{display:flex;align-items:center;gap:6px;margin-left:auto;}
-.combo-lbl{font-family:'Black Han Sans',sans-serif;font-size:12px;color:var(--combo);}
-.combo-track{width:60px;height:6px;background:#1a1510;border-radius:3px;overflow:hidden;border:1px solid #3a1860;}
-.combo-fill{height:100%;background:linear-gradient(90deg,#6030a0,#c080f0);border-radius:3px;transition:width 0.1s;}
-.combo-decay{font-size:12px;color:#8040a0;min-width:20px;text-align:center;}
-.combo-mult{font-family:'Black Han Sans',sans-serif;font-size:17px;color:#c080f0;min-width:32px;text-align:right;}
-
-/* 스킬 바 */
-.skill-bar{flex-shrink:0;display:flex;gap:5px;padding:6px 10px;background:var(--panel);}
-.skill-btn{flex:1;background:#0d0a04;border:2px solid var(--border);border-radius:6px;padding:6px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;overflow:hidden;transition:border-color 0.2s;-webkit-tap-highlight-color:transparent;}
-.skill-btn.ready{border-color:var(--gold);box-shadow:0 0 8px rgba(232,160,16,0.4);}
+/* ── 스킬 3개 ── */
+.skill-bar{
+  flex-shrink:0;display:flex;gap:5px;
+  padding:5px 8px;background:var(--panel);border-bottom:1px solid var(--border);
+}
+.skill-btn{
+  flex:1;background:#0d0a04;border:2px solid var(--border);border-radius:6px;
+  padding:5px 3px;cursor:pointer;display:flex;flex-direction:column;
+  align-items:center;gap:2px;position:relative;overflow:hidden;
+  transition:border-color 0.2s;-webkit-tap-highlight-color:transparent;
+}
+.skill-btn.ready{border-color:var(--gold);box-shadow:0 0 6px rgba(232,160,16,0.35);}
 .skill-btn.no-pt{border-color:#501808;opacity:0.5;}
 .skill-btn:disabled{cursor:not-allowed;}
-.sk-icon{font-size:22px;line-height:1;}
-.sk-name{font-size:11px;color:var(--tan);letter-spacing:0.2px;text-align:center;}
-.sk-cost{font-size:11px;color:var(--gold);text-align:center;font-weight:700;}
-.sk-effect{font-size:9px;color:#607050;text-align:center;line-height:1.4;}
-.sk-cd{font-family:'Black Han Sans',sans-serif;font-size:12px;color:var(--gold);}
+.sk-icon{font-size:20px;line-height:1;}
+.sk-name{font-size:10px;color:var(--tan);text-align:center;font-weight:700;}
+.sk-cost{font-size:10px;color:var(--gold);text-align:center;font-weight:700;}
+.sk-effect{font-size:8px;color:#607050;text-align:center;line-height:1.3;}
+.sk-cd{font-family:'Black Han Sans',sans-serif;font-size:11px;color:var(--gold);}
 .sk-cd.rdy{color:#40c060;}
-.cd-ov{position:absolute;inset:0;background:rgba(8,6,0,0.78);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--tan);border-radius:5px;}
+.cd-ov{
+  position:absolute;inset:0;background:rgba(8,6,0,0.78);
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Black Han Sans',sans-serif;font-size:16px;color:var(--tan);border-radius:5px;
+}
 
-/* 하단 패널 */
-.bottom-panel{flex-shrink:0;background:var(--panel);border-top:2px solid var(--border);display:flex;flex-direction:column;max-height:30vh;}
-.tabs{display:flex;border-bottom:1px solid var(--border);}
-.tab-btn{flex:1;padding:7px;font-size:13px;font-weight:700;background:transparent;border:none;color:#5a3810;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:color 0.2s;}
-.tab-btn.active{color:var(--gold);border-bottom:2px solid var(--gold);margin-bottom:-1px;}
-.tab-content{overflow-y:auto;flex:1;}
-.upgrades{display:flex;flex-direction:column;gap:5px;padding:7px 10px;}
-.ug-btn{background:#080600;border:1px solid var(--border);border-radius:5px;padding:7px 10px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:background 0.15s,border-color 0.15s;text-align:left;width:100%;-webkit-tap-highlight-color:transparent;}
+/* ── 패시브(업그레이드) 4개 ── */
+.upgrades{
+  flex:1;display:flex;flex-direction:column;gap:4px;
+  padding:5px 8px;overflow-y:auto;min-height:0;background:var(--panel);
+}
+.ug-btn{
+  flex-shrink:0;background:#080600;border:1px solid var(--border);border-radius:5px;
+  padding:6px 9px;cursor:pointer;display:flex;align-items:center;gap:8px;
+  transition:background 0.15s,border-color 0.15s;text-align:left;width:100%;
+  -webkit-tap-highlight-color:transparent;
+}
 .ug-btn:hover:not(:disabled){background:#1a1510;border-color:var(--gold);}
 .ug-btn:disabled{opacity:0.35;cursor:not-allowed;}
-.ug-btn.bought{border-color:var(--green);background:#060e06;}
-.ug-ico{font-size:20px;flex-shrink:0;}
+.ug-btn.bought{border-color:var(--green);background:#060e06;cursor:default;}
+.ug-btn.affordable{border-color:var(--gold);background:#1a1205;}
+.ug-btn{opacity:0.45;}
+.ug-btn.bought,.ug-btn.affordable{opacity:1;}
+.ug-ico{font-size:18px;flex-shrink:0;}
 .ug-info{flex:1;}
-.ug-name{font-size:13px;font-weight:700;color:var(--paper);}
-.ug-desc{font-size:11px;color:#907040;margin-top:2px;}
-.ug-eff{font-size:10px;color:#507040;margin-top:2px;font-style:italic;}
-.ug-cost{font-family:'Black Han Sans',sans-serif;font-size:14px;color:var(--gold);flex-shrink:0;white-space:nowrap;}
-.ug-btn.bought .ug-cost{color:var(--green);font-size:12px;}
-.feed{padding:5px 10px;display:flex;flex-direction:column;gap:1px;}
-.fi{font-size:12px;color:#907040;padding:3px 0;border-bottom:1px solid #110f08;animation:fi 0.2s ease;}
-.fi.imp{color:var(--gold);}
-.fi.bad{color:#c04020;}
-.fi.ok{color:#28a050;}
-@keyframes fi{from{opacity:0}to{opacity:1}}
+.ug-name{font-size:12px;font-weight:700;color:var(--paper);}
+.ug-desc{font-size:10px;color:#907040;margin-top:1px;}
+.ug-eff{font-size:9px;color:#507040;margin-top:1px;font-style:italic;}
+.ug-cost{font-family:'Black Han Sans',sans-serif;font-size:13px;color:var(--gold);flex-shrink:0;white-space:nowrap;}
+.ug-btn.bought .ug-cost{color:var(--green);font-size:11px;}
 
-/* 오버레이 */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:100;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;overflow-y:auto;}
+/* ── 로그 (맨 하단 고정) ── */
+.log-bar{
+  flex-shrink:0;background:#080602;border-top:1px solid var(--border);
+  padding:6px 12px;min-height:58px;max-height:80px;overflow:hidden;
+}
+.log-item{font-size:18px;color:#907040;line-height:1.6;}
+.log-item.imp{color:var(--gold);}
+.log-item.bad{color:#c04020;}
+.log-item.ok{color:#28a050;}
+
+/* ── 스킬 버스트 ── */
+.skill-burst{
+  position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);
+  pointer-events:none;z-index:300;animation:sb 0.7s ease forwards;
+  font-size:clamp(52px,14vw,84px);
+}
+@keyframes sb{0%{opacity:1;transform:translate(-50%,-50%) scale(0.3)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
+
+/* ── 오버레이 ── */
+.overlay{
+  display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:100;
+  align-items:center;justify-content:center;flex-direction:column;
+  text-align:center;padding:24px;overflow-y:auto;
+}
 .overlay.on{display:flex;}
-.ov-icon{font-size:56px;margin-bottom:12px;}
-.ov-title{font-family:'Black Han Sans',sans-serif;font-size:28px;color:var(--gold);margin-bottom:10px;}
-.ov-desc{font-size:15px;color:#a09050;line-height:2;margin-bottom:16px;}
-.ov-link{display:inline-block;background:var(--green);color:#fff;padding:13px 26px;border-radius:6px;text-decoration:none;font-weight:700;font-size:15px;margin-bottom:9px;}
-.ov-link-team{display:inline-block;background:#1560a0;color:#fff;padding:13px 26px;border-radius:6px;text-decoration:none;font-weight:700;font-size:15px;margin-bottom:9px;border:1.5px solid #3090d0;}
-.ov-team-box{margin:10px 0;background:rgba(21,96,160,0.18);border:1px solid #1560a0;border-radius:9px;padding:14px 20px;max-width:340px;}
-.ov-team-q{font-size:14px;color:#90c8f0;margin-bottom:10px;line-height:1.7;}
-.re-btn{background:transparent;border:1px solid var(--border);color:#907040;padding:10px 20px;border-radius:5px;cursor:pointer;font-size:14px;margin-top:6px;font-family:'Noto Sans KR',sans-serif;}
+.ov-icon{font-size:52px;margin-bottom:10px;}
+.ov-title{font-family:'Black Han Sans',sans-serif;font-size:26px;color:var(--gold);margin-bottom:8px;}
+.ov-desc{font-size:14px;color:#a09050;line-height:1.9;margin-bottom:14px;}
+.ov-link{display:inline-block;background:var(--green);color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;margin-bottom:8px;}
+.ov-link-team{display:inline-block;background:#1560a0;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;margin-bottom:8px;border:1.5px solid #3090d0;}
+.ov-team-box{margin:8px 0;background:rgba(21,96,160,0.18);border:1px solid #1560a0;border-radius:8px;padding:12px 18px;max-width:320px;}
+.ov-team-q{font-size:13px;color:#90c8f0;margin-bottom:8px;line-height:1.6;}
+.re-btn{background:transparent;border:1px solid var(--border);color:#907040;padding:9px 18px;border-radius:4px;cursor:pointer;font-size:13px;margin-top:5px;font-family:'Noto Sans KR',sans-serif;}
 
-/* 인트로 */
-.intro-overlay{display:flex;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:200;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:18px;overflow-y:auto;}
-.intro-emblem{font-size:56px;margin-bottom:8px;filter:drop-shadow(0 0 12px rgba(232,160,16,0.6));}
-.intro-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(18px,4.5vw,26px);color:var(--gold);letter-spacing:1px;margin-bottom:5px;line-height:1.3;}
-.intro-sub{font-size:13px;color:#907040;letter-spacing:0.5px;margin-bottom:16px;}
-.intro-card{background:#0d0a04;border:1px solid var(--border);border-radius:9px;padding:14px 17px;max-width:380px;width:100%;text-align:left;margin-bottom:13px;position:relative;}
-.intro-card::before{content:'🔍 상황 브리핑';position:absolute;top:-11px;left:13px;background:#0d0a04;padding:0 7px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:var(--gold);letter-spacing:1px;}
-.rule-item{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start;}
-.rule-icon{font-size:18px;flex-shrink:0;line-height:1.3;}
-.rule-text{font-size:12px;color:#c8a860;line-height:1.6;}
+/* ── 인트로 ── */
+.intro-overlay{
+  display:flex;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:200;
+  align-items:center;justify-content:center;flex-direction:column;
+  text-align:center;padding:16px;overflow-y:auto;
+}
+.intro-emblem{font-size:48px;margin-bottom:6px;filter:drop-shadow(0 0 12px rgba(232,160,16,0.6));}
+.intro-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(16px,4.2vw,22px);color:var(--gold);letter-spacing:1px;margin-bottom:4px;line-height:1.3;}
+.intro-sub{font-size:11px;color:#907040;letter-spacing:0.5px;margin-bottom:14px;}
+.intro-card{background:#0d0a04;border:1px solid var(--border);border-radius:8px;padding:13px 15px;max-width:360px;width:100%;text-align:left;margin-bottom:12px;position:relative;}
+.intro-card::before{position:absolute;top:-10px;left:12px;background:#0d0a04;padding:0 6px;font-family:'Black Han Sans',sans-serif;font-size:11px;color:var(--gold);letter-spacing:1px;}
+.intro-card.brief::before{content:'📢 상황 브리핑';}
+.intro-card.rules::before{content:'🎮 게임 규칙';}
+.rule-item{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
+.rule-icon{font-size:15px;flex-shrink:0;line-height:1.3;}
+.rule-text{font-size:11px;color:#c8a860;line-height:1.6;}
 .rule-text strong{color:var(--paper);}
-.intro-dossier{background:#0d0a04;border:1px dashed #6b5020;border-radius:7px;padding:10px 15px;max-width:380px;width:100%;margin-bottom:14px;font-size:12px;color:#807850;line-height:1.7;text-align:left;position:relative;}
-.intro-dossier::before{content:'📁 사건 파일';position:absolute;top:-10px;left:11px;background:#0d0a04;padding:0 6px;font-size:11px;color:#907040;}
-.start-btn{background:linear-gradient(135deg,#b06808,#e8a010);color:#1a1510;font-family:'Black Han Sans',sans-serif;font-size:19px;font-weight:900;padding:15px 44px;border-radius:8px;border:none;cursor:pointer;letter-spacing:2px;box-shadow:0 4px 20px rgba(232,160,16,0.4);transition:transform 0.15s;}
+.intro-dossier{background:#0d0a04;border:1px dashed #6b5020;border-radius:6px;padding:9px 13px;max-width:360px;width:100%;margin-bottom:12px;font-size:10px;color:#807850;line-height:1.7;text-align:left;position:relative;}
+.intro-dossier::before{content:'📁 실제 사건';position:absolute;top:-9px;left:10px;background:#0d0a04;padding:0 5px;font-size:10px;color:#907040;}
+.start-btn{background:linear-gradient(135deg,#b06808,#e8a010);color:#1a1510;font-family:'Black Han Sans',sans-serif;font-size:17px;font-weight:900;padding:13px 38px;border-radius:7px;border:none;cursor:pointer;letter-spacing:2px;box-shadow:0 4px 18px rgba(232,160,16,0.4);transition:transform 0.15s;}
 .start-btn:active{transform:scale(0.95);}
+.back-btn{background:transparent;border:1px solid var(--border);color:#907040;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:13px;font-family:'Noto Sans KR',sans-serif;}
 
-/* 레벨업 팝업 */
-.lup-pop{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#1a1510,#2e1e08);border:2px solid var(--gold);border-radius:9px;padding:18px 26px;text-align:center;z-index:50;animation:lup 0.4s ease;}
-@keyframes lup{from{transform:translate(-50%,-50%) scale(0.5)}to{transform:translate(-50%,-50%) scale(1)}}
-.lup-t{font-family:'Black Han Sans',sans-serif;font-size:21px;color:var(--gold);}
-.lup-d{font-size:13px;color:#c8a860;margin-top:6px;}
+/* 카운트다운 */
+.cd-num{font-family:'Black Han Sans',sans-serif;font-size:90px;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(232,160,16,0.7);}
 </style>
 </head>
 <body>
 
-<!-- ═══ 인트로 페이지 1: 상황 브리핑 ═══ -->
-<div class="intro-overlay" id="intro-ov">
+<!-- ═══ 인트로 1: 상황 브리핑 ═══ -->
+<div class="intro-overlay" id="intro1">
   <div class="intro-emblem">🕵️</div>
   <div class="intro-title">아무리 덮어봐라<br>우리가 파헤치지</div>
   <div class="intro-sub">난개발·환경오염 방지 및 주민 알권리 조례 운동본부</div>
-
-  <div class="intro-card" style="max-width:380px;width:100%;">
-    <div style="font-family:'Black Han Sans',sans-serif;font-size:13px;color:var(--gold);margin-bottom:12px;text-align:center;letter-spacing:1px;">📢 상황 브리핑</div>
-    <div style="font-size:13px;color:#c8a860;line-height:1.8;">
+  <div class="intro-card brief" style="max-width:360px;width:100%;">
+    <div style="font-size:12px;color:#c8a860;line-height:1.9;">
       지금 이 순간, 전국 곳곳에서<br>
-      <strong style="color:#e05040;">우리 동네에 폐기물소각장이 주민 몰래</strong>들어오려 합니다.<br><br>
+      <strong style="color:#e05040;">우리 동네에 폐기물소각장이 주민 몰래</strong> 들어오려 합니다.<br><br>
       사업자는 규모를 줄여 환경영향평가를 피하고,<br>
       행정은 인허가 절차를 날림으로 통과시킵니다.<br><br>
       주민들은 인허가가 <strong>다 끝난 후에야</strong> 뒤늦게 소식을 듣습니다.<br><br>
@@ -172,63 +205,62 @@ header{padding:8px 14px 6px;background:linear-gradient(180deg,#0a0800 0%,var(--b
       인허가가 완료되기 전에 조례를 제정해 막아내세요!
     </div>
   </div>
-
-  <div class="intro-dossier" style="max-width:380px;">
-    📁 실제 사건 | 이 게임의 이벤트는 현실에서도 벌어지는 일들입니다.<br>
+  <div class="intro-dossier" style="max-width:360px;">
+    이 게임의 이벤트는 현실에서도 벌어지는 일들입니다.<br>
     • 99톤 소각장 → 100톤 기준을 피해 환경영향평가 면제<br>
     • 도시계획위원회 27회 전부 이메일 서면심의로만 의결<br>
-    • 폐기물사업계획서 적합통보 후 주민은 뒤늦게 공사 시작을 알게 됨
+    • 적합통보 후 주민은 뒤늦게 공사 시작을 알게 됨
   </div>
-
   <button class="start-btn" onclick="showIntro2()">다음 → 게임 규칙 보기</button>
 </div>
 
-<!-- ═══ 인트로 페이지 2: 게임 규칙 ═══ -->
-<div class="intro-overlay" id="intro-ov2" style="display:none;">
-  <div class="intro-emblem" style="font-size:40px;margin-bottom:6px;">📋</div>
-  <div class="intro-title" style="font-size:clamp(16px,4vw,22px);margin-bottom:12px;">게임 규칙</div>
-
-  <div class="intro-card" style="max-width:380px;width:100%;">
-    <div style="font-family:'Black Han Sans',sans-serif;font-size:13px;color:var(--gold);margin-bottom:12px;text-align:center;letter-spacing:1px;">🎮 어떻게 하나요?</div>
+<!-- ═══ 인트로 2: 게임 규칙 ═══ -->
+<div class="intro-overlay" id="intro2" style="display:none;">
+  <div class="intro-emblem" style="font-size:38px;margin-bottom:5px;">📋</div>
+  <div class="intro-title" style="font-size:clamp(15px,3.8vw,20px);margin-bottom:12px;">게임 규칙</div>
+  <div class="intro-card rules" style="max-width:360px;width:100%;">
+    <div class="rule-item" style="margin-top:6px;">
+      <span class="rule-icon">⏱️</span>
+      <div class="rule-text">시간이 흐르면 <strong>정보공개 포인트(📄)</strong>가 자동으로 쌓입니다.<br>클릭은 없습니다 — 대신 포인트를 어떻게 쓸지 판단하세요.</div>
+    </div>
     <div class="rule-item">
-      <span class="rule-icon">📄</span>
-      <div class="rule-text"><strong>화면을 클릭</strong>해서 정보공개 포인트를 모으세요.<br>포인트로 스킬을 쓰고, 주민활동을 강화합니다.</div>
+      <span class="rule-icon">⬆️</span>
+      <div class="rule-text"><strong>주민활동 강화(패시브)</strong>를 구매하면 포인트 적립이 빨라집니다.<br>먼저 기반을 다져야 나중에 스킬을 쓸 수 있습니다.</div>
+    </div>
+    <div class="rule-item">
+      <span class="rule-icon">⚡</span>
+      <div class="rule-text"><strong>스킬 3가지</strong>: 포인트를 소모해 발동.<br>쓸수록 다음 비용이 3배로 뜁니다. 타이밍이 핵심!</div>
     </div>
     <div class="rule-item">
       <span class="rule-icon">🏗️</span>
-      <div class="rule-text"><strong style="color:#e05040;">인허가 진행</strong> 게이지가 100%가 되면 <strong>패배!</strong><br>스킬로 속도를 늦출 수 있지만 내려가진 않습니다.</div>
+      <div class="rule-text"><strong style="color:#e05040;">인허가 진행</strong> 100% → 패배. 스킬로 늦출 수 있지만 내려가진 않아요.</div>
     </div>
     <div class="rule-item">
       <span class="rule-icon">📜</span>
-      <div class="rule-text"><strong style="color:#40c070;">조례 제정</strong> 게이지를 100%까지 채우면 <strong>승리!</strong><br>주민활동을 강화하고, 스킬로 게이지를 올리세요.</div>
-    </div>
-    <div class="rule-item">
-      <span class="rule-icon">🔥</span>
-      <div class="rule-text"><strong>콤보</strong>: 1.5초 안에 연속 클릭하면 포인트 최대 5배!<br>멈추면 즉시 초기화됩니다.</div>
+      <div class="rule-text"><strong style="color:#40c070;">조례 제정</strong> 100% → 승리! 스킬과 패시브로 게이지를 올리세요.</div>
     </div>
     <div class="rule-item">
       <span class="rule-icon">🚨</span>
-      <div class="rule-text"><strong>긴급 이벤트</strong>가 주기적으로 터집니다.<br>이벤트 창에 <strong>대응 방법</strong>이 안내됩니다. 제한시간 내 대응하세요!</div>
+      <div class="rule-text"><strong>긴급 이벤트</strong>가 주기적으로 터집니다.<br>이벤트 창에 <strong>대응 방법</strong>이 표시됩니다. 제한시간 내 스킬을 쓰거나 포인트를 확보하세요!</div>
     </div>
   </div>
-
   <div style="display:flex;gap:10px;margin-top:4px;">
-    <button class="re-btn" onclick="showIntro1()">← 뒤로</button>
+    <button class="back-btn" onclick="showIntro1()">← 뒤로</button>
     <button class="start-btn" onclick="startCountdown()">✊ 투쟁 시작</button>
   </div>
 </div>
 
 <!-- ═══ 카운트다운 ═══ -->
-<div class="intro-overlay" id="countdown-ov" style="display:none;">
-  <div style="font-size:22px;color:#c8a860;margin-bottom:16px;line-height:1.7;text-align:center;max-width:340px;">
-    🏗️ 소각장 인허가 절차가<br>지금 이 순간도 진행 중입니다.<br><br>
+<div class="intro-overlay" id="cdov" style="display:none;">
+  <div style="font-size:18px;color:#c8a860;margin-bottom:14px;line-height:1.7;text-align:center;max-width:300px;">
+    🏗️ 소각장 인허가 절차가<br>지금도 진행 중입니다.<br><br>
     <strong style="color:var(--gold);">정보를 파헤쳐 막아내세요!</strong>
   </div>
-  <div id="countdown-num" style="font-family:'Black Han Sans',sans-serif;font-size:80px;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(232,160,16,0.6);">3</div>
-  <div style="font-size:16px;color:#907040;margin-top:12px;">게임이 곧 시작됩니다...</div>
+  <div class="cd-num" id="cd-num">3</div>
+  <div style="font-size:14px;color:#907040;margin-top:10px;">게임이 곧 시작됩니다...</div>
 </div>
 
-<!-- ═══ 헤더 ═══ -->
+<!-- ═══ 게임 화면 ═══ -->
 <header>
   <div class="hdr">
     <div>
@@ -242,69 +274,46 @@ header{padding:8px 14px 6px;background:linear-gradient(180deg,#0a0800 0%,var(--b
   </div>
 </header>
 
-<!-- ═══ 게이지 2개 ═══ -->
 <div class="gauges">
   <div class="gauge-box">
-    <div class="gauge-label">
-      <span>🏗️ 인허가 진행</span>
-      <span class="gauge-pct gauge-pct-dev" id="dev-pct">0%</span>
-    </div>
+    <div class="gauge-label"><span>🏗️ 인허가 진행</span><span class="gauge-pct gauge-pct-dev" id="dev-pct">0%</span></div>
     <div class="gauge-bar"><div class="gauge-fill gf-dev" id="dev-bar" style="width:0%"></div></div>
   </div>
   <div class="gauge-box">
-    <div class="gauge-label">
-      <span>📜 조례 제정</span>
-      <span class="gauge-pct gauge-pct-law" id="law-pct">0%</span>
-    </div>
+    <div class="gauge-label"><span>📜 조례 제정</span><span class="gauge-pct gauge-pct-law" id="law-pct">0%</span></div>
     <div class="gauge-bar"><div class="gauge-fill gf-law" id="law-bar" style="width:0%"></div></div>
   </div>
 </div>
 
-<!-- ═══ 씬 ═══ -->
-<div class="scene" id="scene">
-  <div class="scene-grid"></div>
-  <div class="lv-badge" id="lv-badge">
-    Lv.1<small>신청인</small>
-    <div class="xp-bar"><div class="xp-fill" id="xp-fill" style="width:0%"></div></div>
-  </div>
-  <div class="click-obj">
-    <span class="click-icon">📁</span>
-    <div class="click-hint">탭/클릭해서 정보공개 포인트 적립!</div>
-  </div>
-</div>
-
-<!-- ═══ 포인트 바 (스킬 바로 위) ═══ -->
-<div class="pt-bar">
-  <span class="pt-icon">📄</span>
+<div class="pt-row">
   <div>
-    <div class="pt-label">정보공개 포인트</div>
-    <div style="display:flex;align-items:baseline;gap:4px;">
+    <div class="pt-label">📄 정보공개 포인트</div>
+    <div class="pt-main">
       <span class="pt-num" id="pt-num">0</span>
-      <span class="pt-rate" id="pt-rate">+0/초</span>
+      <span class="pt-rate" id="pt-rate">+0.5/초</span>
     </div>
   </div>
-  <div class="combo-wrap">
-    <span class="combo-lbl">COMBO</span>
-    <div class="combo-track"><div class="combo-fill" id="combo-fill" style="width:0%"></div></div>
-    <span class="combo-decay" id="combo-decay">—</span>
-    <span class="combo-mult" id="combo-mult">×1</span>
+  <div class="pt-right">
+    <div class="pt-time" id="elapsed-time">00:00</div>
+    <div class="pt-time-label">경과 시간</div>
   </div>
 </div>
 
-<!-- ═══ 스킬 바 ═══ -->
+<!-- 이벤트 배너 (평소엔 숨김) -->
+<div id="event-area"></div>
+
+<!-- 스킬 바 -->
 <div class="skill-bar" id="skill-bar"></div>
 
-<!-- ═══ 하단 패널 ═══ -->
-<div class="bottom-panel">
-  <div class="tabs">
-    <button class="tab-btn active" onclick="switchTab('up')">⬆ 주민활동 강화</button>
-    <button class="tab-btn" onclick="switchTab('log')">📡 활동 로그</button>
-  </div>
-  <div class="tab-content" id="tab-up"><div class="upgrades" id="ug-list"></div></div>
-  <div class="tab-content" id="tab-log" style="display:none"><div class="feed" id="feed"></div></div>
+<!-- 주민활동 강화 패시브 -->
+<div class="upgrades" id="ug-list"></div>
+
+<!-- 로그 -->
+<div class="log-bar" id="log-bar">
+  <div class="log-item imp">✊ 투쟁 시작! 포인트를 모아 스킬과 패시브를 활용하세요.</div>
 </div>
 
-<!-- ═══ 승리 ═══ -->
+<!-- 승리 -->
 <div class="overlay" id="win-ov">
   <div class="ov-icon">🎊</div>
   <div class="ov-title">7대 조례 제정 성공!</div>
@@ -317,10 +326,10 @@ header{padding:8px 14px 6px;background:linear-gradient(180deg,#0a0800 0%,var(--b
   <button class="re-btn" onclick="restartGame()">처음부터 다시</button>
 </div>
 
-<!-- ═══ 패배 ═══ -->
+<!-- 패배 -->
 <div class="overlay" id="lose-ov">
   <div class="ov-icon">😢</div>
-  <div class="ov-title" id="lose-title">인허가 강행됐습니다</div>
+  <div class="ov-title">인허가 강행됐습니다</div>
   <div class="ov-desc" id="lose-desc">정보가 막히면 난개발을 막을 수 없습니다.</div>
   <a class="ov-link" href="https://cfoi1.github.io/weneedlaw/" target="_blank">🔗 캠페인 살펴보기</a>
   <div class="ov-team-box">
@@ -331,180 +340,217 @@ header{padding:8px 14px 6px;background:linear-gradient(180deg,#0a0800 0%,var(--b
 </div>
 
 <script>
-// ═══════════════════════════════════
-// 이벤트 정의
-// penalty: 인허가 증가 (절대 감소 없음)
-// bonus:   조례 증가
-// response: 저지 방법 안내
-// ═══════════════════════════════════
+// ════════════════════════════
+// 이벤트
+// ════════════════════════════
+// ════════════════════════════
+// 이벤트 — 실제 인허가 절차 순서 반영
+// phase: 1=초반(0~33%), 2=중반(33~66%), 3=후반(66~100%) 인허가 진행 시 가중 출현
+// ════════════════════════════
 const EVENTS = [
+  // ── 1단계: 초반 — 정보 차단, 사전 절차 밀실 처리 ──
   {
-    title:'⚠️ 폐기물사업계획서 적합통보 임박!',
-    effect:'막지 못하면 인허가 +25%',
-    response:'💡 저지법: 지금 바로 클릭해서 포인트를 모아 📋<strong>정보공개 청구</strong> 스킬을 사용하세요!',
-    timer:9, penalty:25, bonus:0,
-    successCond:'skill',
-  },
-  {
-    title:'🔒 도시계획위원회 서면심의!',
-    effect:'저지 실패 시 인허가 +22%',
-    response:'💡 저지법: 🌿<strong>언론보도</strong> 스킬로 심의를 중단시키거나, 포인트를 <strong>1000점 이상</strong> 보유하세요!',
-    timer:8, penalty:22, bonus:0,
-    successCond:'pts', successThreshold:1000,
-  },
-  {
-    title:'🤝 공무원과 업체의 유착!',
-    effect:'인허가 즉시 +12% — 저지 불가',
-    response:'😡 저지 불가: 내부 정보가 차단됐습니다. 인허가가 강제 진행됩니다. 클릭을 멈추지 마세요!',
-    timer:6, penalty:12, bonus:0, unavoidable:true,
-  },
-  {
+    phase:1,
     title:'🏭 환경영향평가 면제 꼼수!',
-    effect:'허용 시 인허가 +18%',
-    response:'💡 저지법: 포인트를 <strong>1000점 이상</strong> 확보한 상태에서 시간이 지나면 주민의견서가 제출돼 저지됩니다!',
-    timer:8, penalty:18, bonus:0,
-    successCond:'pts', successThreshold:1000,
+    effect:'허용 시 인허가 +15%',
+    response:'💡 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 주민의견서 자동 제출로 저지!',
+    timer:9, penalty:15, bonus:0,
+    successCond:'pts', baseThreshold:35,
   },
   {
+    phase:1,
+    title:'🤫 사업계획서 비공개 접수!',
+    effect:'인허가 즉시 +5% — 저지 불가',
+    response:'😡 <strong>저지 불가.</strong> 사업자가 사업계획서를 주민 모르게 제출했습니다!',
+    timer:6, penalty:5, bonus:0, unavoidable:true,
+  },
+  {
+    phase:1,
+    title:'⚠️ 폐기물사업계획서 적합통보 임박!',
+    effect:'막지 못하면 인허가 +20%',
+    response:'💡 📋<strong>정보공개 청구</strong> 스킬을 사용하거나 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 저지!',
+    timer:10, penalty:20, bonus:0,
+    successCond:'skill_or_pts', baseThreshold:30, skillId:'sk_foia',
+  },
+
+  // ── 2단계: 중반 — 위원회 심의, 도시계획 처리 ──
+  {
+    phase:2,
+    title:'🔒 도시계획위원회 서면심의!',
+    effect:'저지 실패 시 인허가 +10%',
+    response:'💡 📰<strong>언론보도</strong> 스킬을 사용하거나 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 저지!',
+    timer:9, penalty:10, bonus:0,
+    successCond:'skill_or_pts', baseThreshold:40, skillId:'sk_env',
+  },
+  {
+    phase:2,
+    title:'🗄️ 위원회 회의록 비공개 처리!',
+    effect:'막지 못하면 인허가 +10%',
+    response:'💡 📋<strong>정보공개 청구</strong> 스킬을 사용하면 회의록 공개를 강제할 수 있습니다!',
+    timer:9, penalty:10, bonus:0,
+    successCond:'skill', skillId:'sk_foia',
+  },
+  {
+    phase:2,
+    title:'🤝 공무원과 업체의 유착!',
+    effect:'인허가 즉시 +10% — 저지 불가',
+    response:'😡 <strong>저지 불가.</strong> 내부 정보가 차단됐습니다. 인허가가 강제 진행됩니다!',
+    timer:6, penalty:10, bonus:0, unavoidable:true,
+  },
+  {
+    phase:2,
+    title:'🏦 대형 로비 자금 투입!',
+    effect:'인허가 즉시 +10% — 저지 불가',
+    response:'😡 <strong>저지 불가.</strong> 사업자가 대규모 로비를 투입했습니다!',
+    timer:5, penalty:10, bonus:0, unavoidable:true,
+  },
+
+  // ── 3단계: 후반 — 주민 뒤늦게 인지, 반격 기회 ──
+  {
+    phase:3,
     title:'📢 주민설명회 기회!',
     effect:'참가하면 조례 +15%',
-    response:'💡 참가법: 포인트를 <strong>2000점 이상</strong> 모으면 주민의견서가 접수됩니다. 열심히 클릭하세요!',
-    timer:8, penalty:0, bonus:15,
-    successCond:'pts', successThreshold:2000,
+    response:'💡 ✊<strong>주민총회 소집</strong> 스킬 사용 또는 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 참가 성공!',
+    timer:9, penalty:0, bonus:15,
+    successCond:'skill_or_pts', baseThreshold:50, skillId:'sk_rally',
   },
   {
+    phase:3,
+    title:'📰 언론사 취재 기회!',
+    effect:'제보 성공 시 조례 +12%, 실패 시 인허가 +8%',
+    response:'💡 📰<strong>언론보도</strong> 스킬 사용 또는 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 제보 성공!',
+    timer:8, penalty:8, bonus:12,
+    successCond:'skill_or_pts', baseThreshold:50, skillId:'sk_env',
+  },
+  {
+    phase:3,
     title:'✊ 마을총회 개최!',
     effect:'참여하면 조례 +18%',
-    response:'💡 참가법: <strong>클릭을 멈추지 마세요!</strong> 포인트 <strong>2500점 이상</strong>이면 마을 협의의견서가 제출됩니다.',
-    timer:8, penalty:0, bonus:18,
-    successCond:'pts', successThreshold:2500,
-  },
-  {
-    title:'📰 언론사 취재 기회!',
-    effect:'제보하면 조례 +12%',
-    response:'💡 제보법: ✊ 포인트를 <strong>2000점 이상</strong> 보유하면 자료 제보 성공!',
-    timer:7, penalty:8, bonus:12,
-    successCond:'pts', successThreshold:2000,
-  },
-  {
-    title:'🏦 대형 로비 자금 투입!',
-    effect:'인허가 즉시 +15% — 저지 불가',
-    response:'😡 저지 불가: 사업자가 대규모 로비 자금을 투입했습니다. 인허가가 강제 진행됩니다. 포기하지 마세요!',
-    timer:5, penalty:15, bonus:0, unavoidable:true,
-  },
-  {
-    title:'🗄️ 위원회 회의록 비공개 처리!',
-    effect:'막지 못하면 인허가 +20%',
-    response:'💡 저지법: 📋<strong>정보공개 청구</strong> 스킬을 사용하면 회의록을 공개할 수 있습니다!',
-    timer:8, penalty:20, bonus:0,
-    successCond:'skill_foia',
+    response:'💡 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 마을 협의의견서 자동 제출!',
+    timer:9, penalty:0, bonus:18,
+    successCond:'pts', baseThreshold:60,
   },
 ];
 
-// ═══════════════════
-// 스킬 정의
-// 인허가 게이지는 절대 하락 없음 → devFreeze(속도 중단)만 사용
-// ═══════════════════
-const SKILL_BASE_COSTS = {sk_foia:80, sk_env:140, sk_rally:220};
-const SKILL_COST_MULT  = {sk_foia:3, sk_env:3, sk_rally:3};
+// ════════════════════════════
+// 스킬 (액티브)
+// ════════════════════════════
+const SKILL_COST_MULT = 2;
 const SKILLS = [
   {
+    id:'sk_solo', icon:'🪧', name:'1인 시위',
+    baseCost:20, cd:10,
+    effect:'인허가 속도 10초간 절반',
+    fn(G){ G.soloProtest=100; G.lastSkill='sk_solo'; addLog('🪧 1인 시위! 인허가 속도 10초간 절반으로 감소','ok'); },
+    burst:'🪧',
+  },
+  {
     id:'sk_foia', icon:'📋', name:'정보공개 청구',
-    cd:8,
-    effect:'인허가 8초 중단 & 자동적립 2배',
-    fn(G){
-      G.devFreeze=Math.max(G.devFreeze,80);
-      G.foiaBoost=80;
-      G.lastSkillUsed='sk_foia';
-      addFeed('📋 정보공개 청구 제출! 인허가 8초 중단, 자동적립 2배','ok');
-    },
+    baseCost:25, cd:8,
+    effect:'인허가 8초 중단 & 적립 2배',
+    fn(G){ G.devFreeze=Math.max(G.devFreeze,80); G.foiaBoost=80; G.lastSkill='sk_foia'; addLog('📋 정보공개 청구! 인허가 8초 중단, 적립 2배','ok'); },
     burst:'📋',
   },
   {
     id:'sk_env', icon:'📰', name:'언론보도',
-    cd:12,
+    baseCost:50, cd:12,
     effect:'인허가 15초 중단 & 조례 +8%',
-    fn(G){
-      G.devFreeze=Math.max(G.devFreeze,150);
-      G.lawPct=Math.min(100,G.lawPct+8);
-      G.lastSkillUsed='sk_env';
-      addFeed('📰 언론보도! 인허가 15초 중단, 조례 +8%','ok');
-    },
+    fn(G){ G.devFreeze=Math.max(G.devFreeze,150); G.lawPct=Math.min(100,G.lawPct+8); G.lastSkill='sk_env'; addLog('📰 언론보도! 인허가 15초 중단, 조례 +8%','ok'); },
     burst:'📰',
   },
   {
     id:'sk_rally', icon:'✊', name:'주민총회 소집',
-    cd:16,
-    effect:'조례 +18% 즉시',
-    fn(G){
-      G.lawPct=Math.min(100,G.lawPct+18);
-      G.lastSkillUsed='sk_rally';
-      addFeed('✊ 주민총회 소집! 마을 협의의견 제출 → 조례 +18%','ok');
-    },
+    baseCost:200, cd:16,
+    effect:'조례 즉시 +25%',
+    fn(G){ G.lawPct=Math.min(100,G.lawPct+25); G.lastSkill='sk_rally'; addLog('✊ 주민총회 소집! 조례 +25%','ok'); },
     burst:'✊',
   },
 ];
 
-// ═══════════════════
-// 업그레이드 (4종)
-// ═══════════════════
+// ════════════════════════════
+// 패시브 (주민활동 강화)
+// ════════════════════════════
 const UPGRADES = [
-  {id:'u1',ico:'👁️',name:'현장 감시 모니터링',   desc:'자동 포인트 +1/초',              eff:'현장을 지속 감시해 인허가 서류를 자동 수집',    cost:100, cps:1,  power:0,    devSlow:0,    lawImm:0},
-  {id:'u2',ico:'✊',name:'주민대책위 결성',        desc:'클릭 파워 +2',                   eff:'대책위가 주민 의견을 결집해 파워 강화',  cost:200, cps:0,  power:'+2', devSlow:0,    lawImm:0},
-  {id:'u3',ico:'⚖️', name:'공익법률팀 연결',       desc:'인허가 속도 −15%',               eff:'법적 이의제기로 인허가 절차에 제동',            cost:400, cps:0,  power:0,    devSlow:0.15, lawImm:0},
-  {id:'u4',ico:'🌐',name:'제도 개선 네트워크 구축',desc:'자동 포인트 +2/초 & 조례 즉시 +10%', eff:'전국 단체 연대로 조례 입법 기반 확보',     cost:700, cps:2,  power:0,    devSlow:0,    lawImm:10},
+  {id:'u0',ico:'👂',name:'소문에 귀 기울이기',      desc:'자동 적립 +1/초',               eff:'동네 소문으로 인허가 동향을 파악하기 시작',    cost:20,   cps:1,  devSlow:0,    lawImm:0, threshMult:0},
+  {id:'u1',ico:'👁️',name:'현장 감시 모니터링',    desc:'자동 적립 +2/초',               eff:'현장 감시로 인허가 서류 자동 수집',             cost:50,   cps:2,  devSlow:0,    lawImm:0, threshMult:0},
+  {id:'u2',ico:'📣',name:'주민 알림망 구축',        desc:'이벤트 저지 기준 −20%',         eff:'사전고지조례로 주민 문자 통보 — 이벤트 대응 쉬워짐', cost:75,  cps:0,  devSlow:0,    lawImm:0, threshMult:0.2},
+  {id:'u3',ico:'✊', name:'주민대책위 결성',         desc:'자동 적립 +4/초',               eff:'대책위 결성으로 정보 수집력 강화',              cost:100,  cps:4,  devSlow:0,    lawImm:0, threshMult:0},
+  {id:'u4',ico:'⚖️', name:'공익법률팀 연결',         desc:'인허가 속도 −50%',              eff:'법적 이의제기로 인허가 절차에 제동',            cost:200,  cps:0,  devSlow:0.50, lawImm:0, threshMult:0},
+  {id:'u5',ico:'🌐',name:'제도 개선 네트워크 구축', desc:'자동 적립 +6/초 & 조례 +10%',  eff:'전국 단체 연대로 조례 입법 기반 확보',         cost:250,  cps:6,  devSlow:0,    lawImm:10,threshMult:0},
 ];
 
-const LV_NAMES=['','정보공개 신청인','마을 청원인','환경 감시단','주민의견 제출자','설명회 참가자','정보공개 청구인','회의록 열람자','환경평가 촉구자','지역 활동가','주민알권리 수호자'];
-const CRISIS_LABELS=['📋 폐기물사업계획서 적합통보 검토 중','🏗️ 도시계획위원회 심의 예정','🔒 환경영향평가 서면처리 시도','⚠️ 소각장 인허가 절차 진행 중','🚨 폐기물매립장 입지 제안 접수','🤝 공무원-사업자 협의 진행 중'];
+const CRISIS_LABELS=['📋 폐기물사업계획서 적합통보 검토 중','🏗️ 도시계획위원회 심의 예정','🔒 환경영향평가 서면처리 시도','⚠️ 소각장 인허가 절차 진행 중','🚨 폐기물매립장 입지 제안 접수','🤝 공무원-사업자 비공개 협의 중'];
 
-// ═══════════════════
+// ════════════════════════════
 // 게임 상태
-// ═══════════════════
+// ════════════════════════════
 let G={};
 function initState(){
   G={
-    pts:0, clickPower:1, autoCPS:0, lawTickRate:0,
+    pts:0, autoCPS:2, // 기본 2/초
     devPct:0, lawPct:0,
     devSlowMult:1, devFreeze:0, foiaBoost:0,
-    lastSkillUsed:null,
-    gameOver:false, tick:0,
-    combo:0, comboMax:40, comboDecayTick:0, comboDecayLimit:15, comboBonusMult:1,
-    level:1, xp:0, xpNext:80,
-    skillCDs:{sk_foia:0,sk_env:0,sk_rally:0},
-    skillCosts:{sk_foia:80, sk_env:140, sk_rally:220},
+    threshReduction:0, // 주민 알림망 구축 시 이벤트 기준 감소율
+    lastSkill:null,
+    gameOver:false, tick:0, elapsed:0,
+    skillCDs:{sk_solo:0,sk_foia:0,sk_env:0,sk_rally:0},
+    skillCosts:{sk_solo:20,sk_foia:25,sk_env:50,sk_rally:200},
+    soloProtest:0,
+    eventCount:0,
     purchased:new Set(),
-    activeEvent:null, eventTimer:0, eventPending:120,
+    activeEvent:null, eventTimer:0, eventPending:200, // 20초 후 첫 이벤트
   };
 }
 
-// ═══════════════════
-// DOM 헬퍼
-// ═══════════════════
-const scene=document.getElementById('scene');
-const feedEl=document.getElementById('feed');
+// ════════════════════════════
+// DOM
+// ════════════════════════════
 function $(id){return document.getElementById(id);}
-function switchTab(n){
-  document.querySelectorAll('.tab-btn').forEach((b,i)=>b.classList.toggle('active',(i===0&&n==='up')||(i===1&&n==='log')));
-  $('tab-up').style.display=n==='up'?'block':'none';
-  $('tab-log').style.display=n==='log'?'block':'none';
+
+// ════════════════════════════
+// 로그 (최대 2줄만 표시)
+// ════════════════════════════
+const logBar=$('log-bar');
+const logItems=[];
+function addLog(msg,type=''){
+  const el=document.createElement('div');
+  el.className='log-item '+(type||'');
+  el.textContent=msg;
+  logBar.insertBefore(el,logBar.firstChild);
+  logItems.unshift(el);
+  if(logItems.length>2){ logBar.removeChild(logItems.pop()); }
 }
 
-// ═══════════════════
+// ════════════════════════════
 // 스킬 바
-// ═══════════════════
+// ════════════════════════════
 function renderSkillBar(){
   const bar=$('skill-bar');bar.innerHTML='';
   SKILLS.forEach(sk=>{
     const cost=G.skillCosts[sk.id];
     const btn=document.createElement('button');
     btn.className='skill-btn';btn.id='sk-btn-'+sk.id;
-    btn.innerHTML=`<span class="sk-icon">${sk.icon}</span><span class="sk-name">${sk.name}</span><span class="sk-cost" id="sk-cost-${sk.id}">📄${cost}</span><span class="sk-effect">${sk.effect}</span><span class="sk-cd rdy" id="sk-cd-${sk.id}">준비</span>`;
-    btn.onclick=()=>useSkill(sk.id);
+    btn.innerHTML=`
+      <span class="sk-icon">${sk.icon}</span>
+      <span class="sk-name">${sk.name}</span>
+      <span class="sk-cost" id="sk-cost-${sk.id}">📄${cost}</span>
+      <span class="sk-effect">${sk.effect}</span>
+      <span class="sk-cd rdy" id="sk-cd-${sk.id}">준비</span>`;
+    let tapped=false;
+    btn.addEventListener('touchend',e=>{
+      e.preventDefault();
+      tapped=true;
+      useSkill(sk.id);
+    },{passive:false});
+    btn.addEventListener('click',()=>{
+      if(tapped){tapped=false;return;}
+      useSkill(sk.id);
+    });
     bar.appendChild(btn);
     updateSkBtn(sk.id);
   });
 }
+
 function updateSkBtn(id){
   const btn=$('sk-btn-'+id);if(!btn)return;
   const cost=G.skillCosts[id];
@@ -525,140 +571,123 @@ function updateSkBtn(id){
     if(cdEl){cdEl.textContent='준비';cdEl.className='sk-cd rdy';}
   }
 }
+
 function useSkill(id){
   if(G.gameOver)return;
   const sk=SKILLS.find(s=>s.id===id);
   const cost=G.skillCosts[id];
   if(!sk||G.skillCDs[id]>0||G.pts<cost)return;
   G.pts-=cost;
-  // 다음 사용 비용 1.8배 증가
-  G.skillCosts[id]=Math.floor(cost*SKILL_COST_MULT[id]);
+  G.skillCosts[id]=Math.floor(cost*SKILL_COST_MULT);
   G.skillCDs[id]=sk.cd;
   sk.fn(G);
   spawnBurst(sk.burst);
-  addFeed(`💸 다음 [${sk.name}] 비용: 📄${Math.floor(G.skillCosts[id])}`, '');
+  addLog(`💸 다음 [${sk.name}] 비용: 📄${Math.floor(G.skillCosts[id])}`, '');
   updateUI();
 }
 
-// ═══════════════════
-// 콤보
-// ═══════════════════
-function addCombo(){
-  G.combo=Math.min(G.comboMax,G.combo+1);
-  G.comboDecayTick=0;
-  const pct=G.combo/G.comboMax;
-  G.comboBonusMult=1+Math.floor(pct*4);
-  $('combo-fill').style.width=(pct*100)+'%';
-  const cm=$('combo-mult');
-  cm.textContent='×'+G.comboBonusMult;
-  cm.classList.add('pop');
-  setTimeout(()=>cm.classList.remove('pop'),110);
-  updateComboTimer();
-}
-function tickCombo(){
-  if(G.combo===0)return;
-  G.comboDecayTick++;
-  updateComboTimer();
-  if(G.comboDecayTick>=G.comboDecayLimit){
-    G.combo=0;G.comboBonusMult=1;G.comboDecayTick=0;
-    $('combo-fill').style.width='0%';
-    $('combo-mult').textContent='×1';
-    $('combo-decay').textContent='—';
-  }
-}
-function updateComboTimer(){
-  if(G.combo===0){$('combo-decay').textContent='—';return;}
-  const rem=G.comboDecayLimit-G.comboDecayTick;
-  const s=Math.ceil(rem/10);
-  $('combo-decay').textContent='●'.repeat(Math.min(s,3))+'○'.repeat(Math.max(0,3-s));
-}
-
-// ═══════════════════
-// 레벨/XP
-// ═══════════════════
-function addXP(a){
-  G.xp+=a;
-  while(G.xp>=G.xpNext&&G.level<10){G.xp-=G.xpNext;G.level++;G.xpNext=Math.floor(G.xpNext*1.7);onLvUp();}
-  const pct=Math.min(100,(G.xp/G.xpNext)*100);
-  $('xp-fill').style.width=pct+'%';
-  $('lv-badge').innerHTML=`Lv.${G.level}<small>${LV_NAMES[G.level]||'알권리 수호자'}</small><div class="xp-bar"><div class="xp-fill" id="xp-fill" style="width:${pct}%"></div></div>`;
-}
-function onLvUp(){
-  const bonus=[0,0,1,1,2,2,3,3,4,4,5][G.level]||0;
-  G.clickPower+=bonus;
-  addFeed(`🆙 Lv.${G.level} [${LV_NAMES[G.level]||'알권리 수호자'}] 달성! 클릭파워 +${bonus}`,'imp');
-  const p=document.createElement('div');
-  p.className='lup-pop';
-  p.innerHTML=`<div class="lup-t">🆙 ${LV_NAMES[G.level]||'알권리 수호자'}</div><div class="lup-d">Lv.${G.level} | 클릭파워 +${bonus}</div>`;
-  document.body.appendChild(p);setTimeout(()=>p.remove(),2000);
-}
-
-// ═══════════════════
-// 업그레이드
-// ═══════════════════
+// ════════════════════════════
+// 패시브
+// ════════════════════════════
+// ════════════════════════════
+// 패시브 — 한 번만 렌더, 스타일만 업데이트
+// ════════════════════════════
 function renderUpgrades(){
   const list=$('ug-list');list.innerHTML='';
   UPGRADES.forEach(u=>{
-    const bought=G.purchased.has(u.id);
     const btn=document.createElement('button');
-    btn.className='ug-btn'+(bought?' bought':'');
-    btn.disabled=bought||G.pts<u.cost;
-    btn.innerHTML=`<span class="ug-ico">${u.ico}</span><div class="ug-info"><div class="ug-name">${u.name}</div><div class="ug-desc">${u.desc}</div><div class="ug-eff">${u.eff}</div></div><div class="ug-cost">${bought?'✓완료':'📄'+u.cost}</div>`;
-    if(!bought)btn.onclick=()=>buyUpgrade(u.id);
+    btn.className='ug-btn';
+    btn.id='ug-'+u.id;
+    btn.innerHTML=`
+      <span class="ug-ico">${u.ico}</span>
+      <div class="ug-info">
+        <div class="ug-name">${u.name}</div>
+        <div class="ug-desc">${u.desc}</div>
+        <div class="ug-eff">${u.eff}</div>
+      </div>
+      <div class="ug-cost" id="ug-cost-${u.id}">📄${u.cost}</div>`;
+    btn.addEventListener('touchend',e=>{
+      e.preventDefault();
+      buyUpgrade(u.id);
+    },{passive:false});
+    btn.addEventListener('click',e=>{
+      buyUpgrade(u.id);
+    });
     list.appendChild(btn);
   });
 }
+
+function updateUpgradeStyles(){
+  UPGRADES.forEach(u=>{
+    const btn=$('ug-'+u.id);
+    if(!btn)return;
+    const bought=G.purchased.has(u.id);
+    const canAfford=G.pts>=u.cost;
+    const costEl=$('ug-cost-'+u.id);
+    if(bought){
+      btn.className='ug-btn bought';
+      if(costEl) costEl.textContent='✓완료';
+    }else if(canAfford){
+      btn.className='ug-btn affordable';
+      if(costEl) costEl.textContent='📄'+u.cost;
+    }else{
+      btn.className='ug-btn';
+      if(costEl) costEl.textContent='📄'+u.cost;
+    }
+  });
+}
+
 function buyUpgrade(id){
   const u=UPGRADES.find(x=>x.id===id);
   if(!u||G.pts<u.cost||G.purchased.has(id))return;
   G.pts-=u.cost;G.purchased.add(id);
   G.autoCPS+=u.cps||0;
-  if(u.power==='+2')G.clickPower+=2;
-  if(u.power==='+3')G.clickPower+=3;
-  if(u.devSlow)G.devSlowMult=Math.max(0.3,G.devSlowMult*(1-u.devSlow));
-  if(u.lawImm)G.lawPct=Math.min(100,G.lawPct+u.lawImm);
-  addFeed(`✅ [${u.name}] 활성화 — ${u.eff}`,'ok');
-  renderUpgrades();
+  if(u.devSlow)    G.devSlowMult=Math.max(0.3,G.devSlowMult*(1-u.devSlow));
+  if(u.lawImm)     G.lawPct=Math.min(100,G.lawPct+u.lawImm);
+  if(u.threshMult) G.threshReduction=Math.min(0.6,G.threshReduction+u.threshMult);
+  addLog(`✅ [${u.name}] 활성화 — ${u.eff}`,'ok');
+  updateUpgradeStyles();
 }
 
-// ═══════════════════
-// 피드
-// ═══════════════════
-function addFeed(msg,type=''){
-  const el=document.createElement('div');
-  el.className='fi '+(type||'');
-  const t=new Date();
-  el.textContent=`[${t.getHours()}:${String(t.getMinutes()).padStart(2,'0')}] ${msg}`;
-  feedEl.insertBefore(el,feedEl.firstChild);
-  if(feedEl.children.length>50)feedEl.lastChild.remove();
-}
-
-// ═══════════════════
-// 파티클
-// ═══════════════════
-function spawnParticle(x,y,text,color='#e8a010',big=false){
-  const p=document.createElement('div');
-  p.className=big?'big-p':'particle';
-  p.style.left=(x-18)+'px';p.style.top=(y-10)+'px';
-  p.style.color=color;p.textContent=text;
-  scene.appendChild(p);setTimeout(()=>p.remove(),big?1400:1100);
-}
-function spawnBurst(icon){
-  const b=document.createElement('div');b.className='skill-burst';b.textContent=icon;
-  scene.appendChild(b);setTimeout(()=>b.remove(),900);
-}
-
-// ═══════════════════
-// 긴급 이벤트
-// ═══════════════════
+// ════════════════════════════
+// 이벤트
+// ════════════════════════════
+const eventArea=$('event-area');
 let evBanner=null;
+
 function triggerEvent(){
   if(G.activeEvent||G.gameOver)return;
-  const ev=EVENTS[Math.floor(Math.random()*EVENTS.length)];
-  G.activeEvent={...ev};G.eventTimer=ev.timer;
-  G.lastSkillUsed=null;
-  addFeed(`🚨 긴급! ${ev.title}`,'bad');
+
+  // 인허가 진행도에 따라 페이즈 결정
+  const dev=G.devPct;
+  let phase;
+  if(dev<33) phase=1;
+  else if(dev<66) phase=2;
+  else phase=3;
+
+  // 해당 페이즈 이벤트 70%, 인접 페이즈 30% 혼합
+  const primary=EVENTS.filter(e=>e.phase===phase);
+  const adjacent=EVENTS.filter(e=>e.phase!==phase);
+  const pool=[...primary,...primary,...primary,...primary,...primary,...primary,...primary,
+              ...adjacent,...adjacent,...adjacent];
+  const ev=pool[Math.floor(Math.random()*pool.length)];
+
+  const scaledThreshold=ev.baseThreshold
+    ? Math.floor(ev.baseThreshold*Math.pow(1.25,G.eventCount)*(1-G.threshReduction))
+    : null;
+  G.activeEvent={...ev, successThreshold:scaledThreshold};
+  G.eventTimer=ev.timer;
+  G.lastSkill=null;
+  G.eventCount++;
+  addLog(`🚨 긴급! ${ev.title}`,'bad');
   evBanner?.remove();
+  let responseHtml=ev.response;
+  if(scaledThreshold){
+    responseHtml=responseHtml.replace(
+      '<strong id="ev-threshold"></strong>',
+      `<strong>${scaledThreshold}pt</strong>`
+    );
+  }
   evBanner=document.createElement('div');
   evBanner.className='event-banner';
   evBanner.innerHTML=`
@@ -666,80 +695,64 @@ function triggerEvent(){
       <div class="ev-title">${ev.title}</div>
       <div class="ev-timer-box"><span class="ev-timer" id="ev-timer">${ev.timer}s</span></div>
     </div>
-    <div class="ev-how">${ev.unavoidable?ev.response:ev.response}</div>`;
-  scene.appendChild(evBanner);
-  // 저지 불가 이벤트는 즉시 처리
+    <div class="ev-how">${responseHtml}</div>`;
+  eventArea.appendChild(evBanner);
   if(ev.unavoidable){
     G.devPct=Math.min(100,G.devPct+ev.penalty);
-    addFeed(`😡 ${ev.title} — 인허가 +${ev.penalty}% (저지 불가)`,'bad');
+    addLog(`😡 저지 불가 — 인허가 +${ev.penalty}%`,'bad');
   }
 }
+
 function tickEvent(){
   if(!G.activeEvent)return;
   G.eventTimer=Math.max(0,G.eventTimer-0.1);
-  const el=document.getElementById('ev-timer');
-  if(el)el.textContent=Math.ceil(G.eventTimer)+'s';
+  const el=$('ev-timer');
+  if(el) el.textContent=Math.ceil(G.eventTimer)+'s';
   if(G.eventTimer<=0) resolveEvent();
 }
+
 function resolveEvent(){
   if(!G.activeEvent)return;
   const ev=G.activeEvent;
   if(!ev.unavoidable){
     let success=false;
-    if(ev.successCond==='pts') success=G.pts>=ev.successThreshold;
-    else if(ev.successCond==='skill') success=G.lastSkillUsed!==null;
-    else if(ev.successCond==='skill_foia') success=G.lastSkillUsed==='sk_foia';
-    else success=G.pts>30;
+    const cond=ev.successCond;
+    if(cond==='pts') success=G.pts>=ev.successThreshold;
+    else if(cond==='skill') success=G.lastSkill===ev.skillId;
+    else if(cond==='skill_or_pts') success=(G.lastSkill===ev.skillId)||(G.pts>=ev.successThreshold);
+    else success=false;
 
     if(success){
-      const bonusActual=Math.round((ev.bonus||0)*0.6);
-      const penaltyActual=Math.round((ev.penalty||0)*0.4); // 성공해도 일부 진행
-      if(bonusActual>0) G.lawPct=Math.min(100,G.lawPct+bonusActual);
-      if(penaltyActual>0) G.devPct=Math.min(100,G.devPct+penaltyActual);
-      addFeed(`✅ 이벤트 저지 성공!`+(bonusActual>0?` 조례 +${bonusActual}%`:'')+(penaltyActual>0?` 인허가 +${penaltyActual}%(부분 진행)`:''),'ok');
+      const b=Math.round((ev.bonus||0)*0.6);
+      const p=Math.round((ev.penalty||0)*0.3);
+      if(b>0){G.lawPct=Math.min(100,G.lawPct+b);addLog(`✅ 저지 성공! 조례 +${b}%`,'ok');}
+      else{if(p>0) G.devPct=Math.min(100,G.devPct+p); addLog(`✅ 저지 성공!`+(p>0?` (인허가 +${p}% 부분 진행)`:''),'ok');}
     }else{
       if(ev.penalty) G.devPct=Math.min(100,G.devPct+ev.penalty);
-      addFeed(`❌ 저지 실패. 인허가 +${ev.penalty||0}%`,'bad');
+      addLog(`❌ 저지 실패. 인허가 +${ev.penalty||0}%`,'bad');
     }
   }
-  G.activeEvent=null;evBanner?.remove();evBanner=null;
+  G.activeEvent=null;
+  evBanner?.remove();evBanner=null;
 }
 
-// ═══════════════════
-// 메인 클릭
-// ═══════════════════
-scene.addEventListener('click',e=>{
-  if(G.gameOver)return;
-  const rect=scene.getBoundingClientRect();
-  const x=e.clientX-rect.left,y=e.clientY-rect.top;
-  const gain=G.clickPower*G.comboBonusMult;
-  G.pts+=gain;addXP(gain);addCombo();
-  const isBig=G.comboBonusMult>=3;
-  spawnParticle(x,y,`+${Math.floor(gain)}📄`,gain>8?'#f8b820':'#e8a010',isBig);
-  if(G.comboBonusMult>=2){
-    const labels=['','','DOUBLE!','TRIPLE!','QUAD!','MAX COMBO!!'];
-    spawnParticle(x,y-28,labels[G.comboBonusMult]||'COMBO!!','#c080f0',true);
-  }
-  const docs=['인허가 신청서','환경영향평가서','위원회 회의록','폐기물처리계획서','사전고지 공문','도시계획심의안','사업계획서'];
-  if(Math.random()<0.18) spawnParticle(x,y-22,docs[Math.floor(Math.random()*docs.length)],'#c8a040',false);
-  updateUI();
-});
-
-// ═══════════════════
-// UI 갱신
-// ═══════════════════
+// ════════════════════════════
+// UI
+// ════════════════════════════
 function updateUI(){
   $('pt-num').textContent=Math.floor(G.pts);
   $('pt-rate').textContent=`+${G.autoCPS.toFixed(1)}/초`;
   $('dev-bar').style.width=G.devPct+'%';$('dev-pct').textContent=Math.floor(G.devPct)+'%';
   $('law-bar').style.width=G.lawPct+'%';$('law-pct').textContent=Math.floor(G.lawPct)+'%';
-  renderUpgrades();
+  const m=Math.floor(G.elapsed/60), s=G.elapsed%60;
+  $('elapsed-time').textContent=String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+  updateUpgradeStyles();
   SKILLS.forEach(sk=>updateSkBtn(sk.id));
 }
 
-// ═══════════════════
+// ════════════════════════════
 // 게임오버
-// ═══════════════════
+// ════════════════════════════
 function checkGameOver(){
   if(G.devPct>=100){
     G.gameOver=true;
@@ -751,100 +764,103 @@ function checkGameOver(){
   }
 }
 
-// ═══════════════════
+// ════════════════════════════
 // 게임 루프
-// ═══════════════════
+// ════════════════════════════
 let loopId=null;
 function startLoop(){
   if(loopId)clearInterval(loopId);
   loopId=setInterval(()=>{
     if(G.gameOver)return;
     G.tick++;
-    // 자동 포인트
-    if(G.autoCPS>0){
-      const m=(G.foiaBoost>0)?2:1;
-      G.pts+=G.autoCPS*m/10;addXP(G.autoCPS*m*0.04);
+    if(G.tick%10===0) G.elapsed++;
+
+    // 포인트 자동 적립
+    const cpsBoost=(G.foiaBoost>0)?2:1;
+    G.pts+=G.autoCPS*cpsBoost/10;
+    if(G.foiaBoost>0) G.foiaBoost--;
+
+    // 인허가 진행
+    if(G.devFreeze>0){ G.devFreeze--; }
+    else{
+      const soloMult=(G.soloProtest>0)?0.5:1;
+      G.devPct=Math.min(100,G.devPct+(0.55*G.devSlowMult*soloMult)/10);
     }
-    if(G.foiaBoost>0)G.foiaBoost--;
-    // 조례 자동 상승
-    if(G.lawTickRate>0)G.lawPct=Math.min(100,G.lawPct+G.lawTickRate/10);
-    // 인허가 진행 — 더 빠르게, 업그레이드로도 최대 20%만 감속
-    if(G.devFreeze>0){G.devFreeze--;}
-    else{G.devPct=Math.min(100,G.devPct+(0.55*G.devSlowMult)/10);}
-    // 콤보
-    tickCombo();
+    if(G.soloProtest>0) G.soloProtest--;
+
     // 스킬 쿨타임
-    Object.keys(G.skillCDs).forEach(sid=>{if(G.skillCDs[sid]>0){G.skillCDs[sid]=Math.max(0,G.skillCDs[sid]-0.1);updateSkBtn(sid);}});
-    // 이벤트 — 고정 250틱(25초)마다 발생
+    Object.keys(G.skillCDs).forEach(sid=>{
+      if(G.skillCDs[sid]>0){ G.skillCDs[sid]=Math.max(0,G.skillCDs[sid]-0.1); updateSkBtn(sid); }
+    });
+
+    // 이벤트
     tickEvent();
     G.eventPending--;
-    if(G.eventPending<=0&&!G.activeEvent){triggerEvent();G.eventPending=250;}
-    // 위기 레이블
-    if(G.tick%90===0)$('crisis-label').textContent=CRISIS_LABELS[Math.floor(Math.random()*CRISIS_LABELS.length)];
-    // 피드 랜덤
-    if(G.tick%100===40){
+    if(G.eventPending<=0&&!G.activeEvent){ triggerEvent(); G.eventPending=250; }
+
+    // 위기 레이블 (9초마다)
+    if(G.tick%90===0) $('crisis-label').textContent=CRISIS_LABELS[Math.floor(Math.random()*CRISIS_LABELS.length)];
+
+    // 피드 (10초마다)
+    if(G.tick%100===0){
       const msgs=[
-        ['🏭 소각장 사업자, 97톤으로 규모 축소 — 환경영향평가 회피','bad'],
+        ['🏭 소각장 사업자, 99톤으로 규모 축소 — 환경영향평가 회피','bad'],
         ['📮 지방환경청, 폐기물사업계획서 적합통보 검토 중','bad'],
-        ['🗄️ 산업단지계획심의위원회 회의록 비공개 처리','bad'],
+        ['🗄️ 도시계획위원회 회의록 비공개 처리','bad'],
         ['🤝 공무원과 사업자 비공개 협의 진행','bad'],
-        ['📢 주민설명회 개최 요구 서명 접수 중',''],
-        ['✊ 익산시 환경정책위원회 심의 결과 불승인','ok'],
+        ['✊ 주민들의 의견서 제출로 인허가 심의 보류','ok'],
         ['📰 지역언론, 매립장 허가 의혹 취재 중','ok'],
-        ['📋 정보공개 청구 접수 — 담당 공무원 검토 중',''],
       ];
       const [m,t]=msgs[Math.floor(Math.random()*msgs.length)];
-      addFeed(m,t);
+      addLog(m,t);
     }
-    updateUI();checkGameOver();
+
+    updateUI();
+    checkGameOver();
   },100);
 }
 
-// ═══════════════════
-// 시작 / 재시작
-// ═══════════════════
-function showIntro1(){
-  $('intro-ov2').style.display='none';
-  $('intro-ov').style.display='flex';
-}
-function showIntro2(){
-  $('intro-ov').style.display='none';
-  $('intro-ov2').style.display='flex';
-}
-function startCountdown(){
-  $('intro-ov2').style.display='none';
-  $('countdown-ov').style.display='flex';
-  let n=3;
-  $('countdown-num').textContent=n;
-  const iv=setInterval(()=>{
-    n--;
-    if(n>0){
-      $('countdown-num').textContent=n;
-    }else{
-      clearInterval(iv);
-      $('countdown-ov').style.display='none';
-      startGame();
-    }
-  },1000);
-}
-function startGame(){
-  initState();renderSkillBar();
-  addFeed('✊ 투쟁 시작! 클릭해서 정보공개 포인트를 모으세요.','imp');
-  addFeed('📄 포인트로 스킬 발동 → 인허가 저지 & 조례 제정!','');
-  addFeed('⚡ 콤보는 1.5초 내 클릭 없으면 즉시 초기화됩니다!','bad');
-  updateUI();startLoop();
-}
-function restartGame(){
-  if(loopId)clearInterval(loopId);
-  document.querySelectorAll('.event-banner').forEach(e=>e.remove());
-  $('win-ov').classList.remove('on');$('lose-ov').classList.remove('on');
-  feedEl.innerHTML='';
-  $('countdown-ov').style.display='none';
-  $('intro-ov2').style.display='none';
-  $('intro-ov').style.display='flex';
+// ════════════════════════════
+// 버스트
+// ════════════════════════════
+function spawnBurst(icon){
+  const b=document.createElement('div');b.className='skill-burst';b.textContent=icon;
+  document.body.appendChild(b);setTimeout(()=>b.remove(),800);
 }
 
-initState();renderSkillBar();updateUI();
+// ════════════════════════════
+// 인트로 / 시작 / 재시작
+// ════════════════════════════
+function showIntro1(){ $('intro2').style.display='none'; $('intro1').style.display='flex'; }
+function showIntro2(){ $('intro1').style.display='none'; $('intro2').style.display='flex'; }
+
+function startCountdown(){
+  $('intro2').style.display='none';
+  $('cdov').style.display='flex';
+  let n=3; $('cd-num').textContent=n;
+  const iv=setInterval(()=>{
+    n--;
+    if(n>0){ $('cd-num').textContent=n; }
+    else{ clearInterval(iv); $('cdov').style.display='none'; startGame(); }
+  },1000);
+}
+
+function startGame(){
+  initState(); renderSkillBar(); renderUpgrades();
+  addLog('✊ 투쟁 시작! 포인트가 쌓이면 패시브와 스킬을 활용하세요.','imp');
+  updateUI(); startLoop();
+}
+
+function restartGame(){
+  if(loopId)clearInterval(loopId);
+  evBanner?.remove(); evBanner=null;
+  $('win-ov').classList.remove('on'); $('lose-ov').classList.remove('on');
+  $('cdov').style.display='none'; $('intro2').style.display='none';
+  $('intro1').style.display='flex';
+}
+
+// 초기화
+initState(); renderSkillBar(); renderUpgrades(); updateUI();
 </script>
 </body>
 </html>
