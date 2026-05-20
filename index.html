@@ -16,140 +16,140 @@ html,body{height:100%;overflow:hidden;}
 body{background:var(--bg);font-family:'Noto Sans KR',sans-serif;color:var(--paper);display:flex;flex-direction:column;height:100vh;}
 
 /* HEADER */
-header{padding:6px 12px 5px;background:linear-gradient(180deg,#0a0800 0%,var(--bg) 100%);border-bottom:2px solid var(--border);flex-shrink:0;}
+header{padding:8px 14px 6px;background:linear-gradient(180deg,#0a0800 0%,var(--bg) 100%);border-bottom:2px solid var(--border);flex-shrink:0;}
 .hdr{display:flex;align-items:center;justify-content:space-between;}
-.title{font-family:'Black Han Sans',sans-serif;font-size:clamp(13px,3.2vw,18px);color:var(--gold);letter-spacing:0.5px;line-height:1.2;}
-.sub-title{font-size:10px;color:#907040;margin-top:1px;letter-spacing:0.3px;}
-.crisis-label{font-size:11px;color:#c04020;font-weight:700;letter-spacing:0.5px;text-align:right;}
-.crisis-sub{font-size:10px;color:#907040;margin-top:1px;text-align:right;}
+.title{font-family:'Black Han Sans',sans-serif;font-size:clamp(14px,3.8vw,22px);color:var(--gold);letter-spacing:0.5px;line-height:1.2;}
+.sub-title{font-size:12px;color:#907040;margin-top:2px;letter-spacing:0.3px;}
+.crisis-label{font-size:13px;color:#c04020;font-weight:700;letter-spacing:0.5px;text-align:right;}
+.crisis-sub{font-size:11px;color:#907040;margin-top:1px;text-align:right;}
 
 /* 게이지 영역 */
-.gauges{flex-shrink:0;display:flex;gap:6px;padding:6px 10px;background:var(--panel);border-bottom:1px solid var(--border);}
-.gauge-box{flex:1;background:#080600;border:1px solid var(--border);border-radius:4px;padding:5px 10px;}
-.gauge-label{font-size:11px;color:#907040;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
-.gauge-pct{font-family:'Black Han Sans',sans-serif;font-size:14px;}
-.gauge-bar{height:11px;background:#1a1510;border-radius:3px;overflow:hidden;}
-.gauge-fill{height:100%;border-radius:3px;transition:width 0.3s;}
+.gauges{flex-shrink:0;display:flex;gap:7px;padding:7px 12px;background:var(--panel);border-bottom:1px solid var(--border);}
+.gauge-box{flex:1;background:#080600;border:1px solid var(--border);border-radius:5px;padding:6px 12px;}
+.gauge-label{font-size:13px;color:#b09050;display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.gauge-pct{font-family:'Black Han Sans',sans-serif;font-size:17px;}
+.gauge-bar{height:13px;background:#1a1510;border-radius:4px;overflow:hidden;}
+.gauge-fill{height:100%;border-radius:4px;transition:width 0.3s;}
 .gf-dev{background:linear-gradient(90deg,#802010,#d04030);}
 .gf-law{background:linear-gradient(90deg,#1a7a3c,#30b060);}
-.gauge-pct-dev{color:#d04030;}
-.gauge-pct-law{color:#30b060;}
+.gauge-pct-dev{color:#e05040;}
+.gauge-pct-law{color:#40c070;}
 
 /* SCENE */
 .scene{flex:1;position:relative;overflow:hidden;background:linear-gradient(180deg,#2e1e08 0%,#1a1510 100%);cursor:pointer;user-select:none;-webkit-tap-highlight-color:transparent;min-height:0;}
 .scene-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(107,80,32,0.1) 1px,transparent 1px),linear-gradient(90deg,rgba(107,80,32,0.1) 1px,transparent 1px);background-size:28px 28px;}
 .click-obj{position:absolute;top:50%;left:50%;transform:translate(-50%,-52%);text-align:center;pointer-events:none;z-index:2;}
-.click-icon{font-size:clamp(48px,12vw,70px);display:block;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.9));transition:transform 0.08s;}
+.click-icon{font-size:clamp(52px,13vw,76px);display:block;filter:drop-shadow(0 4px 14px rgba(0,0,0,0.9));transition:transform 0.08s;}
 .scene:active .click-icon{transform:scale(0.82) rotate(-6deg);}
-.click-hint{font-size:12px;color:#907040;margin-top:5px;}
-.lv-badge{position:absolute;top:8px;right:9px;z-index:3;background:rgba(8,6,0,0.9);border:1px solid var(--gold);border-radius:4px;padding:4px 10px;font-family:'Black Han Sans',sans-serif;font-size:13px;color:var(--gold);text-align:center;}
-.lv-badge small{display:block;font-size:10px;color:#907040;font-family:'Noto Sans KR',sans-serif;font-weight:400;}
+.click-hint{font-size:14px;color:#907040;margin-top:6px;}
+.lv-badge{position:absolute;top:9px;right:10px;z-index:3;background:rgba(8,6,0,0.9);border:1px solid var(--gold);border-radius:5px;padding:5px 12px;font-family:'Black Han Sans',sans-serif;font-size:15px;color:var(--gold);text-align:center;}
+.lv-badge small{display:block;font-size:11px;color:#907040;font-family:'Noto Sans KR',sans-serif;font-weight:400;}
 .xp-bar{height:3px;background:#1a1510;border-radius:1px;margin-top:3px;overflow:hidden;}
 .xp-fill{height:100%;background:var(--gold);border-radius:1px;transition:width 0.3s;}
 
 /* 이벤트 배너 */
-.event-banner{position:absolute;top:6px;left:8px;right:8px;z-index:8;background:rgba(140,30,10,0.97);border:2px solid #e04020;border-radius:6px;padding:8px 12px;animation:pulse-ev 0.7s infinite alternate;pointer-events:none;}
-@keyframes pulse-ev{from{box-shadow:0 0 0 0 rgba(224,64,32,0.5);}to{box-shadow:0 0 0 6px rgba(224,64,32,0);}}
-.ev-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
-.ev-title{font-size:12px;font-weight:700;color:#fff;letter-spacing:0.5px;}
-.ev-timer-box{background:#600;border-radius:3px;padding:2px 8px;}
-.ev-timer{font-family:'Black Han Sans',sans-serif;font-size:17px;color:#ffd;}
-.ev-how{font-size:11px;color:#ffddaa;line-height:1.5;}
+.event-banner{position:absolute;top:7px;left:9px;right:9px;z-index:8;background:rgba(140,30,10,0.97);border:2px solid #e04020;border-radius:7px;padding:9px 14px;animation:pulse-ev 0.7s infinite alternate;pointer-events:none;}
+@keyframes pulse-ev{from{box-shadow:0 0 0 0 rgba(224,64,32,0.5);}to{box-shadow:0 0 0 7px rgba(224,64,32,0);}}
+.ev-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.ev-title{font-size:14px;font-weight:700;color:#fff;letter-spacing:0.5px;}
+.ev-timer-box{background:#600;border-radius:4px;padding:2px 10px;}
+.ev-timer{font-family:'Black Han Sans',sans-serif;font-size:20px;color:#ffd;}
+.ev-how{font-size:13px;color:#ffddaa;line-height:1.5;}
 .ev-how strong{color:#ffe060;}
 
 /* 파티클 */
-.particle{position:absolute;font-size:12px;font-weight:700;pointer-events:none;z-index:10;white-space:nowrap;animation:pu 1.1s ease forwards;}
+.particle{position:absolute;font-size:13px;font-weight:700;pointer-events:none;z-index:10;white-space:nowrap;animation:pu 1.1s ease forwards;}
 @keyframes pu{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-55px)}}
-.big-p{position:absolute;font-family:'Black Han Sans',sans-serif;font-size:18px;pointer-events:none;z-index:11;white-space:nowrap;animation:bp 1.4s ease forwards;text-shadow:0 2px 6px rgba(0,0,0,0.9);}
+.big-p{position:absolute;font-family:'Black Han Sans',sans-serif;font-size:20px;pointer-events:none;z-index:11;white-space:nowrap;animation:bp 1.4s ease forwards;text-shadow:0 2px 6px rgba(0,0,0,0.9);}
 @keyframes bp{0%{opacity:1;transform:translateY(0) scale(1.2)}100%{opacity:0;transform:translateY(-80px) scale(0.6)}}
-.skill-burst{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:12;animation:sb 0.8s ease forwards;font-size:clamp(48px,13vw,78px);}
+.skill-burst{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);pointer-events:none;z-index:12;animation:sb 0.8s ease forwards;font-size:clamp(52px,14vw,84px);}
 @keyframes sb{0%{opacity:1;transform:translate(-50%,-50%) scale(0.3)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
 
 /* 포인트 바 (스킬 위) */
-.pt-bar{flex-shrink:0;display:flex;align-items:center;gap:8px;padding:5px 12px;background:#0d0a04;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
-.pt-icon{font-size:18px;}
-.pt-label{font-size:10px;color:#907040;}
-.pt-num{font-family:'Black Han Sans',sans-serif;font-size:24px;color:var(--gold);line-height:1;}
-.pt-rate{font-size:10px;color:#706030;margin-left:3px;}
-.combo-wrap{display:flex;align-items:center;gap:5px;margin-left:auto;}
-.combo-lbl{font-family:'Black Han Sans',sans-serif;font-size:11px;color:var(--combo);}
-.combo-track{width:56px;height:5px;background:#1a1510;border-radius:2px;overflow:hidden;border:1px solid #3a1860;}
-.combo-fill{height:100%;background:linear-gradient(90deg,#6030a0,#c080f0);border-radius:2px;transition:width 0.1s;}
-.combo-decay{font-size:10px;color:#8040a0;min-width:18px;text-align:center;}
-.combo-mult{font-family:'Black Han Sans',sans-serif;font-size:14px;color:#c080f0;min-width:28px;text-align:right;}
+.pt-bar{flex-shrink:0;display:flex;align-items:center;gap:10px;padding:6px 14px;background:#0d0a04;border-top:1px solid var(--border);border-bottom:1px solid var(--border);}
+.pt-icon{font-size:20px;}
+.pt-label{font-size:12px;color:#907040;}
+.pt-num{font-family:'Black Han Sans',sans-serif;font-size:28px;color:var(--gold);line-height:1;}
+.pt-rate{font-size:12px;color:#706030;margin-left:4px;}
+.combo-wrap{display:flex;align-items:center;gap:6px;margin-left:auto;}
+.combo-lbl{font-family:'Black Han Sans',sans-serif;font-size:12px;color:var(--combo);}
+.combo-track{width:60px;height:6px;background:#1a1510;border-radius:3px;overflow:hidden;border:1px solid #3a1860;}
+.combo-fill{height:100%;background:linear-gradient(90deg,#6030a0,#c080f0);border-radius:3px;transition:width 0.1s;}
+.combo-decay{font-size:12px;color:#8040a0;min-width:20px;text-align:center;}
+.combo-mult{font-family:'Black Han Sans',sans-serif;font-size:17px;color:#c080f0;min-width:32px;text-align:right;}
 
 /* 스킬 바 */
-.skill-bar{flex-shrink:0;display:flex;gap:5px;padding:5px 8px;background:var(--panel);}
-.skill-btn{flex:1;background:#0d0a04;border:1.5px solid var(--border);border-radius:5px;padding:5px 3px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;overflow:hidden;transition:border-color 0.2s;-webkit-tap-highlight-color:transparent;}
-.skill-btn.ready{border-color:var(--gold);box-shadow:0 0 6px rgba(232,160,16,0.4);}
+.skill-bar{flex-shrink:0;display:flex;gap:5px;padding:6px 10px;background:var(--panel);}
+.skill-btn{flex:1;background:#0d0a04;border:2px solid var(--border);border-radius:6px;padding:6px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px;position:relative;overflow:hidden;transition:border-color 0.2s;-webkit-tap-highlight-color:transparent;}
+.skill-btn.ready{border-color:var(--gold);box-shadow:0 0 8px rgba(232,160,16,0.4);}
 .skill-btn.no-pt{border-color:#501808;opacity:0.5;}
 .skill-btn:disabled{cursor:not-allowed;}
-.sk-icon{font-size:20px;line-height:1;}
-.sk-name{font-size:9px;color:var(--tan);letter-spacing:0.2px;text-align:center;}
-.sk-cost{font-size:9px;color:var(--gold);text-align:center;}
-.sk-effect{font-size:8px;color:#607050;text-align:center;line-height:1.3;}
-.sk-cd{font-family:'Black Han Sans',sans-serif;font-size:11px;color:var(--gold);}
+.sk-icon{font-size:22px;line-height:1;}
+.sk-name{font-size:11px;color:var(--tan);letter-spacing:0.2px;text-align:center;}
+.sk-cost{font-size:11px;color:var(--gold);text-align:center;font-weight:700;}
+.sk-effect{font-size:9px;color:#607050;text-align:center;line-height:1.4;}
+.sk-cd{font-family:'Black Han Sans',sans-serif;font-size:12px;color:var(--gold);}
 .sk-cd.rdy{color:#40c060;}
-.cd-ov{position:absolute;inset:0;background:rgba(8,6,0,0.75);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:16px;color:var(--tan);border-radius:4px;}
+.cd-ov{position:absolute;inset:0;background:rgba(8,6,0,0.78);display:flex;align-items:center;justify-content:center;font-family:'Black Han Sans',sans-serif;font-size:18px;color:var(--tan);border-radius:5px;}
 
 /* 하단 패널 */
-.bottom-panel{flex-shrink:0;background:var(--panel);border-top:2px solid var(--border);display:flex;flex-direction:column;max-height:28vh;}
+.bottom-panel{flex-shrink:0;background:var(--panel);border-top:2px solid var(--border);display:flex;flex-direction:column;max-height:30vh;}
 .tabs{display:flex;border-bottom:1px solid var(--border);}
-.tab-btn{flex:1;padding:6px;font-size:12px;font-weight:700;background:transparent;border:none;color:#5a3810;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:color 0.2s;}
+.tab-btn{flex:1;padding:7px;font-size:13px;font-weight:700;background:transparent;border:none;color:#5a3810;cursor:pointer;font-family:'Noto Sans KR',sans-serif;transition:color 0.2s;}
 .tab-btn.active{color:var(--gold);border-bottom:2px solid var(--gold);margin-bottom:-1px;}
 .tab-content{overflow-y:auto;flex:1;}
-.upgrades{display:flex;flex-direction:column;gap:5px;padding:6px 9px;}
-.ug-btn{background:#080600;border:1px solid var(--border);border-radius:4px;padding:6px 9px;cursor:pointer;display:flex;align-items:center;gap:8px;transition:background 0.15s,border-color 0.15s;text-align:left;width:100%;-webkit-tap-highlight-color:transparent;}
+.upgrades{display:flex;flex-direction:column;gap:5px;padding:7px 10px;}
+.ug-btn{background:#080600;border:1px solid var(--border);border-radius:5px;padding:7px 10px;cursor:pointer;display:flex;align-items:center;gap:9px;transition:background 0.15s,border-color 0.15s;text-align:left;width:100%;-webkit-tap-highlight-color:transparent;}
 .ug-btn:hover:not(:disabled){background:#1a1510;border-color:var(--gold);}
 .ug-btn:disabled{opacity:0.35;cursor:not-allowed;}
 .ug-btn.bought{border-color:var(--green);background:#060e06;}
-.ug-ico{font-size:18px;flex-shrink:0;}
+.ug-ico{font-size:20px;flex-shrink:0;}
 .ug-info{flex:1;}
-.ug-name{font-size:12px;font-weight:700;color:var(--paper);}
-.ug-desc{font-size:10px;color:#907040;margin-top:1px;}
-.ug-eff{font-size:9px;color:#507040;margin-top:1px;font-style:italic;}
-.ug-cost{font-family:'Black Han Sans',sans-serif;font-size:13px;color:var(--gold);flex-shrink:0;white-space:nowrap;}
-.ug-btn.bought .ug-cost{color:var(--green);font-size:11px;}
-.feed{padding:4px 9px;display:flex;flex-direction:column;gap:1px;}
-.fi{font-size:11px;color:#907040;padding:3px 0;border-bottom:1px solid #110f08;animation:fi 0.2s ease;}
+.ug-name{font-size:13px;font-weight:700;color:var(--paper);}
+.ug-desc{font-size:11px;color:#907040;margin-top:2px;}
+.ug-eff{font-size:10px;color:#507040;margin-top:2px;font-style:italic;}
+.ug-cost{font-family:'Black Han Sans',sans-serif;font-size:14px;color:var(--gold);flex-shrink:0;white-space:nowrap;}
+.ug-btn.bought .ug-cost{color:var(--green);font-size:12px;}
+.feed{padding:5px 10px;display:flex;flex-direction:column;gap:1px;}
+.fi{font-size:12px;color:#907040;padding:3px 0;border-bottom:1px solid #110f08;animation:fi 0.2s ease;}
 .fi.imp{color:var(--gold);}
 .fi.bad{color:#c04020;}
 .fi.ok{color:#28a050;}
 @keyframes fi{from{opacity:0}to{opacity:1}}
 
 /* 오버레이 */
-.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:100;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:20px;overflow-y:auto;}
+.overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:100;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:24px;overflow-y:auto;}
 .overlay.on{display:flex;}
-.ov-icon{font-size:52px;margin-bottom:10px;}
-.ov-title{font-family:'Black Han Sans',sans-serif;font-size:26px;color:var(--gold);margin-bottom:8px;}
-.ov-desc{font-size:13px;color:#907040;line-height:1.9;margin-bottom:14px;}
-.ov-link{display:inline-block;background:var(--green);color:#fff;padding:11px 22px;border-radius:5px;text-decoration:none;font-weight:700;font-size:14px;margin-bottom:8px;}
-.ov-link-team{display:inline-block;background:#1560a0;color:#fff;padding:11px 22px;border-radius:5px;text-decoration:none;font-weight:700;font-size:14px;margin-bottom:8px;border:1.5px solid #3090d0;}
-.ov-team-box{margin:8px 0;background:rgba(21,96,160,0.18);border:1px solid #1560a0;border-radius:8px;padding:12px 18px;max-width:320px;}
-.ov-team-q{font-size:13px;color:#90c8f0;margin-bottom:8px;line-height:1.6;}
-.re-btn{background:transparent;border:1px solid var(--border);color:#907040;padding:8px 18px;border-radius:4px;cursor:pointer;font-size:13px;margin-top:5px;font-family:'Noto Sans KR',sans-serif;}
+.ov-icon{font-size:56px;margin-bottom:12px;}
+.ov-title{font-family:'Black Han Sans',sans-serif;font-size:28px;color:var(--gold);margin-bottom:10px;}
+.ov-desc{font-size:15px;color:#a09050;line-height:2;margin-bottom:16px;}
+.ov-link{display:inline-block;background:var(--green);color:#fff;padding:13px 26px;border-radius:6px;text-decoration:none;font-weight:700;font-size:15px;margin-bottom:9px;}
+.ov-link-team{display:inline-block;background:#1560a0;color:#fff;padding:13px 26px;border-radius:6px;text-decoration:none;font-weight:700;font-size:15px;margin-bottom:9px;border:1.5px solid #3090d0;}
+.ov-team-box{margin:10px 0;background:rgba(21,96,160,0.18);border:1px solid #1560a0;border-radius:9px;padding:14px 20px;max-width:340px;}
+.ov-team-q{font-size:14px;color:#90c8f0;margin-bottom:10px;line-height:1.7;}
+.re-btn{background:transparent;border:1px solid var(--border);color:#907040;padding:10px 20px;border-radius:5px;cursor:pointer;font-size:14px;margin-top:6px;font-family:'Noto Sans KR',sans-serif;}
 
 /* 인트로 */
-.intro-overlay{display:flex;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:200;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:16px;overflow-y:auto;}
-.intro-emblem{font-size:52px;margin-bottom:8px;filter:drop-shadow(0 0 12px rgba(232,160,16,0.6));}
-.intro-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(16px,4.2vw,23px);color:var(--gold);letter-spacing:1px;margin-bottom:4px;line-height:1.3;}
-.intro-sub{font-size:11px;color:#907040;letter-spacing:0.5px;margin-bottom:14px;}
-.intro-card{background:#0d0a04;border:1px solid var(--border);border-radius:8px;padding:13px 15px;max-width:360px;width:100%;text-align:left;margin-bottom:12px;position:relative;}
-.intro-card::before{content:'🔍 수사 브리핑';position:absolute;top:-10px;left:12px;background:#0d0a04;padding:0 6px;font-family:'Black Han Sans',sans-serif;font-size:11px;color:var(--gold);letter-spacing:1px;}
-.rule-item{display:flex;gap:9px;margin-bottom:8px;align-items:flex-start;}
-.rule-icon{font-size:16px;flex-shrink:0;line-height:1.3;}
-.rule-text{font-size:11px;color:#c8a860;line-height:1.6;}
+.intro-overlay{display:flex;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:200;align-items:center;justify-content:center;flex-direction:column;text-align:center;padding:18px;overflow-y:auto;}
+.intro-emblem{font-size:56px;margin-bottom:8px;filter:drop-shadow(0 0 12px rgba(232,160,16,0.6));}
+.intro-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(18px,4.5vw,26px);color:var(--gold);letter-spacing:1px;margin-bottom:5px;line-height:1.3;}
+.intro-sub{font-size:13px;color:#907040;letter-spacing:0.5px;margin-bottom:16px;}
+.intro-card{background:#0d0a04;border:1px solid var(--border);border-radius:9px;padding:14px 17px;max-width:380px;width:100%;text-align:left;margin-bottom:13px;position:relative;}
+.intro-card::before{content:'🔍 수사 브리핑';position:absolute;top:-11px;left:13px;background:#0d0a04;padding:0 7px;font-family:'Black Han Sans',sans-serif;font-size:12px;color:var(--gold);letter-spacing:1px;}
+.rule-item{display:flex;gap:10px;margin-bottom:9px;align-items:flex-start;}
+.rule-icon{font-size:18px;flex-shrink:0;line-height:1.3;}
+.rule-text{font-size:12px;color:#c8a860;line-height:1.6;}
 .rule-text strong{color:var(--paper);}
-.intro-dossier{background:#0d0a04;border:1px dashed #6b5020;border-radius:6px;padding:9px 13px;max-width:360px;width:100%;margin-bottom:13px;font-size:10px;color:#706840;line-height:1.7;text-align:left;position:relative;}
-.intro-dossier::before{content:'📁 사건 파일';position:absolute;top:-9px;left:10px;background:#0d0a04;padding:0 5px;font-size:10px;color:#907040;}
-.start-btn{background:linear-gradient(135deg,#b06808,#e8a010);color:#1a1510;font-family:'Black Han Sans',sans-serif;font-size:17px;font-weight:900;padding:14px 40px;border-radius:7px;border:none;cursor:pointer;letter-spacing:2px;box-shadow:0 4px 18px rgba(232,160,16,0.4);transition:transform 0.15s;}
+.intro-dossier{background:#0d0a04;border:1px dashed #6b5020;border-radius:7px;padding:10px 15px;max-width:380px;width:100%;margin-bottom:14px;font-size:12px;color:#807850;line-height:1.7;text-align:left;position:relative;}
+.intro-dossier::before{content:'📁 사건 파일';position:absolute;top:-10px;left:11px;background:#0d0a04;padding:0 6px;font-size:11px;color:#907040;}
+.start-btn{background:linear-gradient(135deg,#b06808,#e8a010);color:#1a1510;font-family:'Black Han Sans',sans-serif;font-size:19px;font-weight:900;padding:15px 44px;border-radius:8px;border:none;cursor:pointer;letter-spacing:2px;box-shadow:0 4px 20px rgba(232,160,16,0.4);transition:transform 0.15s;}
 .start-btn:active{transform:scale(0.95);}
 
 /* 레벨업 팝업 */
-.lup-pop{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#1a1510,#2e1e08);border:2px solid var(--gold);border-radius:8px;padding:16px 22px;text-align:center;z-index:50;animation:lup 0.4s ease;}
+.lup-pop{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:linear-gradient(135deg,#1a1510,#2e1e08);border:2px solid var(--gold);border-radius:9px;padding:18px 26px;text-align:center;z-index:50;animation:lup 0.4s ease;}
 @keyframes lup{from{transform:translate(-50%,-50%) scale(0.5)}to{transform:translate(-50%,-50%) scale(1)}}
-.lup-t{font-family:'Black Han Sans',sans-serif;font-size:19px;color:var(--gold);}
-.lup-d{font-size:12px;color:#c8a860;margin-top:5px;}
+.lup-t{font-family:'Black Han Sans',sans-serif;font-size:21px;color:var(--gold);}
+.lup-d{font-size:13px;color:#c8a860;margin-top:6px;}
 </style>
 </head>
 <body>
