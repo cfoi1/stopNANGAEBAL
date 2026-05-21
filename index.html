@@ -323,7 +323,7 @@ header{
       <div style="font-size:22px;flex-shrink:0;">🤝</div>
       <div>
         <div style="font-size:13px;font-weight:700;color:var(--paper);margin-bottom:3px;">주민활동 강화 (패시브 스킬)</div>
-        <div style="font-size:11px;color:#c8a860;line-height:1.5;">포인트를 써서 <br>포인트 적립 속도, 인허가 억제 등<br> 영구적인 효과를 얻습니다. <strong style="color:#e8a010;">먼저 기반을 다지세요.</strong></div>
+        <div style="font-size:11px;color:#c8a860;line-height:1.5;">포인트를 써서 <br>포인트 적립 속도 상승, 인허가 억제 등<br> 영구적인 효과를 얻습니다. <strong style="color:#e8a010;">먼저 기반을 다지세요.</strong></div>
       </div>
     </div>
 
@@ -331,7 +331,7 @@ header{
       <div style="font-size:22px;flex-shrink:0;">✊</div>
       <div>
         <div style="font-size:13px;font-weight:700;color:var(--paper);margin-bottom:3px;">액티브 스킬</div>
-        <div style="font-size:11px;color:#c8a860;line-height:1.5;">포인트를 소모해 즉시 발동.<br>인허가 중단, 조례 상승 등 강력한 효과.<br><strong style="color:#e05040;">쓸수록 비용이 2배씩 올라갑니다.</strong></div>
+        <div style="font-size:11px;color:#c8a860;line-height:1.5;">포인트를 소모해 즉시 발동.<br>인허가를 잠시 중단하고, 조례 게이지를 상승시키는 강력한 효과.<br><strong style="color:#e05040;">쓸수록 비용이 2배씩 올라갑니다.</strong></div>
       </div>
     </div>
 
@@ -572,12 +572,12 @@ const SKILLS = [
 // 패시브 (주민활동 강화)
 // ════════════════════════════
 const UPGRADES = [
-  {id:'u0',ico:'👂',name:'소문에 귀 기울이기',      desc:'자동 적립 +1/초',               eff:'동네 소문으로 개발 동향을 파악합니다',    cost:20,   cps:1,  devSlow:0,    lawImm:0, threshMult:0},
-  {id:'u1',ico:'👁️',name:'현장 감시 모니터링',    desc:'자동 적립 +2/초',               eff:'현장 감시로 정보를 수집합니다',             cost:50,   cps:2,  devSlow:0,    lawImm:0, threshMult:0},
+  {id:'u0',ico:'👂',name:'소문에 귀 기울이기',      desc:'포인트 적립 +1/초',               eff:'동네 소문으로 개발 동향을 파악합니다',    cost:20,   cps:1,  devSlow:0,    lawImm:0, threshMult:0},
+  {id:'u1',ico:'👁️',name:'현장 감시 모니터링',    desc:'포인트 적립 +2/초',               eff:'현장 감시로 정보를 수집합니다',             cost:50,   cps:2,  devSlow:0,    lawImm:0, threshMult:0},
   {id:'u2',ico:'📣',name:'주민 알림망 구축',        desc:'이벤트 저지 기준 −20%',         eff:'주민들에게 상황을 알려 위기 대응 능력을 키웁니다', cost:75,  cps:0,  devSlow:0,    lawImm:0, threshMult:0.2},
-  {id:'u3',ico:'✊', name:'주민대책위 결성',         desc:'자동 적립 +4/초',               eff:'주민대책위를 결성하여 활동력을 높입니다',              cost:100,  cps:4,  devSlow:0,    lawImm:0, threshMult:0},
+  {id:'u3',ico:'✊', name:'주민대책위 결성',         desc:'포인트 적립 +4/초',               eff:'주민대책위를 결성하여 활동력을 높입니다',              cost:100,  cps:4,  devSlow:0,    lawImm:0, threshMult:0},
   {id:'u4',ico:'⚖️', name:'공익법률팀 연결',         desc:'인허가 속도 −50%',              eff:'법적인 이의제기로 인허가 속도를 늦춥니다',            cost:200,  cps:0,  devSlow:0.50, lawImm:0, threshMult:0},
-  {id:'u5',ico:'🌐',name:'제도 개선 네트워크 구축', desc:'자동 적립 +6/초 & 조례 +10%',  eff:'전국적인 연대로 조례 입법의 기반을 만듭니다',         cost:250,  cps:6,  devSlow:0,    lawImm:10,threshMult:0},
+  {id:'u5',ico:'🌐',name:'제도 개선 네트워크 구축', desc:'포인트 적립 +6/초 & 조례 +10%',  eff:'전국적인 연대로 조례 입법의 기반을 만듭니다',         cost:250,  cps:6,  devSlow:0,    lawImm:10,threshMult:0},
 ];
 
 const CRISIS_LABELS=['📋 폐기물사업계획서 적합통보 검토 중','🏗️ 도시계획위원회 심의 예정','🔒 환경영향평가 날림처리 시도','⚠️ 소각장 인허가 절차 진행 중','🚨 폐기물소각장 입지 제안 접수','🤝 공무원-사업자 비공개 협의 중'];
