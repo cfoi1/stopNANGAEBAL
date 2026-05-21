@@ -7,150 +7,180 @@
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;700;900&family=Black+Han+Sans&display=swap');
 :root{
-  --bg:#1a1510;--panel:#110f08;--border:#6b5020;
-  --gold:#e8a010;--paper:#f0e0a0;--red:#b83020;--green:#1a7a3c;
-  --combo:#8040c0;--tan:#c8a050;
+  --bg:#2a1f10;--panel:#1e1608;--border:#8a6830;
+  --gold:#f0b020;--paper:#fff8e0;--red:#c83020;--green:#1e9a40;
+  --tan:#e0b860;
+  --fs-xs:12px;--fs-sm:14px;--fs-md:16px;--fs-lg:19px;--fs-xl:23px;
 }
 *{box-sizing:border-box;margin:0;padding:0;}
 html,body{height:100%;overflow:hidden;}
+
 body{
-  background:var(--bg);font-family:'Noto Sans KR',sans-serif;
-  color:var(--paper);display:flex;flex-direction:column;
-  height:100dvh; /* 모바일 주소창 대응 */
+  background:#100c06;
+  font-family:'Noto Sans KR',sans-serif;
+  color:var(--paper);
+  display:flex;
+  justify-content:center;
+  align-items:stretch;
+  height:100dvh;
+}
+#game-wrap{
+  background:var(--bg);
+  width:100%;
+  max-width:480px;
+  display:flex;
+  flex-direction:column;
+  height:100dvh;
+  position:relative;
+  box-shadow:0 0 40px rgba(0,0,0,0.8);
 }
 
 /* ── HEADER ── */
 header{
-  flex-shrink:0;padding:5px 12px 4px;
-  background:linear-gradient(180deg,#0a0800,var(--bg));
+  flex-shrink:0;padding:7px 14px 5px;
+  background:linear-gradient(180deg,#160e04,var(--bg));
   border-bottom:2px solid var(--border);
 }
-.hdr{display:flex;align-items:center;justify-content:space-between;}
-.title{font-family:'Black Han Sans',sans-serif;font-size:clamp(12px,3.2vw,17px);color:var(--gold);letter-spacing:0.5px;line-height:1.2;}
-.sub-title{font-size:10px;color:#907040;margin-top:1px;}
-.crisis-label{font-size:10px;color:#c04020;font-weight:700;text-align:right;}
-.crisis-sub{font-size:9px;color:#907040;margin-top:1px;text-align:right;}
+.title{font-family:'Black Han Sans',sans-serif;font-size:clamp(13px,3.5vw,17px);color:var(--gold);letter-spacing:0.5px;line-height:1.2;}
+.sub-title{font-size:var(--fs-xs);color:#c09860;margin-top:2px;}
 
-/* ── 게이지 2개 ── */
+/* ── 게이지 ── */
 .gauges{
-  flex-shrink:0;display:flex;gap:6px;
-  padding:5px 10px;background:var(--panel);border-bottom:1px solid var(--border);
+  flex-shrink:0;display:flex;gap:7px;
+  padding:6px 12px;background:var(--panel);border-bottom:1px solid var(--border);
 }
-.gauge-box{flex:1;background:#080600;border:1px solid var(--border);border-radius:4px;padding:4px 10px;}
-.gauge-label{font-size:11px;color:#b09050;display:flex;justify-content:space-between;align-items:center;margin-bottom:3px;}
-.gauge-pct{font-family:'Black Han Sans',sans-serif;font-size:15px;}
-.gauge-bar{height:10px;background:#1a1510;border-radius:3px;overflow:hidden;}
-.gauge-fill{height:100%;border-radius:3px;transition:width 0.4s;}
-.gf-dev{background:linear-gradient(90deg,#802010,#d04030);}
-.gf-law{background:linear-gradient(90deg,#1a7a3c,#30b060);}
-.gauge-pct-dev{color:#e05040;}
-.gauge-pct-law{color:#40c070;}
+.gauge-box{flex:1;background:#140e04;border:1px solid var(--border);border-radius:5px;padding:5px 10px;}
+.gauge-label{font-size:var(--fs-sm);color:#d4b070;display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;font-weight:700;}
+.gauge-pct{font-family:'Black Han Sans',sans-serif;font-size:var(--fs-xl);}
+.gauge-bar{height:13px;background:#2a1f10;border-radius:4px;overflow:hidden;}
+.gauge-fill{height:100%;border-radius:4px;transition:width 0.4s;}
+.gf-dev{background:linear-gradient(90deg,#a02010,#f04030);}
+.gf-law{background:linear-gradient(90deg,#1a8a30,#30d060);}
+.gauge-pct-dev{color:#ff7060;}
+.gauge-pct-law{color:#50e080;}
+.gauge-status{font-size:var(--fs-xs);margin-top:3px;min-height:14px;font-weight:700;}
+.gs-dev{color:#e08060;}
+.gs-law{color:#50c870;}
 
-/* ── 포인트 + 타이머 ── */
+/* ── 포인트 행 ── */
 .pt-row{
-  flex-shrink:0;display:flex;align-items:center;gap:8px;
-  padding:4px 10px;background:#0d0a04;
-  border-bottom:1px solid var(--border);
+  flex-shrink:0;display:flex;align-items:center;gap:10px;
+  padding:6px 12px;background:#160e04;
+  border-bottom:2px solid var(--border);
 }
-.pt-main{display:flex;align-items:baseline;gap:5px;}
-.pt-label{font-size:10px;color:#907040;}
-.pt-num{font-family:'Black Han Sans',sans-serif;font-size:26px;color:var(--gold);line-height:1;}
-.pt-rate{font-size:10px;color:#706030;}
-.pt-right{margin-left:auto;text-align:right;}
-.pt-time{font-family:'Black Han Sans',sans-serif;font-size:11px;color:#c04020;}
-.pt-time-label{font-size:9px;color:#907040;margin-top:1px;}
+.pt-label{font-size:var(--fs-xs);color:#c09860;margin-bottom:1px;}
+.pt-num{font-family:'Black Han Sans',sans-serif;font-size:34px;color:var(--gold);line-height:1;}
+.pt-rate{font-size:var(--fs-md);color:var(--tan);margin-left:4px;font-weight:700;}
+.pt-right{margin-left:auto;text-align:right;max-width:160px;}
+.pt-situation{font-size:var(--fs-xs);color:#e08050;line-height:1.4;font-weight:700;}
 
 /* ── 이벤트 배너 ── */
 .event-banner{
-  flex-shrink:0;background:rgba(140,30,10,0.98);border-top:2px solid #e04020;
-  border-bottom:2px solid #e04020;padding:7px 12px;
-  animation:pulse-ev 0.7s infinite alternate;
+  flex-shrink:0;
+  background:linear-gradient(135deg,#700a0a,#a01414);
+  border-top:3px solid #ff5030;
+  border-bottom:3px solid #ff5030;
+  padding:10px 14px;
+  animation:pulse-ev 0.6s infinite alternate;
 }
-@keyframes pulse-ev{from{background:rgba(140,30,10,0.98);}to{background:rgba(180,40,10,0.98);}}
-.ev-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
-.ev-title{font-size:13px;font-weight:700;color:#fff;letter-spacing:0.5px;}
-.ev-timer-box{background:#600;border-radius:4px;padding:2px 8px;flex-shrink:0;margin-left:6px;}
-.ev-timer{font-family:'Black Han Sans',sans-serif;font-size:18px;color:#ffd;}
-.ev-how{font-size:11px;color:#ffddaa;line-height:1.5;}
-.ev-how strong{color:#ffe060;}
-.no-event{display:none;}
+@keyframes pulse-ev{
+  from{background:linear-gradient(135deg,#700a0a,#a01414);}
+  to{background:linear-gradient(135deg,#901010,#c01818);}
+}
+.ev-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:6px;gap:8px;}
+.ev-title{font-size:var(--fs-lg);font-weight:900;color:#fff;letter-spacing:0.5px;line-height:1.3;}
+.ev-timer-box{background:#500;border:1px solid #ff4020;border-radius:5px;padding:3px 10px;flex-shrink:0;}
+.ev-timer{font-family:'Black Han Sans',sans-serif;font-size:24px;color:#ffe080;}
+.ev-how{font-size:var(--fs-sm);color:#ffe8b0;line-height:1.6;}
+.ev-how strong{color:#fff060;}
 
-/* ── 스킬 4개 ── */
+/* 현재상황 */
+.status-bar{
+  flex-shrink:0;padding:5px 12px;
+  background:#160e04;border-bottom:1px solid #3a2410;
+  font-size:var(--fs-xs);color:#a08050;line-height:1.5;
+}
+
+/* ── 섹션 레이블 ── */
+.section-label{
+  flex-shrink:0;
+  display:flex;align-items:center;gap:6px;
+  padding:5px 12px 4px;
+  font-family:'Black Han Sans',sans-serif;
+  font-size:var(--fs-xs);color:#d0a050;letter-spacing:1.5px;
+  background:var(--panel);border-bottom:1px solid #3a2410;
+}
+
+/* ── 스킬 바 ── */
 .skill-bar{
   flex-shrink:0;display:flex;gap:5px;
-  padding:5px 8px;background:var(--panel);border-bottom:1px solid var(--border);
-}
-.skill-bar-label{
-  flex-shrink:0;padding:3px 10px 0;
-  font-size:10px;color:#6b5020;letter-spacing:1px;font-weight:700;
-  background:var(--panel);
+  padding:5px 8px 6px;background:var(--panel);
+  border-bottom:2px solid var(--border);
 }
 .skill-btn{
-  flex:1;background:#0d0a04;border:2px solid var(--border);border-radius:6px;
-  padding:5px 3px;cursor:pointer;display:flex;flex-direction:column;
+  flex:1;background:#140e04;border:2px solid var(--border);border-radius:7px;
+  padding:6px 3px;cursor:pointer;display:flex;flex-direction:column;
   align-items:center;gap:2px;position:relative;overflow:hidden;
-  transition:border-color 0.2s;-webkit-tap-highlight-color:transparent;
+  transition:border-color 0.15s,background 0.15s;
+  -webkit-tap-highlight-color:transparent;
 }
-.skill-btn.ready{border-color:var(--gold);box-shadow:0 0 6px rgba(232,160,16,0.35);}
-.skill-btn.no-pt{border-color:#501808;opacity:0.5;}
+.skill-btn.ready{
+  border-color:var(--gold);background:#241800;
+  box-shadow:0 0 10px rgba(240,176,32,0.35);
+}
+.skill-btn.no-pt{border-color:#5a2010;opacity:0.45;}
 .skill-btn:disabled{cursor:not-allowed;}
-.sk-icon{font-size:20px;line-height:1;}
-.sk-name{font-size:10px;color:var(--tan);text-align:center;font-weight:700;}
-.sk-cost{font-size:10px;color:var(--gold);text-align:center;font-weight:700;}
-.sk-effect{font-size:9px;color:#7a9060;text-align:center;line-height:1.3;}
-.sk-cd{font-family:'Black Han Sans',sans-serif;font-size:11px;color:var(--gold);}
-.sk-cd.rdy{color:#40c060;}
+.sk-icon{font-size:22px;line-height:1;}
+.sk-name{font-size:var(--fs-xs);color:var(--tan);text-align:center;font-weight:700;line-height:1.2;}
+.sk-cost{font-size:var(--fs-xs);color:var(--gold);text-align:center;font-weight:900;}
+.sk-effect{font-size:11px;color:#90b870;text-align:center;line-height:1.3;}
+.sk-cd{font-family:'Black Han Sans',sans-serif;font-size:var(--fs-sm);color:var(--gold);}
+.sk-cd.rdy{color:#50e070;}
 .cd-ov{
-  position:absolute;inset:0;background:rgba(8,6,0,0.78);
+  position:absolute;inset:0;background:rgba(10,6,0,0.82);
   display:flex;align-items:center;justify-content:center;
-  font-family:'Black Han Sans',sans-serif;font-size:16px;color:var(--tan);border-radius:5px;
+  font-family:'Black Han Sans',sans-serif;font-size:18px;color:#d0a050;border-radius:6px;
 }
 
-/* ── 패시브(주민활동 강화) ── */
+/* ── 주민활동 강화 ── */
 .upgrades-wrap{flex:1;display:flex;flex-direction:column;min-height:0;background:var(--panel);}
-.upgrades-label{
-  flex-shrink:0;padding:4px 10px 2px;
-  font-size:10px;color:#6b5020;letter-spacing:1px;font-weight:700;
-  border-bottom:1px solid #2a1a08;
-}
 .upgrades{
-  flex:1;display:flex;flex-direction:column;gap:4px;
-  padding:4px 8px;overflow-y:auto;min-height:0;
+  flex:1;display:flex;flex-direction:column;gap:5px;
+  padding:5px 8px;overflow-y:auto;min-height:0;
 }
 .ug-btn{
-  flex-shrink:0;background:#080600;border:1px solid var(--border);border-radius:5px;
-  padding:6px 9px;cursor:pointer;display:flex;align-items:center;gap:8px;
+  flex-shrink:0;background:#140e04;border:1px solid var(--border);border-radius:6px;
+  padding:8px 10px;cursor:pointer;display:flex;align-items:center;gap:10px;
   transition:background 0.15s,border-color 0.15s;text-align:left;width:100%;
   -webkit-tap-highlight-color:transparent;
 }
-.ug-btn:hover:not(:disabled){background:#1a1510;border-color:var(--gold);}
-.ug-btn:disabled{opacity:0.35;cursor:not-allowed;}
-.ug-btn.bought{border-color:var(--green);background:#060e06;cursor:default;}
-.ug-btn.affordable{border-color:var(--gold);background:#1a1205;}
+.ug-btn:active{background:#2a1f10;}
+.ug-btn.bought{border-color:#30c060;background:#0a1e0a;cursor:default;}
+.ug-btn.affordable{border-color:var(--gold);background:#241400;}
 .ug-btn{opacity:0.45;}
 .ug-btn.bought,.ug-btn.affordable{opacity:1;}
-.ug-ico{font-size:18px;flex-shrink:0;}
-.ug-info{flex:1;}
-.ug-name{font-size:12px;font-weight:700;color:var(--paper);}
-.ug-desc{font-size:10px;color:#c8a050;margin-top:1px;}
-.ug-eff{font-size:9px;color:#507040;margin-top:1px;font-style:italic;}
-.ug-cost{font-family:'Black Han Sans',sans-serif;font-size:13px;color:var(--gold);flex-shrink:0;white-space:nowrap;}
-.ug-btn.bought .ug-cost{color:var(--green);font-size:11px;}
-
-/* 게이지 하단 상황 텍스트 */
-.gauge-status{font-size:10px;margin-top:3px;min-height:13px;}
-.gs-dev{color:#c06040;}
-.gs-law{color:#40a060;}
-
-/* ── 로그 (맨 하단 고정) ── */
-.log-bar{
-  flex-shrink:0;background:#080602;border-top:1px solid var(--border);
-  padding:6px 12px;min-height:58px;max-height:80px;overflow:hidden;
+.ug-ico{font-size:20px;flex-shrink:0;}
+.ug-info{flex:1;min-width:0;}
+.ug-name{font-size:var(--fs-md);font-weight:700;color:var(--paper);}
+.ug-desc{font-size:var(--fs-sm);color:var(--tan);margin-top:2px;font-weight:700;}
+.ug-eff{font-size:var(--fs-xs);color:#80a860;margin-top:2px;font-style:italic;}
+.ug-cost{
+  font-family:'Black Han Sans',sans-serif;font-size:var(--fs-md);
+  color:var(--gold);flex-shrink:0;white-space:nowrap;
+  background:#241400;border:1px solid var(--border);
+  border-radius:4px;padding:2px 8px;
 }
-.log-item{font-size:18px;color:#907040;line-height:1.6;}
+.ug-btn.bought .ug-cost{color:#40d060;background:#081a08;border-color:#30c060;}
+
+/* ── 로그 ── */
+.log-bar{
+  flex-shrink:0;background:#100a02;border-top:2px solid var(--border);
+  padding:7px 14px;min-height:54px;max-height:76px;overflow:hidden;
+}
+.log-item{font-size:var(--fs-md);color:#c0a060;line-height:1.6;}
 .log-item.imp{color:var(--gold);}
-.log-item.bad{color:#c04020;}
-.log-item.ok{color:#28a050;}
+.log-item.bad{color:#ff6040;}
+.log-item.ok{color:#40d060;}
 
 /* ── 스킬 버스트 ── */
 .skill-burst{
@@ -158,49 +188,59 @@ header{
   pointer-events:none;z-index:300;animation:sb 0.7s ease forwards;
   font-size:clamp(52px,14vw,84px);
 }
-@keyframes sb{0%{opacity:1;transform:translate(-50%,-50%) scale(0.3)}50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}}
+@keyframes sb{
+  0%{opacity:1;transform:translate(-50%,-50%) scale(0.3)}
+  50%{opacity:1;transform:translate(-50%,-50%) scale(1.2)}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.8)}
+}
 
-/* ── 오버레이 ── */
+/* ── 승리/패배 오버레이 ── */
 .overlay{
   display:none;position:fixed;inset:0;background:rgba(0,0,0,0.93);z-index:100;
   align-items:center;justify-content:center;flex-direction:column;
   text-align:center;padding:24px;overflow-y:auto;
 }
 .overlay.on{display:flex;}
-.ov-icon{font-size:52px;margin-bottom:10px;}
-.ov-title{font-family:'Black Han Sans',sans-serif;font-size:26px;color:var(--gold);margin-bottom:8px;}
-.ov-desc{font-size:14px;color:#a09050;line-height:1.9;margin-bottom:14px;}
-.ov-link{display:inline-block;background:var(--green);color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;margin-bottom:8px;}
-.ov-link-team{display:inline-block;background:#1560a0;color:#fff;padding:12px 24px;border-radius:6px;text-decoration:none;font-weight:700;font-size:14px;margin-bottom:8px;border:1.5px solid #3090d0;}
-.ov-team-box{margin:8px 0;background:rgba(21,96,160,0.18);border:1px solid #1560a0;border-radius:8px;padding:12px 18px;max-width:320px;}
-.ov-team-q{font-size:13px;color:#90c8f0;margin-bottom:8px;line-height:1.6;}
-.re-btn{background:transparent;border:1px solid var(--border);color:#907040;padding:9px 18px;border-radius:4px;cursor:pointer;font-size:13px;margin-top:5px;font-family:'Noto Sans KR',sans-serif;}
+.ov-icon{font-size:56px;margin-bottom:12px;}
+.ov-title{font-family:'Black Han Sans',sans-serif;font-size:28px;color:var(--gold);margin-bottom:10px;}
+.ov-desc{font-size:var(--fs-md);color:#d0c080;line-height:1.9;margin-bottom:16px;}
+.ov-link{display:inline-block;background:var(--green);color:#fff;padding:13px 26px;border-radius:7px;text-decoration:none;font-weight:700;font-size:var(--fs-md);margin-bottom:9px;}
+.ov-link-team{display:inline-block;background:#1a70c0;color:#fff;padding:13px 26px;border-radius:7px;text-decoration:none;font-weight:700;font-size:var(--fs-md);margin-bottom:9px;border:1.5px solid #50a0e0;}
+.ov-team-box{margin:8px 0;background:rgba(30,110,180,0.2);border:1px solid #3080c0;border-radius:9px;padding:14px 20px;max-width:320px;width:100%;}
+.ov-team-q{font-size:var(--fs-sm);color:#a0d8f0;margin-bottom:10px;line-height:1.6;}
+.re-btn{background:transparent;border:1px solid var(--border);color:#c09860;padding:10px 20px;border-radius:5px;cursor:pointer;font-size:var(--fs-sm);margin-top:6px;font-family:'Noto Sans KR',sans-serif;}
 
-/* ── 인트로 ── */
+/* ── 인트로 오버레이 ── */
 .intro-overlay{
-  display:flex;position:fixed;inset:0;background:rgba(0,0,0,0.97);z-index:200;
+  display:flex;position:fixed;inset:0;background:rgba(10,6,2,0.97);z-index:200;
   align-items:center;justify-content:center;flex-direction:column;
-  text-align:center;padding:16px;overflow-y:auto;
+  text-align:center;padding:18px;overflow-y:auto;
 }
-.intro-emblem{font-size:48px;margin-bottom:6px;filter:drop-shadow(0 0 12px rgba(232,160,16,0.6));}
-.intro-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(16px,4.2vw,22px);color:var(--gold);letter-spacing:1px;margin-bottom:4px;line-height:1.3;}
-.intro-sub{font-size:11px;color:#907040;letter-spacing:0.5px;margin-bottom:14px;}
-.intro-card{background:#0d0a04;border:1px solid var(--border);border-radius:8px;padding:13px 15px;max-width:360px;width:100%;text-align:left;margin-bottom:12px;position:relative;}
-.intro-card::before{position:absolute;top:-10px;left:12px;background:#0d0a04;padding:0 6px;font-family:'Black Han Sans',sans-serif;font-size:11px;color:var(--gold);letter-spacing:1px;}
-.intro-card.brief::before{content:'📢 상황 브리핑';}
-.intro-card.rules::before{content:'🎮 게임 규칙';}
-.rule-item{display:flex;gap:8px;margin-bottom:8px;align-items:flex-start;}
-.rule-icon{font-size:15px;flex-shrink:0;line-height:1.3;}
-.rule-text{font-size:11px;color:#c8a860;line-height:1.6;}
-.rule-text strong{color:var(--paper);}
-.intro-dossier{background:#0d0a04;border:1px dashed #6b5020;border-radius:6px;padding:9px 13px;max-width:360px;width:100%;margin-bottom:12px;font-size:10px;color:#807850;line-height:1.7;text-align:left;position:relative;}
-.intro-dossier::before{content:'📁 실제 사건';position:absolute;top:-9px;left:10px;background:#0d0a04;padding:0 5px;font-size:10px;color:#907040;}
-.start-btn{background:linear-gradient(135deg,#b06808,#e8a010);color:#1a1510;font-family:'Black Han Sans',sans-serif;font-size:17px;font-weight:900;padding:13px 38px;border-radius:7px;border:none;cursor:pointer;letter-spacing:2px;box-shadow:0 4px 18px rgba(232,160,16,0.4);transition:transform 0.15s;}
-.start-btn:active{transform:scale(0.95);}
-.back-btn{background:transparent;border:1px solid var(--border);color:#907040;padding:10px 20px;border-radius:6px;cursor:pointer;font-size:13px;font-family:'Noto Sans KR',sans-serif;}
+.intro-emblem{font-size:52px;margin-bottom:8px;filter:drop-shadow(0 0 14px rgba(240,176,32,0.7));}
+.intro-title{font-family:'Black Han Sans',sans-serif;font-size:clamp(18px,5vw,24px);color:var(--gold);letter-spacing:1px;margin-bottom:5px;line-height:1.3;}
+.intro-sub{font-size:var(--fs-xs);color:#c09860;letter-spacing:0.5px;margin-bottom:16px;}
+.start-btn{
+  background:linear-gradient(135deg,#c07808,#f0b020);color:#1a1000;
+  font-family:'Black Han Sans',sans-serif;font-size:18px;font-weight:900;
+  padding:14px 42px;border-radius:8px;border:none;cursor:pointer;letter-spacing:2px;
+  box-shadow:0 4px 20px rgba(240,176,32,0.5);transition:transform 0.15s,box-shadow 0.15s;
+}
+.start-btn:active{transform:scale(0.95);box-shadow:0 2px 10px rgba(240,176,32,0.3);}
+.back-btn{
+  background:transparent;border:1px solid var(--border);color:#c09860;
+  padding:12px 22px;border-radius:7px;cursor:pointer;font-size:var(--fs-sm);
+  font-family:'Noto Sans KR',sans-serif;
+}
 
 /* 카운트다운 */
-.cd-num{font-family:'Black Han Sans',sans-serif;font-size:90px;color:var(--gold);line-height:1;text-shadow:0 0 30px rgba(232,160,16,0.7);}
+.cd-num{font-family:'Black Han Sans',sans-serif;font-size:100px;color:var(--gold);line-height:1;text-shadow:0 0 40px rgba(240,176,32,0.8);}
+
+/* ── PC 보완 ── */
+@media(min-width:480px){
+  :root{--fs-xs:13px;--fs-sm:15px;--fs-md:17px;--fs-lg:20px;--fs-xl:25px;}
+  .pt-num{font-size:38px;}
+  .gauge-pct{font-size:25px;}
+}
 </style>
 </head>
 <body>
@@ -209,59 +249,104 @@ header{
 <div class="intro-overlay" id="intro1">
   <div class="intro-emblem">🕵️</div>
   <div class="intro-title">아무리 덮어봐라<br>우리가 파헤치지</div>
-  <div class="intro-sub">난개발·환경오염 방지 및 주민 알권리 조례 운동본부</div>
-  <div class="intro-card brief" style="max-width:360px;width:100%;">
-    <div style="font-size:12px;color:#c8a860;line-height:1.9;">
-      지금 이 순간, 전국 곳곳에서<br>
-      <strong style="color:#e05040;">우리 동네에 폐기물소각장이 주민 몰래</strong> 들어오려 합니다.<br><br>
-      사업자는 규모를 줄여 환경영향평가를 피하고,<br>
-      행정은 인허가 절차를 날림으로 통과시킵니다.<br><br>
-      주민들은 인허가가 <strong>다 끝난 후에야</strong> 뒤늦게 소식을 듣습니다.<br><br>
-      <strong style="color:#40c070;">당신은 마을을 지키기 위해 이 과정을 파헤치는 주민 활동가입니다.</strong><br>
-      인허가가 완료되기 전에 조례를 제정해 막아내세요!
+
+  <div style="max-width:340px;width:100%;display:flex;flex-direction:column;gap:10px;margin-bottom:16px;">
+
+    <div style="background:#1a0e06;border-left:3px solid #e05040;border-radius:0 6px 6px 0;padding:10px 14px;">
+      <div style="font-size:11px;color:#a07040;margin-bottom:4px;letter-spacing:1px;">📍 지금 이 순간</div>
+      <div style="font-size:13px;color:var(--paper);line-height:1.7;">전국 곳곳에서<br><strong style="color:#e05040;">폐기물 소각장이 주민 몰래</strong> 들어오려 합니다.</div>
+    </div>
+
+    <div style="background:#1a0e06;border-left:3px solid #c07030;border-radius:0 6px 6px 0;padding:10px 14px;">
+      <div style="font-size:11px;color:#a07040;margin-bottom:4px;letter-spacing:1px;">🏭 문제는?</div>
+      <div style="font-size:13px;color:var(--paper);line-height:1.7;">사업자는 규모를 줄여 환경영향평가를 피하고,<br>행정은 인허가 절차를 날림으로 통과시킵니다.<br>주민들은 <strong>다 끝난 후에야</strong> 알게 됩니다.</div>
+    </div>
+
+    <div style="background:#0a1a0a;border-left:3px solid #40c070;border-radius:0 6px 6px 0;padding:10px 14px;">
+      <div style="font-size:11px;color:#407040;margin-bottom:4px;letter-spacing:1px;">✊ 당신의 역할</div>
+      <div style="font-size:13px;color:var(--paper);line-height:1.7;"><strong style="color:#40c070;">주민 활동가</strong>로서 정보를 파헤치고<br>인허가가 완료되기 전에 조례를 제정해<br>난개발을 막아내세요!</div>
+    </div>
+
+    <div style="background:#0d0a04;border:1px dashed #4a3010;border-radius:6px;padding:8px 12px;">
+      <div style="font-size:10px;color:#706040;line-height:1.6;">📁 이 게임의 이벤트는 현실에서 벌어지는 일에서 모티브를 따왔습니다.<br>
+      • 99톤 소각장 → 100톤 기준을 피해 환경영향평가 면제<br>
+      • 도시계획위원회 회의를 전부 이메일 서면심의로만 의결</div>
     </div>
   </div>
-  <div class="intro-dossier" style="max-width:360px;">
-    이 게임의 이벤트는 현실에서도 벌어지는 일들입니다.<br>
-    • 99톤 소각장 → 100톤 기준을 피해 환경영향평가 면제<br>
-    • 도시계획위원회 전부 이메일 서면심의로만 의결<br>
-    • 적합통보 후 주민은 뒤늦게 공사 시작을 알게 됨
-  </div>
-  <button class="start-btn" onclick="showIntro2()">다음 → 게임 규칙 보기</button>
+
+  <button class="start-btn" onclick="showIntro2()">다음 →</button>
 </div>
 
-<!-- ═══ 인트로 2: 게임 규칙 ═══ -->
+<!-- ═══ 인트로 2: 게임 목표 ═══ -->
 <div class="intro-overlay" id="intro2" style="display:none;">
-  <div class="intro-emblem" style="font-size:38px;margin-bottom:5px;">📋</div>
-  <div class="intro-title" style="font-size:clamp(15px,3.8vw,20px);margin-bottom:12px;">게임 규칙</div>
-  <div class="intro-card rules" style="max-width:360px;width:100%;">
-    <div class="rule-item" style="margin-top:6px;">
-      <span class="rule-icon">⏱️</span>
-      <div class="rule-text">시간이 흐르면 <strong>활동 포인트(📄)</strong>가 자동으로 쌓입니다.<br> 포인트를 어떻게 쓸지 판단하세요.</div>
+  <div class="intro-emblem" style="font-size:42px;margin-bottom:8px;">🎯</div>
+  <div class="intro-title" style="margin-bottom:16px;">게임 목표</div>
+
+  <div style="max-width:340px;width:100%;display:flex;flex-direction:column;gap:12px;margin-bottom:20px;">
+
+    <div style="background:#1a0505;border:2px solid #c03020;border-radius:8px;padding:14px 16px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:6px;">🏗️</div>
+      <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#e05040;margin-bottom:6px;">인허가 진행 100% = 패배</div>
+      <div style="font-size:12px;color:#c07060;line-height:1.6;">소각장 인허가가 완료되면 끝입니다.<br>게이지는 계속 올라가며 <strong style="color:#e07060;">내려가지 않습니다. 적절한 스킬로 속도를 늦추세요!</strong></div>
     </div>
-    <div class="rule-item">
-      <span class="rule-icon">⬆️</span>
-      <div class="rule-text"><strong>주민활동 강화(패시브)</strong>를 구매하면 포인트 적립이 빨라집니다.<br>먼저 기반을 다져야 나중에 스킬을 쓸 수 있습니다.</div>
+
+    <div style="background:#051a0a;border:2px solid #1a8a3c;border-radius:8px;padding:14px 16px;text-align:center;">
+      <div style="font-size:28px;margin-bottom:6px;">📜</div>
+      <div style="font-family:'Black Han Sans',sans-serif;font-size:16px;color:#40c070;margin-bottom:6px;">조례 제정 100% = 승리!</div>
+      <div style="font-size:12px;color:#50a060;line-height:1.6;">주민 알권리 조례를 통과시키면<br>난개발을 막아낼 수 있습니다.<br><strong style="color:#60c080;">주민활동 강화하고, 스킬로 게이지를 올리세요.</strong></div>
     </div>
-    <div class="rule-item">
-      <span class="rule-icon">⚡</span>
-      <div class="rule-text"><strong>스킬 4가지</strong>: 포인트를 소모해 발동.<br>쓸수록 다음 비용이 2배로 뜁니다. 타이밍이 핵심!</div>
-    </div>
-    <div class="rule-item">
-      <span class="rule-icon">🏗️</span>
-      <div class="rule-text"><strong style="color:#e05040;">인허가 진행</strong> 100% → 패배. 스킬로 늦출 수 있지만 내려가진 않아요.</div>
-    </div>
-    <div class="rule-item">
-      <span class="rule-icon">📜</span>
-      <div class="rule-text"><strong style="color:#40c070;">조례 제정</strong> 100% → 승리! 스킬과 패시브로 게이지를 올리세요.</div>
-    </div>
-    <div class="rule-item">
-      <span class="rule-icon">🚨</span>
-      <div class="rule-text"><strong>긴급 이벤트</strong>가 주기적으로 터집니다.<br>이벤트 창에 <strong>대응 방법</strong>이 표시됩니다. 제한시간 내 스킬을 쓰거나 포인트를 확보하세요!</div>
-    </div>
+
   </div>
-  <div style="display:flex;gap:10px;margin-top:4px;">
+
+  <div style="display:flex;gap:10px;">
     <button class="back-btn" onclick="showIntro1()">← 뒤로</button>
+    <button class="start-btn" onclick="showIntro3()">다음 →</button>
+  </div>
+</div>
+
+<!-- ═══ 인트로 3: 게임 방법 ═══ -->
+<div class="intro-overlay" id="intro3" style="display:none;">
+  <div class="intro-emblem" style="font-size:42px;margin-bottom:8px;">🎮</div>
+  <div class="intro-title" style="margin-bottom:14px;">플레이 방법</div>
+
+  <div style="max-width:340px;width:100%;display:flex;flex-direction:column;gap:8px;margin-bottom:18px;">
+
+    <div style="background:#0d0a04;border:1px solid var(--border);border-radius:7px;padding:11px 14px;display:flex;gap:12px;align-items:flex-start;">
+      <div style="font-size:22px;flex-shrink:0;">⚡</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--paper);margin-bottom:3px;">활동 포인트</div>
+        <div style="font-size:11px;color:#c8a860;line-height:1.5;">시간이 흐르면 활동포인트가 자동으로 쌓입니다.<br>이 포인트로 주민활동을 강화하고, 스킬을 사용합니다.</div>
+      </div>
+    </div>
+
+    <div style="background:#0d0a04;border:1px solid var(--border);border-radius:7px;padding:11px 14px;display:flex;gap:12px;align-items:flex-start;">
+      <div style="font-size:22px;flex-shrink:0;">🤝</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--paper);margin-bottom:3px;">주민활동 강화 (패시브 스킬)</div>
+        <div style="font-size:11px;color:#c8a860;line-height:1.5;">포인트를 써서 <br>포인트 적립 속도, 인허가 억제 등<br> 영구적인 효과를 얻습니다. <strong style="color:#e8a010;">먼저 기반을 다지세요.</strong></div>
+      </div>
+    </div>
+
+    <div style="background:#0d0a04;border:1px solid var(--border);border-radius:7px;padding:11px 14px;display:flex;gap:12px;align-items:flex-start;">
+      <div style="font-size:22px;flex-shrink:0;">✊</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:var(--paper);margin-bottom:3px;">액티브 스킬</div>
+        <div style="font-size:11px;color:#c8a860;line-height:1.5;">포인트를 소모해 즉시 발동.<br>인허가 중단, 조례 상승 등 강력한 효과.<br><strong style="color:#e05040;">쓸수록 비용이 2배씩 올라갑니다.</strong></div>
+      </div>
+    </div>
+
+    <div style="background:#1a0808;border:1px solid #802010;border-radius:7px;padding:11px 14px;display:flex;gap:12px;align-items:flex-start;">
+      <div style="font-size:22px;flex-shrink:0;">🚨</div>
+      <div>
+        <div style="font-size:13px;font-weight:700;color:#e08060;margin-bottom:3px;">긴급 이벤트</div>
+        <div style="font-size:11px;color:#c8a860;line-height:1.5;">주기적으로 위기가 터집니다.<br>화면에 <strong style="color:#ffe060;">대응 방법</strong>이 표시됩니다.<br>제한시간 내에 스킬을 쓰거나 포인트를 확보하세요!</div>
+      </div>
+    </div>
+
+  </div>
+
+  <div style="display:flex;gap:10px;">
+    <button class="back-btn" onclick="showIntro2()">← 뒤로</button>
     <button class="start-btn" onclick="startCountdown()">✊ 투쟁 시작</button>
   </div>
 </div>
@@ -270,18 +355,18 @@ header{
 <div class="intro-overlay" id="cdov" style="display:none;">
   <div style="font-size:18px;color:#c8a860;margin-bottom:14px;line-height:1.7;text-align:center;max-width:300px;">
     🏗️ 소각장 인허가 절차가<br>지금도 진행 중입니다.<br><br>
-    <strong style="color:var(--gold);">정보를 파헤쳐 막아내세요!</strong>
+    <strong style="color:var(--gold);">주민활동을 강화하고, 스킬을 사용하여 막아내세요!</strong>
   </div>
   <div class="cd-num" id="cd-num">3</div>
   <div style="font-size:14px;color:#907040;margin-top:10px;">게임이 곧 시작됩니다...</div>
 </div>
 
 <!-- ═══ 게임 화면 ═══ -->
+<div id="game-wrap">
 <header>
   <div class="hdr">
     <div>
       <div class="title">🕵️ 아무리 덮어봐라 우리가 파헤치지</div>
-      <div class="sub-title">난개발·환경오염 방지 및 주민 알권리 조례 운동본부</div>
     </div>
   </div>
 </header>
@@ -302,39 +387,37 @@ header{
 <div class="pt-row">
   <div>
     <div class="pt-label">⚡ 활동 포인트</div>
-    <div class="pt-main">
+    <div style="display:flex;align-items:baseline;gap:5px;">
       <span class="pt-num" id="pt-num">0</span>
-      <span class="pt-rate" id="pt-rate" style="font-size:12px;color:#c8a050;">+2/초</span>
+      <span class="pt-rate" id="pt-rate">+2/초</span>
     </div>
   </div>
   <div class="pt-right">
-    <div class="pt-time" id="situation-status" style="font-size:10px;color:#c06040;text-align:right;max-width:140px;line-height:1.3;">📋 사업계획서 검토 중</div>
+    <div class="pt-situation" id="situation-status">📋 사업계획서 검토 중</div>
   </div>
 </div>
 
-<!-- 이벤트 or 현재 상황 -->
 <div id="event-area"></div>
-<div id="status-area" style="flex-shrink:0;padding:5px 12px;background:#0d0a04;border-bottom:1px solid var(--border);font-size:11px;color:#907040;line-height:1.5;" id="status-area"></div>
+<div class="status-bar" id="status-area"></div>
 
-<!-- 스킬 -->
-<div class="skill-bar-label">⚡ 액티브 스킬</div>
+<div class="section-label">✊ 액티브 스킬</div>
 <div class="skill-bar" id="skill-bar"></div>
 
-<!-- 주민활동 강화 패시브 -->
 <div class="upgrades-wrap">
-  <div class="upgrades-label">⬆ 주민활동 강화</div>
+  <div class="section-label">🤝 주민활동 강화(패시브)</div>
   <div class="upgrades" id="ug-list"></div>
 </div>
 
-<!-- 로그 -->
 <div class="log-bar" id="log-bar">
   <div class="log-item imp">✊ 투쟁 시작! 활동 포인트를 모아 스킬과 주민활동 강화를 활용하세요.</div>
 </div>
 
+</div><!-- /#game-wrap -->
+
 <!-- 승리 -->
 <div class="overlay" id="win-ov">
   <div class="ov-icon">🎊</div>
-  <div class="ov-title">난개발 막는 알권리 조례 제정 성공!</div>
+  <div class="ov-title">7대 조례 제정 성공!</div>
   <div class="ov-desc">주민의 알권리가 난개발을 막았습니다.<br>사전고지 조례, 환경영향평가 조례,<br>위원회 회의록 공개 조례까지 모두 통과!<br><br>현실에서도 여러분의 참여가 필요합니다.</div>
   <a class="ov-link" href="https://cfoi1.github.io/weneedlaw/" target="_blank">🔗 캠페인 살펴보기</a>
   <div class="ov-team-box">
@@ -347,7 +430,7 @@ header{
 <!-- 패배 -->
 <div class="overlay" id="lose-ov">
   <div class="ov-icon">😢</div>
-  <div class="ov-title">인허가가 강행됐습니다</div>
+  <div class="ov-title">인허가 강행됐습니다</div>
   <div class="ov-desc" id="lose-desc">정보가 막히면 난개발을 막을 수 없습니다.</div>
   <a class="ov-link" href="https://cfoi1.github.io/weneedlaw/" target="_blank">🔗 캠페인 살펴보기</a>
   <div class="ov-team-box">
@@ -370,9 +453,9 @@ const EVENTS = [
   {
     phase:1,
     title:'🏭 환경영향평가 면제 꼼수!',
-    effect:'허용 시 인허가 +10%',
+    effect:'허용 시 인허가 +15%',
     response:'💡 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 주민의견서 자동 제출로 저지!',
-    timer:9, penalty:10, bonus:0,
+    timer:9, penalty:15, bonus:0,
     successCond:'pts', baseThreshold:35,
   },
   {
@@ -385,9 +468,9 @@ const EVENTS = [
   {
     phase:1,
     title:'⚠️ 폐기물사업계획서 적합통보 임박!',
-    effect:'막지 못하면 인허가 +15%',
+    effect:'막지 못하면 인허가 +20%',
     response:'💡 📋<strong>정보공개 청구</strong> 스킬을 사용하거나 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 저지!',
-    timer:10, penalty:15, bonus:0,
+    timer:10, penalty:20, bonus:0,
     successCond:'skill_or_pts', baseThreshold:30, skillId:'sk_foia',
   },
 
@@ -404,7 +487,7 @@ const EVENTS = [
     phase:2,
     title:'🗄️ 위원회 회의록 비공개 처리!',
     effect:'막지 못하면 인허가 +10%',
-    response:'💡 📋<strong>정보공개 청구</strong> 스킬을 사용하면 회의록 공개를 강제할 수 있습니다!',
+    response:'💡 📋<strong>정보공개 청구</strong> 스킬을 사용하면 회의록을 공개하여 인허가를 저지할 수 있습니다!',
     timer:9, penalty:10, bonus:0,
     successCond:'skill', skillId:'sk_foia',
   },
@@ -419,7 +502,7 @@ const EVENTS = [
     phase:2,
     title:'🏦 대형 로비 자금 투입!',
     effect:'인허가 즉시 +10% — 저지 불가',
-    response:'😡 <strong>저지 불가.</strong> 사업자가 대규모 로비를 투입했습니다!',
+    response:'😡 <strong>저지 불가.</strong> 사업자가 대규모 로비를 벌여 인허가 진행률을 높입니다!',
     timer:5, penalty:10, bonus:0, unavoidable:true,
   },
 
@@ -443,9 +526,9 @@ const EVENTS = [
   {
     phase:3,
     title:'✊ 마을총회 개최!',
-    effect:'참여하면 조례 +15%',
+    effect:'참여하면 조례 +18%',
     response:'💡 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 마을 협의의견서 자동 제출!',
-    timer:9, penalty:0, bonus:15,
+    timer:9, penalty:0, bonus:18,
     successCond:'pts', baseThreshold:60,
   },
 ];
@@ -465,8 +548,8 @@ const SKILLS = [
   {
     id:'sk_foia', icon:'📋', name:'정보공개 청구',
     baseCost:25, cd:8,
-    effect:'인허가 8초 중단 & 적립 2배',
-    fn(G){ G.devFreeze=Math.max(G.devFreeze,80); G.foiaBoost=80; G.lastSkill='sk_foia'; addLog('📋 정보공개 청구! 인허가 8초 중단, 적립 2배','ok'); },
+    effect:'인허가 8초 중단 & 포인트 적립 2배',
+    fn(G){ G.devFreeze=Math.max(G.devFreeze,80); G.foiaBoost=80; G.lastSkill='sk_foia'; addLog('📋 정보공개 청구! 인허가 8초 중단, 포인트 적립 2배','ok'); },
     burst:'📋',
   },
   {
@@ -489,15 +572,15 @@ const SKILLS = [
 // 패시브 (주민활동 강화)
 // ════════════════════════════
 const UPGRADES = [
-  {id:'u0',ico:'👂',name:'소문에 귀 기울이기',      desc:'자동 적립 +1/초',               eff:'동네 소문으로 동향을 파악하기 시작',    cost:20,   cps:1,  devSlow:0,    lawImm:0, threshMult:0},
-  {id:'u1',ico:'👁️',name:'현장 감시 모니터링',    desc:'자동 적립 +2/초',               eff:'현장 감시로 정보를 모으기',             cost:50,   cps:2,  devSlow:0,    lawImm:0, threshMult:0},
-  {id:'u2',ico:'📣',name:'주민 알림망 구축',        desc:'이벤트 저지 기준 −20%',         eff:'주민에게 상황 즉각 알리기 — 이벤트 대응 쉬워짐', cost:75,  cps:0,  devSlow:0,    lawImm:0, threshMult:0.2},
-  {id:'u3',ico:'✊', name:'주민대책위 결성',         desc:'자동 적립 +4/초',               eff:'대책위 결성으로 활동 능력 강화',              cost:100,  cps:4,  devSlow:0,    lawImm:0, threshMult:0},
-  {id:'u4',ico:'⚖️', name:'공익법률팀 연결',         desc:'인허가 속도 −50%',              eff:'법적인 수단으로 인허가 절차에 제동',            cost:200,  cps:0,  devSlow:0.50, lawImm:0, threshMult:0},
-  {id:'u5',ico:'🌐',name:'제도 개선 네트워크 구축', desc:'자동 적립 +6/초 & 조례 +10%',  eff:'전국적인 연대로 조례 입법 기반 확보',         cost:250,  cps:6,  devSlow:0,    lawImm:10,threshMult:0},
+  {id:'u0',ico:'👂',name:'소문에 귀 기울이기',      desc:'자동 적립 +1/초',               eff:'동네 소문으로 개발 동향을 파악합니다',    cost:20,   cps:1,  devSlow:0,    lawImm:0, threshMult:0},
+  {id:'u1',ico:'👁️',name:'현장 감시 모니터링',    desc:'자동 적립 +2/초',               eff:'현장 감시로 정보를 수집합니다',             cost:50,   cps:2,  devSlow:0,    lawImm:0, threshMult:0},
+  {id:'u2',ico:'📣',name:'주민 알림망 구축',        desc:'이벤트 저지 기준 −20%',         eff:'주민들에게 상황을 알려 위기 대응 능력을 키웁니다', cost:75,  cps:0,  devSlow:0,    lawImm:0, threshMult:0.2},
+  {id:'u3',ico:'✊', name:'주민대책위 결성',         desc:'자동 적립 +4/초',               eff:'주민대책위를 결성하여 활동력을 높입니다',              cost:100,  cps:4,  devSlow:0,    lawImm:0, threshMult:0},
+  {id:'u4',ico:'⚖️', name:'공익법률팀 연결',         desc:'인허가 속도 −50%',              eff:'법적인 이의제기로 인허가 속도를 늦춥니다',            cost:200,  cps:0,  devSlow:0.50, lawImm:0, threshMult:0},
+  {id:'u5',ico:'🌐',name:'제도 개선 네트워크 구축', desc:'자동 적립 +6/초 & 조례 +10%',  eff:'전국적인 연대로 조례 입법의 기반을 만듭니다',         cost:250,  cps:6,  devSlow:0,    lawImm:10,threshMult:0},
 ];
 
-const CRISIS_LABELS=['📋 폐기물사업계획서 적합통보 검토 중','🏗️ 도시계획위원회 심의 예정','🔒 환경영향평가 비공개처리 시도','⚠️ 소각장 인허가 절차 진행 중','🚨 소각장 입지 제안 접수','🤝 공무원-사업자 비공개 협의 중'];
+const CRISIS_LABELS=['📋 폐기물사업계획서 적합통보 검토 중','🏗️ 도시계획위원회 심의 예정','🔒 환경영향평가 날림처리 시도','⚠️ 소각장 인허가 절차 진행 중','🚨 폐기물소각장 입지 제안 접수','🤝 공무원-사업자 비공개 협의 중'];
 
 // ════════════════════════════
 // 게임 상태
@@ -812,7 +895,7 @@ function updateUI(){
 function checkGameOver(){
   if(G.devPct>=100){
     G.gameOver=true;
-    const msgs=['폐기물사업계획서 적합통보 완료 — 소각장 허가','도시계획위원회 원안 가결 — 소각장 입지 결정','환경영향평가 협의 완료 — 산업단지 착공'];
+    const msgs=['폐기물사업계획서 적합통보 완료 — 소각장 허가','도시계획위원회 원안 가결 — 소각장 입지 결정','환경영향평가 협의 완료 — 착공 돌입'];
     $('lose-desc').innerHTML=msgs[Math.floor(Math.random()*msgs.length)]+'<br><br>주민의 알권리가 보장됐다면 막을 수 있었습니다.<br>난개발·환경오염 방지 7대 조례, 지금 필요합니다.';
     $('lose-ov').classList.add('on');
   }else if(G.lawPct>=100){
@@ -862,10 +945,10 @@ function startLoop(){
       const msgs=[
         ['🏭 소각장 사업자, 99톤으로 규모 축소 — 환경영향평가 회피','bad'],
         ['📮 지방환경청, 폐기물사업계획서 적합통보 검토 중','bad'],
-        ['🗄️ 도시계획위원회 회의록 비공개 처리','bad'],
+        ['🗄️ 평가자료 비공개 처리','bad'],
         ['🤝 공무원과 사업자 비공개 협의 진행','bad'],
         ['✊ 주민들의 의견서 제출로 인허가 심의 보류','ok'],
-        ['📰 지역언론, 소각장 허가 의혹 취재 중','ok'],
+        ['📰 지역언론, 매립장 허가 의혹 취재 중','ok'],
       ];
       const [m,t]=msgs[Math.floor(Math.random()*msgs.length)];
       addLog(m,t);
@@ -888,10 +971,11 @@ function spawnBurst(icon){
 // 인트로 / 시작 / 재시작
 // ════════════════════════════
 function showIntro1(){ $('intro2').style.display='none'; $('intro1').style.display='flex'; }
-function showIntro2(){ $('intro1').style.display='none'; $('intro2').style.display='flex'; }
+function showIntro2(){ $('intro1').style.display='none'; $('intro3').style.display='none'; $('intro2').style.display='flex'; }
+function showIntro3(){ $('intro2').style.display='none'; $('intro3').style.display='flex'; }
 
 function startCountdown(){
-  $('intro2').style.display='none';
+  $('intro3').style.display='none';
   $('cdov').style.display='flex';
   let n=3; $('cd-num').textContent=n;
   const iv=setInterval(()=>{
@@ -911,7 +995,9 @@ function restartGame(){
   if(loopId)clearInterval(loopId);
   evBanner?.remove(); evBanner=null;
   $('win-ov').classList.remove('on'); $('lose-ov').classList.remove('on');
-  $('cdov').style.display='none'; $('intro2').style.display='none';
+  $('cdov').style.display='none';
+  $('intro2').style.display='none';
+  $('intro3').style.display='none';
   $('intro1').style.display='flex';
 }
 
