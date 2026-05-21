@@ -417,7 +417,7 @@ header{
 <!-- 승리 -->
 <div class="overlay" id="win-ov">
   <div class="ov-icon">🎊</div>
-  <div class="ov-title">7대 조례 제정 성공!</div>
+  <div class="ov-title">난개발 막는 알권리 조례 제정 성공!</div>
   <div class="ov-desc">주민의 알권리가 난개발을 막았습니다.<br>사전고지 조례, 환경영향평가 조례,<br>위원회 회의록 공개 조례까지 모두 통과!<br><br>현실에서도 여러분의 참여가 필요합니다.</div>
   <a class="ov-link" href="https://cfoi1.github.io/weneedlaw/" target="_blank">🔗 캠페인 살펴보기</a>
   <div class="ov-team-box">
@@ -896,7 +896,7 @@ function checkGameOver(){
   if(G.devPct>=100){
     G.gameOver=true;
     const msgs=['폐기물사업계획서 적합통보 완료 — 소각장 허가','도시계획위원회 원안 가결 — 소각장 입지 결정','환경영향평가 협의 완료 — 착공 돌입'];
-    $('lose-desc').innerHTML=msgs[Math.floor(Math.random()*msgs.length)]+'<br><br>주민의 알권리가 보장됐다면 막을 수 있었습니다.<br>난개발·환경오염 방지 7대 조례, 지금 필요합니다.';
+    $('lose-desc').innerHTML=msgs[Math.floor(Math.random()*msgs.length)]+'<br><br>주민의 알권리가 보장됐다면 막을 수 있었습니다.<br>난개발·환경오염 방지 조례, 지금 당장 필요합니다!';
     $('lose-ov').classList.add('on');
   }else if(G.lawPct>=100){
     G.gameOver=true;$('win-ov').classList.add('on');
