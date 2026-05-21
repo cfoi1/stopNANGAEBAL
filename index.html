@@ -895,7 +895,11 @@ function getStatus(arr,val){
 
 function updateUI(){
   $('pt-num').textContent=Math.floor(G.pts);
-  $('pt-rate').textContent=`+${G.autoCPS.toFixed(1)}/초`;
+  // foiaBoost 활성 시 실제 2배 수치 표시 + 초록 강조
+  const displayCPS=(G.foiaBoost>0)?G.autoCPS*2:G.autoCPS;
+  const rateEl=$('pt-rate');
+  rateEl.textContent=`+${displayCPS.toFixed(1)}/초`;
+  rateEl.style.color=(G.foiaBoost>0)?'#50e070':'var(--tan)';
   $('dev-bar').style.width=G.devPct+'%';$('dev-pct').textContent=Math.floor(G.devPct)+'%';
   $('law-bar').style.width=G.lawPct+'%';$('law-pct').textContent=Math.floor(G.lawPct)+'%';
   $('dev-status').textContent=getStatus(DEV_STATUS,G.devPct);
