@@ -264,6 +264,22 @@ header{
 .ov-team-box{margin:8px 0;background:rgba(30,110,180,0.2);border:1px solid #3080c0;border-radius:9px;padding:14px 20px;max-width:320px;width:100%;}
 .ov-team-q{font-size:var(--fs-sm);color:#a0d8f0;margin-bottom:10px;line-height:1.6;}
 .re-btn{background:transparent;border:1px solid var(--border);color:#c09860;padding:10px 20px;border-radius:5px;cursor:pointer;font-size:var(--fs-sm);margin-top:6px;font-family:'Noto Sans KR',sans-serif;}
+.share-btn{
+  display:inline-block;background:linear-gradient(135deg,#c07808,#f0b020);
+  color:#1a1000;padding:13px 26px;border-radius:7px;
+  font-weight:900;font-size:var(--fs-md);margin-bottom:9px;
+  border:none;cursor:pointer;font-family:'Black Han Sans',sans-serif;
+  letter-spacing:1px;box-shadow:0 4px 16px rgba(240,176,32,0.4);
+  transition:transform 0.15s;
+}
+.share-btn:active{transform:scale(0.95);}
+.share-toast{
+  position:fixed;bottom:30px;left:50%;transform:translateX(-50%);
+  background:#1e1608;border:1px solid var(--gold);border-radius:8px;
+  padding:10px 20px;font-size:var(--fs-sm);color:var(--gold);
+  z-index:500;animation:toast-in 0.3s ease;white-space:nowrap;
+}
+@keyframes toast-in{from{opacity:0;transform:translateX(-50%) translateY(10px);}to{opacity:1;transform:translateX(-50%) translateY(0);}}
 
 /* ── 인트로 오버레이 ── */
 .intro-overlay{
@@ -300,6 +316,7 @@ header{
 </head>
 <body>
 
+<!-- ═══ 인트로 1: 상황 브리핑 ═══ -->
 <div class="intro-overlay" id="intro1">
   <div class="intro-emblem">🕵️</div>
   <div class="intro-title">아무리 덮어봐라<br>우리가 파헤치지</div>
@@ -331,6 +348,7 @@ header{
   <button class="start-btn" onclick="showIntro2()">다음 →</button>
 </div>
 
+<!-- ═══ 인트로 2: 게임 목표 ═══ -->
 <div class="intro-overlay" id="intro2" style="display:none;">
   <div class="intro-emblem" style="font-size:42px;margin-bottom:8px;">🎯</div>
   <div class="intro-title" style="margin-bottom:16px;">게임 목표</div>
@@ -357,6 +375,7 @@ header{
   </div>
 </div>
 
+<!-- ═══ 인트로 3: 게임 방법 ═══ -->
 <div class="intro-overlay" id="intro3" style="display:none;">
   <div class="intro-emblem" style="font-size:42px;margin-bottom:8px;">🎮</div>
   <div class="intro-title" style="margin-bottom:14px;">플레이 방법</div>
@@ -391,7 +410,7 @@ header{
       <div style="font-size:22px;flex-shrink:0;">🚨</div>
       <div>
         <div style="font-size:13px;font-weight:700;color:#e08060;margin-bottom:3px;">긴급 이벤트</div>
-        <div style="font-size:11px;color:#c8a860;line-height:1.5;">주기적으로 위기 또는 찬스가 터집니다.<br>화면에 <strong style="color:#ffe060;">대응 방법</strong>이 표시됩니다.<br>빨간 이벤트는 저지하고, 초록 이벤트는 성공시켜요!</div>
+        <div style="font-size:11px;color:#c8a860;line-height:1.5;">주기적으로 위기 또는 기회가 터집니다.<br>화면에 <strong style="color:#ffe060;">대응 방법</strong>이 표시됩니다.<br>빨간 이벤트는 저지, 초록 이벤트는 참가 기회!</div>
       </div>
     </div>
 
@@ -403,6 +422,7 @@ header{
   </div>
 </div>
 
+<!-- ═══ 카운트다운 ═══ -->
 <div class="intro-overlay" id="cdov" style="display:none;">
   <div style="font-size:18px;color:#c8a860;margin-bottom:14px;line-height:1.7;text-align:center;max-width:300px;">
     🏗️ 소각장 인허가 절차가<br>지금도 진행 중입니다.<br><br>
@@ -412,6 +432,7 @@ header{
   <div style="font-size:14px;color:#907040;margin-top:10px;">게임이 곧 시작됩니다...</div>
 </div>
 
+<!-- ═══ 게임 화면 ═══ -->
 <div id="game-wrap">
 <header>
   <div class="hdr">
@@ -462,10 +483,14 @@ header{
   <div class="log-item imp">✊ 투쟁 시작! 활동 포인트를 모아 스킬과 주민활동 강화를 활용하세요.</div>
 </div>
 
-</div><div class="overlay" id="win-ov">
+</div><!-- /#game-wrap -->
+
+<!-- 승리 -->
+<div class="overlay" id="win-ov">
   <div class="ov-icon">🎊</div>
   <div class="ov-title">난개발 막는 알권리 조례 제정 성공!</div>
   <div class="ov-desc">주민의 알권리가 난개발을 막았습니다.<br>사전고지 조례, 환경영향평가 조례,<br>위원회 회의록 공개 조례까지 모두 통과!<br><br>현실에서도 여러분의 참여가 필요합니다.</div>
+  <button class="share-btn" onclick="shareGame(true)">✊ 함께 투쟁할 사람? 공유하기</button>
   <a class="ov-link" href="https://cfoi1.github.io/weneedlaw/" target="_blank">🔗 캠페인 살펴보기</a>
   <div class="ov-team-box">
     <div class="ov-team-q">현실에서도 주민들과 팀을 맺고<br>난개발을 막아내고 싶다면?</div>
@@ -474,10 +499,12 @@ header{
   <button class="re-btn" onclick="restartGame()">처음부터 다시</button>
 </div>
 
+<!-- 패배 -->
 <div class="overlay" id="lose-ov">
   <div class="ov-icon">😢</div>
   <div class="ov-title">인허가 강행됐습니다</div>
   <div class="ov-desc" id="lose-desc">정보가 막히면 난개발을 막을 수 없습니다.</div>
+  <button class="share-btn" onclick="shareGame(false)">✊ 함께 투쟁할 사람? 공유하기</button>
   <a class="ov-link" href="https://cfoi1.github.io/weneedlaw/" target="_blank">🔗 캠페인 살펴보기</a>
   <div class="ov-team-box">
     <div class="ov-team-q">현실에서도 주민들과 팀을 맺고<br>난개발을 막아내고 싶다면?</div>
@@ -487,11 +514,7 @@ header{
 </div>
 
 <script>
-// ════════════════════════════
-// 이벤트
-// ════════════════════════════
 const EVENTS = [
-  // ── 1단계: 초반 — 정보 차단, 사전 절차 밀실 처리 ──
   {
     phase:1,
     title:'🏭 환경영향평가 면제 꼼수!',
@@ -515,8 +538,6 @@ const EVENTS = [
     timer:10, penalty:20, bonus:0,
     successCond:'skill_or_pts', baseThreshold:30, skillId:'sk_foia',
   },
-
-  // ── 2단계: 중반 — 위원회 심의, 도시계획 처리 ──
   {
     phase:2,
     title:'🔒 도시계획위원회 서면심의!',
@@ -547,11 +568,9 @@ const EVENTS = [
     response:'😡 <strong>저지 불가.</strong> 사업자가 대규모 로비를 벌여 인허가 진행률을 높입니다!',
     timer:5, penalty:10, bonus:0, unavoidable:true,
   },
-
-  // ── 3단계: 후반 — 주민 뒤늦게 인지, 반격 기회 ──
   {
     phase:3,
-    title:'📢 주민설명회 개최?!',
+    title:'📢 주민설명회 기회!',
     effect:'참가하면 조례 +15%',
     response:'💡 ✊<strong>주민총회 소집</strong> 스킬 사용 또는 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 참가 성공!',
     timer:9, penalty:0, bonus:15,
@@ -559,10 +578,10 @@ const EVENTS = [
   },
   {
     phase:3,
-    title:'📰 언론사 제보?!',
-    effect:'제보 성공 시 조례 +12%, 실패 시 인허가 +3%',
+    title:'📰 언론사 취재 기회!',
+    effect:'제보 성공 시 조례 +12%',
     response:'💡 📰<strong>언론보도</strong> 스킬 사용 또는 포인트 <strong id="ev-threshold"></strong> 이상 보유 시 제보 성공!',
-    timer:8, penalty:3, bonus:12,
+    timer:8, penalty:0, bonus:12,
     successCond:'skill_or_pts', baseThreshold:50, skillId:'sk_env',
   },
   {
@@ -575,9 +594,6 @@ const EVENTS = [
   },
 ];
 
-// ════════════════════════════
-// 스킬 (액티브)
-// ════════════════════════════
 const SKILL_COST_MULT = 2;
 const SKILLS = [
   {
@@ -610,23 +626,17 @@ const SKILLS = [
   },
 ];
 
-// ════════════════════════════
-// 패시브 (주민활동 강화)
-// ════════════════════════════
 const UPGRADES = [
-  {id:'u0',ico:'👂',name:'소문에 귀 기울이기',      desc:'포인트 적립 +1/초',               eff:'동네 소문으로 개발 동향을 파악합니다',    cost:20,   cps:1,  devSlow:0,    lawImm:0, threshMult:0},
-  {id:'u1',ico:'👁️',name:'현장 감시 모니터링',    desc:'포인트 적립 +2/초',               eff:'현장 감시로 정보를 수집합니다',             cost:50,   cps:2,  devSlow:0,    lawImm:0, threshMult:0},
-  {id:'u2',ico:'📣',name:'주민 알림망 구축',        desc:'이벤트 저지 기준 −20%',         eff:'주민들에게 상황을 알려 위기 대응 능력을 키웁니다', cost:75,  cps:0,  devSlow:0,    lawImm:0, threshMult:0.2},
-  {id:'u3',ico:'✊', name:'주민대책위 결성',         desc:'포인트 적립 +4/초',               eff:'주민대책위를 결성하여 활동력을 높입니다',              cost:100,  cps:4,  devSlow:0,    lawImm:0, threshMult:0},
-  {id:'u4',ico:'⚖️', name:'공익법률팀 연결',         desc:'인허가 속도 −50%',              eff:'법적인 이의제기로 인허가 속도를 늦춥니다',            cost:200,  cps:0,  devSlow:0.50, lawImm:0, threshMult:0},
-  {id:'u5',ico:'🌐',name:'제도 개선 네트워크 구축', desc:'포인트 적립 +6/초 & 조례 +10%',  eff:'전국적인 연대로 조례 입법의 기반을 만듭니다',         cost:250,  cps:6,  devSlow:0,    lawImm:10,threshMult:0},
+  {id:'u0',ico:'👂',name:'소문에 귀 기울이기',      desc:'포인트 적립 +1/초',              eff:'동네 소문으로 개발 동향을 파악합니다',              cost:20,  cps:1, devSlow:0,    lawImm:0,  threshMult:0},
+  {id:'u1',ico:'👁️',name:'현장 감시 모니터링',     desc:'포인트 적립 +2/초',              eff:'현장 감시로 정보를 수집합니다',                     cost:50,  cps:2, devSlow:0,    lawImm:0,  threshMult:0},
+  {id:'u2',ico:'📣',name:'주민 알림망 구축',        desc:'이벤트 성공 필요 포인트 30% 감소',  eff:'주민들에게 상황을 알려 위기 대응 능력을 키웁니다', cost:75,  cps:0, devSlow:0,    lawImm:0,  threshMult:0.3},
+  {id:'u3',ico:'✊',name:'주민대책위 결성',           desc:'포인트 적립 +4/초',              eff:'주민대책위를 결성하여 활동력을 높입니다',            cost:100, cps:4, devSlow:0,    lawImm:0,  threshMult:0},
+  {id:'u4',ico:'⚖️',name:'공익법률팀 연결',          desc:'인허가 속도 −50%',               eff:'법적인 이의제기로 인허가 속도를 늦춥니다',           cost:200, cps:0, devSlow:0.50, lawImm:0,  threshMult:0},
+  {id:'u5',ico:'🌐',name:'제도 개선 네트워크 구축',  desc:'포인트 적립 +6/초 & 조례 +10%', eff:'전국적인 연대로 조례 입법의 기반을 만듭니다',        cost:250, cps:6, devSlow:0,    lawImm:10, threshMult:0},
 ];
 
 const CRISIS_LABELS=['📋 폐기물사업계획서 적합통보 검토 중','🏗️ 도시계획위원회 심의 예정','🔒 환경영향평가 날림처리 시도','⚠️ 소각장 인허가 절차 진행 중','🚨 폐기물소각장 입지 제안 접수','🤝 공무원-사업자 비공개 협의 중'];
 
-// ════════════════════════════
-// 게임 상태
-// ════════════════════════════
 let G={};
 function initState(){
   G={
@@ -645,14 +655,8 @@ function initState(){
   };
 }
 
-// ════════════════════════════
-// DOM
-// ════════════════════════════
 function $(id){return document.getElementById(id);}
 
-// ════════════════════════════
-// 로그
-// ════════════════════════════
 const logBar=$('log-bar');
 const logItems=[];
 function addLog(msg,type=''){
@@ -664,9 +668,6 @@ function addLog(msg,type=''){
   if(logItems.length>2){ logBar.removeChild(logItems.pop()); }
 }
 
-// ════════════════════════════
-// 스킬 바
-// ════════════════════════════
 function renderSkillBar(){
   const bar=$('skill-bar');bar.innerHTML='';
   SKILLS.forEach(sk=>{
@@ -680,15 +681,8 @@ function renderSkillBar(){
       <span class="sk-effect">${sk.effect}</span>
       <span class="sk-cd rdy" id="sk-cd-${sk.id}">준비</span>`;
     let tapped=false;
-    btn.addEventListener('touchend',e=>{
-      e.preventDefault();
-      tapped=true;
-      useSkill(sk.id);
-    },{passive:false});
-    btn.addEventListener('click',()=>{
-      if(tapped){tapped=false;return;}
-      useSkill(sk.id);
-    });
+    btn.addEventListener('touchend',e=>{ e.preventDefault(); tapped=true; useSkill(sk.id); },{passive:false});
+    btn.addEventListener('click',()=>{ if(tapped){tapped=false;return;} useSkill(sk.id); });
     bar.appendChild(btn);
     updateSkBtn(sk.id);
   });
@@ -725,19 +719,15 @@ function useSkill(id){
   G.skillCDs[id]=sk.cd;
   sk.fn(G);
   spawnBurst(sk.burst);
-  addLog(`💸 다음 [${sk.name}] 비용: 📄${Math.floor(G.skillCosts[id])}`, '');
+  addLog(`💸 다음 [${sk.name}] 비용: 📄${Math.floor(G.skillCosts[id])}`,'');
   updateUI();
 }
 
-// ════════════════════════════
-// 패시브
-// ════════════════════════════
 function renderUpgrades(){
   const list=$('ug-list');list.innerHTML='';
   UPGRADES.forEach(u=>{
     const btn=document.createElement('button');
-    btn.className='ug-btn';
-    btn.id='ug-'+u.id;
+    btn.className='ug-btn';btn.id='ug-'+u.id;
     btn.innerHTML=`
       <span class="ug-ico">${u.ico}</span>
       <div class="ug-info">
@@ -746,34 +736,21 @@ function renderUpgrades(){
         <div class="ug-eff">${u.eff}</div>
       </div>
       <div class="ug-cost" id="ug-cost-${u.id}">📄${u.cost}</div>`;
-    btn.addEventListener('touchend',e=>{
-      e.preventDefault();
-      buyUpgrade(u.id);
-    },{passive:false});
-    btn.addEventListener('click',e=>{
-      buyUpgrade(u.id);
-    });
+    btn.addEventListener('touchend',e=>{ e.preventDefault(); buyUpgrade(u.id); },{passive:false});
+    btn.addEventListener('click',()=>{ buyUpgrade(u.id); });
     list.appendChild(btn);
   });
 }
 
 function updateUpgradeStyles(){
   UPGRADES.forEach(u=>{
-    const btn=$('ug-'+u.id);
-    if(!btn)return;
+    const btn=$('ug-'+u.id);if(!btn)return;
     const bought=G.purchased.has(u.id);
     const canAfford=G.pts>=u.cost;
     const costEl=$('ug-cost-'+u.id);
-    if(bought){
-      btn.className='ug-btn bought';
-      if(costEl) costEl.textContent='✓완료';
-    }else if(canAfford){
-      btn.className='ug-btn affordable';
-      if(costEl) costEl.textContent='📄'+u.cost;
-    }else{
-      btn.className='ug-btn';
-      if(costEl) costEl.textContent='📄'+u.cost;
-    }
+    if(bought){ btn.className='ug-btn bought'; if(costEl) costEl.textContent='✓완료'; }
+    else if(canAfford){ btn.className='ug-btn affordable'; if(costEl) costEl.textContent='📄'+u.cost; }
+    else{ btn.className='ug-btn'; if(costEl) costEl.textContent='📄'+u.cost; }
   });
 }
 
@@ -798,30 +775,24 @@ function showResultPopup(type, icon, title, desc){
   p.className=`result-popup ${type}`;
   p.innerHTML=`<span class="result-icon">${icon}</span><div class="result-title">${title}</div><div class="result-desc">${desc}</div>`;
   document.body.appendChild(p);
-  setTimeout(()=>p.remove(), 2200);
+  setTimeout(()=>p.remove(), 2800);
 }
 
-// ════════════════════════════
-// 이벤트
-// ════════════════════════════
 const eventArea=$('event-area');
 let evBanner=null;
 
 function triggerEvent(){
   if(G.activeEvent||G.gameOver)return;
-
   const dev=G.devPct;
   let phase;
   if(dev<33) phase=1;
   else if(dev<66) phase=2;
   else phase=3;
-
   const primary=EVENTS.filter(e=>e.phase===phase);
   const adjacent=EVENTS.filter(e=>e.phase!==phase);
   const pool=[...primary,...primary,...primary,...primary,...primary,...primary,...primary,
               ...adjacent,...adjacent,...adjacent];
   const ev=pool[Math.floor(Math.random()*pool.length)];
-
   const scaledThreshold=ev.baseThreshold
     ? Math.floor(ev.baseThreshold*Math.pow(1.25,G.eventCount)*(1-G.threshReduction))
     : null;
@@ -833,12 +804,8 @@ function triggerEvent(){
   evBanner?.remove();
   let responseHtml=ev.response;
   if(scaledThreshold){
-    responseHtml=responseHtml.replace(
-      '<strong id="ev-threshold"></strong>',
-      `<strong>${scaledThreshold}pt</strong>`
-    );
+    responseHtml=responseHtml.replace('<strong id="ev-threshold"></strong>',`<strong>${scaledThreshold}pt</strong>`);
   }
-  
   // 긍정 이벤트(bonus>0이고 penalty=0)는 초록, 나머지는 빨강
   const isPositive = ev.bonus>0 && ev.penalty===0;
   evBanner=document.createElement('div');
@@ -850,7 +817,6 @@ function triggerEvent(){
     </div>
     <div class="ev-how">${responseHtml}</div>`;
   eventArea.appendChild(evBanner);
-  
   if(ev.unavoidable){
     G.devPct=Math.min(100,G.devPct+ev.penalty);
     showResultPopup('unavoidable','⚠️','저지 불가',`인허가 +${ev.penalty}% 강제 진행`);
@@ -875,76 +841,65 @@ function resolveEvent(){
     if(cond==='pts') success=G.pts>=ev.successThreshold;
     else if(cond==='skill') success=G.lastSkill===ev.skillId;
     else if(cond==='skill_or_pts') success=(G.lastSkill===ev.skillId)||(G.pts>=ev.successThreshold);
-    else success=false;
-
     if(success){
       const b=Math.round((ev.bonus||0)*0.6);
       const p=Math.round((ev.penalty||0)*0.3);
       if(b>0){
         G.lawPct=Math.min(100,G.lawPct+b);
         showResultPopup('success','✅','성공!',`조례 +${b}% 획득`);
-        addLog(`✅ 저지 성공! 조례 +${b}%`,'ok');
+        addLog(`✅ 성공! 조례 +${b}%`,'ok');
       }else{
         if(p>0) G.devPct=Math.min(100,G.devPct+p);
         showResultPopup('success','✅','저지 성공!',p>0?`인허가 +${p}% (부분 진행)`:'인허가 저지 완료!');
         addLog(`✅ 저지 성공!`+(p>0?` (인허가 +${p}% 부분 진행)`:''),'ok');
       }
     }else{
-      if(ev.penalty) G.devPct=Math.min(100,G.devPct+ev.penalty);
-      showResultPopup('failure','❌','실패',`인허가 +${ev.penalty||0}% 진행됩니다`);
-      addLog(`❌ 저지 실패. 인허가 +${ev.penalty||0}%`,'bad');
+      const isPositive = ev.bonus>0 && ev.penalty===0;
+      if(isPositive){
+        showResultPopup('failure','😢','아쉽게 놓쳤어요!','다음 기회를 노리세요');
+        addLog(`😢 참가 실패. 기회를 놓쳤습니다.`,'bad');
+      }else{
+        if(ev.penalty) G.devPct=Math.min(100,G.devPct+ev.penalty);
+        showResultPopup('failure','❌','저지 실패',`인허가 +${ev.penalty||0}% 진행됩니다`);
+        addLog(`❌ 저지 실패. 인허가 +${ev.penalty||0}%`,'bad');
+      }
     }
   }
   G.activeEvent=null;
   evBanner?.remove();evBanner=null;
 }
 
-// ════════════════════════════
-// UI
-// ════════════════════════════
 const DEV_STATUS=[
-  [0,  '사업계획서 접수 대기 중...'],
-  [10, '📋 사업계획서 검토 중'],
-  [20, '⚠️ 환경영향평가 절차 진행 중'],
-  [33, '🔒 도시계획위원회 심의 중'],
-  [50, '🏗️ 개발실시계획 승인 절차 중'],
-  [66, '🚨 인허가 최종 검토 단계'],
-  [80, '⛔ 착공 허가 임박!'],
-  [90, '🔴 인허가 완료 직전! 총력 대응 필요!'],
+  [0,'사업계획서 접수 대기 중...'],
+  [10,'📋 사업계획서 검토 중'],
+  [20,'⚠️ 환경영향평가 절차 진행 중'],
+  [33,'🔒 도시계획위원회 심의 중'],
+  [50,'🏗️ 개발실시계획 승인 절차 중'],
+  [66,'🚨 인허가 최종 검토 단계'],
+  [80,'⛔ 착공 허가 임박!'],
+  [90,'🔴 인허가 완료 직전! 총력 대응 필요!'],
 ];
 const LAW_STATUS=[
-  [0,  '주민 서명 모집 중...'],
-  [15, '📝 조례안 초안 작성 중'],
-  [30, '📣 주민설명회 준비 중'],
-  [50, '🗳️ 의회 발의 검토 중'],
-  [70, '⚖️ 조례안 심의 단계'],
-  [85, '✊ 조례 통과 목전!'],
+  [0,'주민 서명 모집 중...'],
+  [15,'📝 조례안 초안 작성 중'],
+  [30,'📣 주민설명회 준비 중'],
+  [50,'🗳️ 의회 발의 검토 중'],
+  [70,'⚖️ 조례안 심의 단계'],
+  [85,'✊ 조례 통과 목전!'],
 ];
-function getStatus(arr, val){
-  let result=arr[0][1];
-  for(const [thresh,label] of arr){ if(val>=thresh) result=label; }
-  return result;
+function getStatus(arr,val){
+  let r=arr[0][1];
+  for(const [t,l] of arr){ if(val>=t) r=l; }
+  return r;
 }
 
 function updateUI(){
   $('pt-num').textContent=Math.floor(G.pts);
-  
-  // 정보공개 청구 스킬(foiaBoost) 적용 여부에 따라 화면 표시 수치 변경
-  const displayCPS = (G.foiaBoost > 0) ? G.autoCPS * 2 : G.autoCPS;
-  $('pt-rate').textContent=`+${displayCPS.toFixed(1)}/초`;
-  
-  // 부스트 중일 때 초록색 강조
-  if(G.foiaBoost > 0){
-    $('pt-rate').style.color = '#50e070';
-  } else {
-    $('pt-rate').style.color = 'var(--tan)';
-  }
-  
+  $('pt-rate').textContent=`+${G.autoCPS.toFixed(1)}/초`;
   $('dev-bar').style.width=G.devPct+'%';$('dev-pct').textContent=Math.floor(G.devPct)+'%';
   $('law-bar').style.width=G.lawPct+'%';$('law-pct').textContent=Math.floor(G.lawPct)+'%';
   $('dev-status').textContent=getStatus(DEV_STATUS,G.devPct);
   $('law-status').textContent=getStatus(LAW_STATUS,G.lawPct);
-  
   const statusArea=$('status-area');
   if(statusArea){
     if(!G.activeEvent){
@@ -954,17 +909,12 @@ function updateUI(){
       statusArea.style.display='none';
     }
   }
-  
   const sit=$('situation-status');
   if(sit) sit.textContent=getStatus(DEV_STATUS,G.devPct);
-  
   updateUpgradeStyles();
   SKILLS.forEach(sk=>updateSkBtn(sk.id));
 }
 
-// ════════════════════════════
-// 게임오버
-// ════════════════════════════
 function checkGameOver(){
   if(G.devPct>=100){
     G.gameOver=true;
@@ -976,9 +926,6 @@ function checkGameOver(){
   }
 }
 
-// ════════════════════════════
-// 게임 루프
-// ════════════════════════════
 let loopId=null;
 function startLoop(){
   if(loopId)clearInterval(loopId);
@@ -986,34 +933,22 @@ function startLoop(){
     if(G.gameOver)return;
     G.tick++;
     if(G.tick%10===0) G.elapsed++;
-
-    // 포인트 자동 적립
     const cpsBoost=(G.foiaBoost>0)?2:1;
     G.pts+=G.autoCPS*cpsBoost/10;
     if(G.foiaBoost>0) G.foiaBoost--;
-
-    // 인허가 진행
     if(G.devFreeze>0){ G.devFreeze--; }
     else{
       const soloMult=(G.soloProtest>0)?0.5:1;
       G.devPct=Math.min(100,G.devPct+(0.55*G.devSlowMult*soloMult)/10);
     }
     if(G.soloProtest>0) G.soloProtest--;
-
-    // 스킬 쿨타임
     Object.keys(G.skillCDs).forEach(sid=>{
       if(G.skillCDs[sid]>0){ G.skillCDs[sid]=Math.max(0,G.skillCDs[sid]-0.1); updateSkBtn(sid); }
     });
-
-    // 이벤트
     tickEvent();
     G.eventPending--;
     if(G.eventPending<=0&&!G.activeEvent){ triggerEvent(); G.eventPending=250; }
-
-    // 위기 레이블 (9초마다)
     if(G.tick%90===0 && $('situation-status')) $('situation-status').textContent=getStatus(DEV_STATUS,G.devPct);
-
-    // 피드 (10초마다)
     if(G.tick%100===0){
       const msgs=[
         ['🏭 소각장 사업자, 99톤으로 규모 축소 — 환경영향평가 회피','bad'],
@@ -1026,23 +961,43 @@ function startLoop(){
       const [m,t]=msgs[Math.floor(Math.random()*msgs.length)];
       addLog(m,t);
     }
-
     updateUI();
     checkGameOver();
   },100);
 }
 
-// ════════════════════════════
-// 버스트
-// ════════════════════════════
 function spawnBurst(icon){
   const b=document.createElement('div');b.className='skill-burst';b.textContent=icon;
   document.body.appendChild(b);setTimeout(()=>b.remove(),800);
 }
 
 // ════════════════════════════
-// 인트로 / 시작 / 재시작
+// 공유하기
 // ════════════════════════════
+function shareGame(isWin){
+  const url = 'http://cfoi1.github.io/stopNANGAEBAL';
+  const text = '정보은폐 파헤치고 마을을 지키자! 난개발 막는 게임 함께 할 사람?';
+
+  if(navigator.share){
+    navigator.share({ title:'아무리 덮어봐라 우리가 파헤치지', text, url })
+      .catch(()=>{});
+  }else{
+    navigator.clipboard.writeText(text+' '+url).then(()=>{
+      showToast('📋 링크가 복사됐어요!');
+    }).catch(()=>{
+      showToast('링크: '+url);
+    });
+  }
+}
+
+function showToast(msg){
+  document.querySelectorAll('.share-toast').forEach(e=>e.remove());
+  const t=document.createElement('div');
+  t.className='share-toast';t.textContent=msg;
+  document.body.appendChild(t);
+  setTimeout(()=>t.remove(), 2500);
+}
+
 function showIntro1(){ $('intro2').style.display='none'; $('intro1').style.display='flex'; }
 function showIntro2(){ $('intro1').style.display='none'; $('intro3').style.display='none'; $('intro2').style.display='flex'; }
 function showIntro3(){ $('intro2').style.display='none'; $('intro3').style.display='flex'; }
@@ -1075,7 +1030,6 @@ function restartGame(){
   $('intro1').style.display='flex';
 }
 
-// 초기화
 initState(); renderSkillBar(); renderUpgrades(); updateUI();
 </script>
 </body>
